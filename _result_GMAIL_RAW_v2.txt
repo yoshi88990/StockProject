@@ -1,0 +1,340 @@
+﻿sokei yoshihiro
+yoshihiroxxxkaihatu000@gmail.com
+PW:Msebta9999
+
+yoshihiroxxxkaihatu001@gmail.com
+PW:Msebta9999
+TEL08059536832
+
+yoshihiro1974@gmail.com
+PW:syaraku100
+
+GitHub
+yoshihiro1980417@gmail.com
+���O�Fsyaraku88
+PW:Msebta1000
+
+-------------------------------------------------------------------------------
+�i�������J�܂ł̓��̂�ƊJ���j
+
+1.Antigravity �ŃA�v����J���E�����B
+2.�\�[�X�R�[�h�� GitHub �ŊǗ��B
+3.Cloudflare Pages �ƘA�g����Web��Ɏ������J�B
+�傫�ȃf�[�^��摜���K�v�ȏꍇ�� Supabase �� Firebase �̖����g��ڑ��B 
+���̍\���ł���΁A�C���t����p���؂������ɁA�X�P�[���r���e�B�̍���Web�A�v������J�ł��܂��B 
+
+�@���݌p�������AGitHub Desktop�o�^�����B
+2. ���|�W�g���i�ۑ��Ɂj�̍쐬
+GitHub Desktop��g���A������PC��Ƀv���W�F�N�g��p�̃t�H���_�i���[�J�����|�W�g���j����܂��B 
+
+�A
+GitHub Desktop�̃��j���[���� File > New Repository ��I����܂��B
+Name: �A�v���̖��O����́B
+Local Path: PC��̕ۑ��ꏊ��I��B
+Create Repository ��N���b�N���Ċ����ł��B
+
+�A-1
+GitHub Desktop�̉E���ɁAVisual Studio Code��Atom��C���X�g�[�����������ǂ��ƂłĂ���̂ŁA Visual Studio Code�i�ʏ�VS�R�[�h�j��C���X�g�[�����鎖�ɂ���B
+���{�ꉻ��s���B
+����B����ƁAGitHub Desktop�̃G�f�B�^�[���AVS�R�[�h�Ƃ��ĔF�������B
+
+�A-2
+Create�@a branch�i�u�����`��쐬����j�ƕ\�������B
+Git�Ȃǂ̃o�[�W�����Ǘ��V�X�e���ɂ����āA���݂̃\�[�X�R�[�h�̗���i�{���j�����Ƃ̗����}�����ꂳ���鑀��
+���{��ł́u�u�����`��؂�v�Ƃ�\������܂��B
+
+�Ƃ肠�����AName: ���|�W�g����:kobun
+kobun�ƑłB
+
+
+ �Ȃ��쐬����̂��i�ړI�j
+���s��Ƃ̎���: ���C���̃R�[�h�i�ʏ�� main �� master �u�����`�j�ɉe����^�����ɁA�V�@�\�̊J����o�O�C���𓯎��i�s�ł��܂��B
+���S�Ȏ��s����: �u�����`��ł̕ύX�͓Ɨ����Ă��邽�߁A��ƒ��ɕs����N���Ă���C���̃v���O����������S�z������܂���B
+�`�[���J���̐���: �����l�ō�Ƃ���ꍇ�A�e�����o�[�������̃u�����`�ō�Ƃ��邱�ƂŁA�R�[�h�̏Փˁi�R���t���N�g�j��ŏ����ɗ}�����܂��B 
+
+�u�����`�iBranch�j�͉p��Łu�}�v��Ӗ����܂��B 
+����: ���C���̗������V�����u�}�v��L�΂��č�Ƃ�J�n���܂��B
+�ҏW: ���̃u�����`��Ńt�@�C���̕ύX��L�^�i�R�~�b�g�j���܂��B
+�����i�}�[�W�j: ��Ƃ��������A��肪�Ȃ����Ƃ��m�F�ł�����A���C���̃u�����`�ɂ��̕ύX����������܂��B 
+
+
+�A-3
+Edit a file�i�t�@�C����ҏW����j
+
+ README.md �̖��
+�v���W�F�N�g�̏Љ�: ���̃v���W�F�N�g�����̂��߂̂�̂��A�ǂ�����Ďg���̂���L�q����t�@�C���ł��B
+GitHub�ł̕\��: GitHub�̃E�F�u�T�C�g��ł��̃��|�W�g����J�����Ƃ��A�g�b�v��ʂɒ��g�����̂܂ܕ\�������d�g�݂ɂȂ��Ă��܂��B
+�ŏ��̈��: �V�������|�W�g���������ہA���g������ۂ���Git�̑��������Ȃ��̂ŁAGitHub Desktop���u�܂��͂���README��ҏW�iEdit�j���āA�ŏ��̕ύX��L�^�i�R�~�b�g�j���Ă݂܂��傤�v�Ƒ����Ă����Ԃł��B
+
+2. �u.md�v�Ƃ́H
+Markdown�i�}�[�N�_�E���j�`���̗��ł��B
+�������̂悤�ȕ��ʂ̃e�L�X�g�t�@�C���ł����A����̋L�@�i��F# ��t����ƌ��o���ɂȂ�j��g�����ƂŁA������傫�������葾���ɂ�����Ƃ������������ȒP�ɂł���t�@�C���`���ł��B
+
+3. �Ȃ����J���Ă���̂��H
+GitHub Desktop�ŁuCreate a New Repository�v������ۂɁA[Initialize this repository with a README] �Ƀ`�F�b�N�����Ă����ꍇ�A�����I�ɂ��̃t�@�C�����쐬����A�ŏ��̕ҏW�ΏۂƂ��ĕ\������܂��B
+���ɂ��ׂ�����
+������Ȃ������ꂩ��J����n�߂�̂ł���΁A�ȉ��̂悤�ȑ����s���Ă݂Ă��������B
+
+-------------------------------------------------------------------------------
+Markdown�i�}�[�N�_�E���j�Ƃ́A�u��y�ɕ��͂�\�����ł���A�y�ʂȋL�@�v�̂��Ƃł��B 
+�ʏ�̃e�L�X�g�Ɂu#�v��u*�v�Ȃǂ̋L����t���邾���ŁA�u���E�U��A�v����Ō��o
+���A�ӏ�����A�����Ȃǂ̑����Ƃ��Ĕ��f����܂��B
+��ȓ���
+�����₷���E�ǂ݂₷��: ���G�ȃ^�O�iHTML�Ȃǁj��o����K�v���Ȃ��A�v���[���e�L�X�g�̂܂܂ł��e���c�����₷���B
+�݊���������: ����̃\�t�g�Ɉˑ������A�����̃G�f�B�^��T�[�r�X�iGitHub�ANotion�ASlack�ADiscord�Ȃǁj�ŗ��p�\�B
+HTML�ɕϊ��\: ���̂܂�Web�T�C�g�p�̃R�[�h�Ƃ��ď����o�����Ƃ��ł���
+--------------------------------------------------------------------------------������Antigravity��J���Ďw�������
+Antigravity�̓����Ƃ��āAAI�G�[�W�F���g�ɁuGit�Ǘ���s���Ăق����v�Ǝw������
+�������B
+
+F:\�{�C�X���[��\222 �ɂ���f�[�^��AGitHub Desktop��g���ăv���C�x�[�g���|�W�g���Ƃ��ăl�b�g�iGitHub�j�ɏグ��菇�͈ȉ��̒ʂ�ł��B
+�菇1�FGitHub Desktop�Ń��|�W�g����쐬����
+GitHub Desktop��J���܂��B
+���j���[�� File �� New Repository... ��I����܂��B
+
+�ݒ��ʂňȉ��̂悤�ɓ��͂��܂��F
+Name: my-antigravity-app �i�D���Ȗ��O��OK�ł��B���ꂪGitHub��̖��O�ɂȂ�܂��j
+Local Path: F:\�{�C�X���[�� ��I����܂��B
+�����ӁFF:\�{�C�X���[��\222 �𒼐ڑI�Ԃ̂ł͂Ȃ��A���̏�̊K�w��I�сAName�� 222 �ɂ��邩�A���邢�͕ʂ̏ꏊ�ō���Ă��璆�g��ړ�������̂��m���ł��B
+
+������́Akobun�Ƃ���name�ŁAGitHub Desktop�ɂ������B
+����ƁA�����222�t�H���_�̒��ɐV����kobun�t�H���_���ł����B
+�����ɁA222�̑S�t�@�C����R�s�y����B
+
+
+�菇3�F�ύX��m��iCommit�j����
+GitHub Desktop�̉�ʂ����ƁA�����ɃR�s�[�����t�@�C����������ƕ���ł���͂��ł��B
+��ʍ����� Summary (required) ���Ɂu����A�b�v���[�h�v�ȂǂƓ��͂��܂��B
+Commit to main �{�^����N���b�N���܂��B����ŁAPC��ł̋L�^���������܂����B
+�菇4�F�l�b�g�֔���J�ŃA�b�v���[�h�iPublish�j����
+
+��ʂ��؂�ւ��APublish repository�{�^��������B
+
+
+��GitHub��̕s�v�ȁA���|�W�b�g��ŏ��ɏ����Ȃ��ƁA��肭�����Ȃ��B
+
+GitHub����E��̃A�C�R����N���b�N�BRepositories��I��ŁB�s�v�ȃt�@�C���̏�Ő^�񒆏�̎��Ԃ�I��B��ԉ��̏�����I�����ƁA�F�؃R�[�h�����t����邩��A���̃R�[�h������ƁA����Ə�����B
+
+
+
+�A�b�v���[�h���ꂽ�ꏊ�́AGitHub�i�M�b�g�n�u�j�Ƃ����T�C�g�ɂ���A���Ȃ���p�̃}�C�y�[�W�i���|�W�g���j�ł��B
+�ȉ��̎菇�ŁA���ۂɃl�b�g��ɕۑ�����Ă���t�@�C��������̖ڂŊm�F�ł��܂��B
+1. �u���E�U�Ŋm�F������@
+�u���E�U�� GitHub.com �ɃA�N�Z�X���A���O�C�����܂��B
+
+
+
+�B
+Cloudflare�i�N���E�h�t���A�j�́AWeb�T�C�g�̃Z�L�����e�B�����ƍ������𓯎��Ɏ�������A���E�ő勉�̃O���[�o��CDN����уG�b�W�Z�L�����e�B�v���b�g�t�H�[���ł��BDNS�̕ύX�����œ����ł��ADDoS�U���̖h��AWAF�ASSL���A�R���e���c�z�M�œK���Ȃǂ�����X�g�b�v�Œ񋟂��A�����v������p�ӂ���Ă��܂��B 
+
+CDN�Ƃ́H
+�uContent Delivery Network�v�̗��ŁAWeb�T�C�g�̃f�[�^�𐢊E���̃T�[�o�[�ɕ��U���Ĕz�u���A�A�N�Z�X���ɋ߂��ꏊ�������͂���d�g�݂ł��B
+
+
+1. Cloudflare�A�J�E���g�̏���
+Cloudflare�_�b�V���{�[�h �Ƀ��O�C�����܂��i�����A�J�E���g��OK�ł��j�B
+�����̃��j���[���� �uWorkers & Pages�v ��I����܂��B
+�u�쐬�v �� �uPages�v �^�u �� �uGit�ɐڑ��v �̏��ɃN���b�N���܂��B 
+
+�B-1
+GitHub�A�J�E���g�Őڑ��B
+Yoshihiro1980417@gmail.com's Account
+
+����Compute&AI��Workers & Pages�ɍs���B
+�E���Create application�i�A�v���P�[�V������쐬����j��N���b�N�B
+���̊D�F�̔L��N���b�N
+
+
+--------------------------------------------------------------------------------2.GitHub�Ń\�[�X�R�[�h��Ǘ�����ł�ȒP�Ō����I�ȕ��@�́A���o�I�ɑ���ł�������c�[���uGitHub Desktop�v��g�p���邱�Ƃł��B
+--------------------------------------------------------------------------------GitHub�A�J�E���g��쐬
+https://github.com/
+���킴�킴�����ɍs���Ȃ��Ă�AGitHub Desktop��_�E�����[�h���鎞��google/mail��
+����ɓo�^�����B
+
+
+--------------------------------------------------------------------------------
+�C���^�[�l�b�g��Ɏ����́u�����̗���v���������́u���|�W�g���\�T�[�r�X�v���ꂪGitHub�@����GitHub��ȒP�Ɏg���悤�ɂ���A�v�����uGitHub Desktop�v
+�t�@�C���̕ύX�����R�~�b�g�Ƃ����B�R�~�b�g����x�ɕύX���������|�W�g���ɕۑ������B
+�E�����̃��|�W�g����R�s�[���鑀���N���[���Ƃ���
+--------------------------------------------------------------------------------�uGitHub Desktop�v
+Create a tutorial repository
+�`���[�g���A���E���|�W�g����쐬����
+
+Clone a repository from the Internet
+�C���^�[�l�b�g���烊�|�W�g����N���[������
+
+�@Create a New Repository on your hard drive
+�n�[�h�h���C�u�ɐV�������|�W�g����쐬����
+
+Add an Existing Repository from your hard drive
+�n�[�h�h���C�u��������̃��|�W�g����ǉ�����
+
+--------------------------------------------------------------------------------�@����
+�L����e
+Name: ���|�W�g����:kobun
+
+Description: ���(�C��):�i����j
+
+Local Path:  (�t�H���_��쐬����f�B���N�g���̃p�X)
+�����̃p�X�̉��Ƀ��|�W�g�����Ńt�H���_���쐬����܂��B
+�FC:\Users�i���[�U�[�j\yoshi\Documents\GitHub�������̓f�[�^���������邩���߂�
+
+F:\�{�C�X���[��\GitHub\desktop-tutorial�������ɕύX
+
+
+���`�b�N���ځFInitialize this repository with a README�����`�b�N�����B
+
+�V�������|�W�g���i�v���W�F�N�g�̕ۑ��ꏊ�j��쐬����ۂɁA
+�v���W�F�N�g�̊T�v��L����README.md�t�@�C��������I�ɐ�������I�v�V�����ł��B 
+
+�����ɃN���[���\�ɂȂ�: ���|�W�g������iEmpty�j�ł͂Ȃ��Ȃ邽�߁A�쐬�シ���Ƀ��[�J������git clone�ł��܂��B
+�ŏ����烁�C���u�����`�������: �ʏ�Amain�i�܂���master�j�u�����`�������ō쐬����܂��B 
+�ǂ̂悤�ȏꍇ�Ƀ`�F�b�N�����邩
+GitHub��ŐV�K���|�W�g����쐬����ꍇ�i�����j: ���S�҂�A�܂��̓��|�W�g����쐬���Čォ��R�[�h��ǉ�����ꍇ�A�`�F�b�N�����Ă����Ǝ�Ԃ��Ȃ��܂��B
+�v���W�F�N�g�̍ŏ��̈��: �v���W�F�N�g�̖ړI������README�ɋL�ڂ������ꍇ�B 
+
+
+
+Git Ignore: �킩��Ȃ������炻�̂܂܂�OK
+
+Licence: �킩��Ȃ�������uMIT License�v(�Ɛӎ����ƒ��쌠�\���`��)��I����Ă���--------------------------------------------------------------------------------No local changes
+
+Publish your repository to GitHub
+
+�v���C�o�V�[�ݒ�: �p�u���b�V������ہA�uKeep this code private�i���̃R�[�h�����J�ɂ���j�v�̃`�F�b�N��O���ƒN�ł��������J���|�W�g���ɂȂ�A�`�F�b�N������Ǝ������������������J���|�W�g���ɂȂ�܂��B 
+
+
+View the files of your repository in Explorer
+GitHub�Ȃǂ̃c�[�����玩���̃R���s���[�^�i���[�J���j��̃t�H���_�𒼐ڊJ���āA���g�̃t�@�C����m�F���鑀��̂��Ƃł��B
+
+�uView the files of your repository in Explorer�v��N���b�N����ƁA���̃v���W�F�N�g�i���|�W�g���j���ۑ�����Ă���Windows�̃t�H���_���p�b�ƊJ���܂��B
+�u�t�@�C����PC�̂ǂ��ɕۑ����ꂽ��������Ȃ��v�Ƃ������Ɏg���ƕ֗��ł��B
+
+
+
+
+
+
+
+�yNew Repository�z�@�V���|�W�g��
+
+�yAdd local Repository�z�@���[�J�����|�W�g���ǉ�
+
+�yClone Repository�z�@�N���[�����|�W�g��
+
+�yOptions�z�@�I�v�V����
+
+�yExit�z�o��
+
+
+�yUndo�z���ɖ߂�
+
+�yRedo�z��蒼��
+
+�yCut�z�J�b�g
+
+�yCopy�z�R�s�[
+
+�yPaste�z�y�[�X�g
+
+�ySelect all�z�S�Ă�I��
+
+�yFind�z����
+
+
+
+�yChanges�z�ύX�_
+
+�yHistory�z�X�V����
+
+�yRepository list�z���|�W�g���ꗗ
+
+�yBranches list�z�u�����`�ꗗ
+
+�yGo To Summary�z�܂Ƃ߂ֈړ�
+
+�yShow stashed changes�z�ۑ����ꂽ�ύX�̕\��
+
+�yToggle full screen�z�S��ʕ\��
+
+�yReset zoom�z�Y�[������Z�b�g
+
+�yZoom in�z�g��
+
+�yZoom out�z�k��
+
+�yExpand active resizable�z
+
+�yContract active resizeble�z
+
+�yToggle developer tools�z
+
+
+�yPush�z�v�b�V��
+
+�yPull�z�v��
+
+�yFetch�z�t�F�b�`
+
+�yRemove�z�폜
+
+�yview on GitHub�zGitHub�Ō���
+
+�yOpen in Command Prompt�z�R�}���h�v�����v�g�ŊJ��
+
+�yShow in Explorer�z�G�N�X�v���[���[�ŕ\��
+
+�yOpen in Visual Studio Code�zVisual Studio Code�ŊJ��
+
+�yCreate issue on GitHub�zGitHub�ɖ���쐬����
+
+�yRepository Settings�z���|�W�g���ݒ�
+
+
+�yNew Branch�z�V�����u�����`
+
+�yRename Branch�z�u�����`���ύX
+
+�yDelete�z�폜
+
+�yDiscard all Changes�z���ׂĂ̕ύX��j��
+
+�yStash all Changes�z���ׂĂ̕ύX��ۑ�
+
+�yUpdate frome main�z���C���̃u�����`��X�V
+
+�yCompare on GitHub�zGitHub��Ŕ�r����
+
+�yView branch on GitHub�zGitHub�Ńu�����`�����
+
+�yPreview pull request�z�v�����N�G�X�g�̃v���r���[
+
+
+�yReport  issues�z����񍐂���
+
+�yContact GitHub Support�zGitHub�T�|�[�g�ւ̂��₢���킹
+
+�yShow User Guides�z���[�U�[�K�C�h��\������
+
+�yShow keyboard shortcuts�z�L�[�{�[�h�V���[�g�J�b�g��\������
+
+�yShow logs in Explorer�z�G�N�X�v���[���[�Ƀ��O��\������
+
+�yAbout GitHub DeskTop�zGitHub DeskTop�ɂ���
+
+
+�yCreate  alias�z�G�C���A�X�쐬
+
+�yCopy repo name�z���|����R�s�[
+
+�yCopy repo path�z���|�p�X�̃R�s�[
+
+�yView on GitHub�zGitHub�Ō���
+
+�yOpen in Command Prompt�z�R�}���h�v�����v�g�ŊJ��
+
+�yShow in Explorer�z�G�N�X�v���[���[�ŊJ��
+
+�yOpen in Visual Studio Code�zVScode �ŊJ��
+
+�yRemove�c�z�폜

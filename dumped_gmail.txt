@@ -1,0 +1,340 @@
+sokei yoshihiro
+yoshihiroxxxkaihatu000@gmail.com
+PW:Msebta9999
+
+yoshihiroxxxkaihatu001@gmail.com
+PW:Msebta9999
+TEL08059536832
+
+yoshihiro1974@gmail.com
+PW:syaraku100
+
+GitHub
+yoshihiro1980417@gmail.com
+OFsyaraku88
+PW:Msebta1000
+
+-------------------------------------------------------------------------------
+iJ܂ł̓̂ƊJj
+
+1.Antigravity ŃAvJEB
+2.\[XR[h GitHub ŊǗB
+3.Cloudflare Pages ƘAgWebɎJB
+傫ȃf[^摜Kvȏꍇ Supabase  Firebase ̖gڑB 
+̍\ł΁ACtp؂ɁAXP[reB̍WebAvJł܂B 
+
+@݌pAGitHub Desktopo^B
+2. |WgiۑɁj̍쐬
+GitHub DesktopgAPCɃvWFNgp̃tH_i[J|Wgj܂B 
+
+A
+GitHub Desktop̃j[ File > New Repository I܂B
+Name: Av̖ÓB
+Local Path: PC̕ۑꏊIB
+Create Repository NbNĊłB
+
+A-1
+GitHub Desktop̉EɁAVisual Studio CodeAtomCXg[ǂƂłĂ̂ŁA Visual Studio CodeiʏVSR[hjCXg[鎖ɂB
+{ꉻsB
+BƁAGitHub Desktop̃GfB^[AVSR[hƂĔFB
+
+A-2
+Create@a branchiu`쐬jƕ\B
+GitȂǂ̃o[WǗVXeɂāÃ݂\[XR[h̗i{jƂ̗}ꂳ鑀
+{ł́uu`؂vƂ\܂B
+
+Ƃ肠AName: |Wg:kobun
+kobunƑłB
+
+
+ Ȃ쐬̂iړIj
+sƂ̎: C̃R[hiʏ main  master u`jɉe^ɁAV@\̊JoOC𓯎isł܂B
+SȎs: u`ł̕ύX͓ƗĂ邽߁AƒɕsNĂC̃vOSz܂B
+`[J̐: lōƂꍇAeo[̃u`ōƂ邱ƂŁAR[h̏ՓˁiRtNgjŏɗ}܂B 
+
+u`iBranchj͉pŁu}vӖ܂B 
+: C̗Vu}vL΂čƂJn܂B
+ҏW: ̃u`Ńt@C̕ύXL^iR~bgj܂B
+i}[Wj: ƂA肪ȂƂmFłAC̃u`ɂ̕ύX܂B 
+
+
+A-3
+Edit a fileit@CҏWj
+
+ README.md ̖
+vWFNg̏Љ: ̃vWFNĝ߂̂̂AǂĎĝLqt@CłB
+GitHubł̕\: GitHub̃EFuTCgł̃|WgJƂAgbvʂɒĝ܂ܕ\dg݂ɂȂĂ܂B
+ŏ̈: V|WgہAgۂGit̑Ȃ̂ŁAGitHub Desktopu܂͂READMEҏWiEditjāAŏ̕ύXL^iR~bgjĂ݂܂傤vƑĂԂłB
+
+2. u.mdvƂ́H
+Markdowni}[N_Ej`̗łB
+̂悤ȕʂ̃eLXgt@CłA̋L@iF# tƌoɂȂjgƂŁA傫葾ɂƂȒPɂłt@C`łB
+
+3. ȂJĂ̂H
+GitHub DesktopŁuCreate a New RepositoryvۂɁA[Initialize this repository with a README] Ƀ`FbNĂꍇAIɂ̃t@C쐬Aŏ̕ҏWΏۂƂĕ\܂B
+ɂׂ
+ȂꂩJn߂̂ł΁Aȉ̂悤ȑsĂ݂ĂB
+
+-------------------------------------------------------------------------------
+Markdowni}[N_EjƂ́Auyɕ͂\łAyʂȋL@v̂ƂłB 
+ʏ̃eLXgɁu#vu*vȂǂ̋Lt邾ŁAuEUAvŌo
+AӏAȂǂ̑ƂĔf܂B
+ȓ
+₷Eǂ݂₷: Gȃ^OiHTMLȂǁjoKvȂAv[eLXĝ܂܂łec₷B
+݊: ̃\tgɈˑÃGfB^T[rXiGitHubANotionASlackADiscordȂǁjŗp\B
+HTMLɕϊ\: ̂܂WebTCgp̃R[hƂďoƂł
+--------------------------------------------------------------------------------AntigravityJĎw
+Antigravity̓ƂāAAIG[WFgɁuGitǗsĂقvƎw
+B
+
+F:\{CX[\222 ɂf[^AGitHub DesktopgăvCx[g|WgƂălbgiGitHubjɏグ菇͈ȉ̒ʂłB
+菇1FGitHub DesktopŃ|Wg쐬
+GitHub DesktopJ܂B
+j[ File  New Repository... I܂B
+
+ݒʂňȉ̂悤ɓ͂܂F
+Name: my-antigravity-app iDȖOOKłBꂪGitHub̖OɂȂ܂j
+Local Path: F:\{CX[ I܂B
+ӁFF:\{CX[\222 𒼐ڑIԂ̂ł͂ȂȀ̊KwIсAName 222 ɂ邩A邢͕ʂ̏ꏊōĂ璆gړ̂młB
+
+́AkobunƂnameŁAGitHub DesktopɂB
+ƁA222tH_̒ɐVkobuntH_łB
+ɁA222̑St@CRsyB
+
+
+菇3FύXmiCommitj
+GitHub Desktop̉ʂƁAɃRs[t@Cƕł͂łB
+ʍ Summary (required) ɁuAbv[hvȂǂƓ͂܂B
+Commit to main {^NbN܂BŁAPCł̋L^܂B
+菇4Flbg֔JŃAbv[hiPublishj
+
+ʂ؂ւAPublish repository{^B
+
+
+GitHub̕svȁA|WbgŏɏȂƁA肭ȂB
+
+GitHubẼACRNbNBRepositoriesIŁBsvȃt@C̏Ő^񒆏̎ԂIBԉ̏IƁAF؃R[ht邩ÃR[hƁAƏB
+
+
+
+Abv[hꂽꏊ́AGitHubiMbgnujƂTCgɂAȂp̃}Cy[Wi|WgjłB
+ȉ̎菇ŁAۂɃlbgɕۑĂt@C̖ڂŊmFł܂B
+1. uEUŊmF@
+uEU GitHub.com ɃANZXAOC܂B
+
+
+
+B
+CloudflareiNEhtAj́AWebTCg̃ZLeBƍ𓯎ɎAEő勉̃O[oCDNуGbWZLeBvbgtH[łBDNS̕ύXœłADDoSU̖hAWAFASSLAReczMœKȂǂXgbvŒ񋟂AvpӂĂ܂B 
+
+CDNƂ́H
+uContent Delivery Networkv̗ŁAWebTCg̃f[^𐢊ẼT[o[ɕUĔzuAANZXɋ߂ꏊ͂dg݂łB
+
+
+1. CloudflareAJEg̏
+Cloudflare_bV{[h ɃOC܂iAJEgOKłjB
+̃j[ uWorkers & Pagesv I܂B
+u쐬v  uPagesv ^u  uGitɐڑv ̏ɃNbN܂B 
+
+B-1
+GitHubAJEgŐڑB
+Yoshihiro1980417@gmail.com's Account
+
+Compute&AIWorkers & PagesɍsB
+ECreate applicationiAvP[V쐬jNbNB
+̊DF̔LNbN
+
+
+--------------------------------------------------------------------------------2.GitHubŃ\[XR[hǗłȒPŌIȕ@́AoIɑłc[uGitHub Desktopvgp邱ƂłB
+--------------------------------------------------------------------------------GitHubAJEg쐬
+https://github.com/
+킴킴ɍsȂĂAGitHub Desktop_E[h鎞google/mail
+ɓo^B
+
+
+--------------------------------------------------------------------------------
+C^[lbgɎ́u̗v́u|Wg\T[rXvꂪGitHub@GitHubȒPɎg悤ɂAvuGitHub Desktopv
+t@C̕ύXR~bgƂBR~bgxɕύX|WgɕۑB
+Ẽ|WgRs[鑀N[Ƃ
+--------------------------------------------------------------------------------uGitHub Desktopv
+Create a tutorial repository
+`[gAE|Wg쐬
+
+Clone a repository from the Internet
+C^[lbg烊|WgN[
+
+@Create a New Repository on your hard drive
+n[hhCuɐV|Wg쐬
+
+Add an Existing Repository from your hard drive
+n[hhCũ|Wgǉ
+
+--------------------------------------------------------------------------------@
+Le
+Name: |Wg:kobun
+
+Description: (C):ij
+
+Local Path:  (tH_쐬fBNg̃pX)
+̃pX̉Ƀ|WgŃtH_쐬܂B
+FC:\Usersi[U[j\yoshi\Documents\GitHub̓f[^邩߂
+
+F:\{CX[\GitHub\desktop-tutorialɕύX
+
+
+`bNځFInitialize this repository with a README`bNB
+
+V|WgivWFNg̕ۑꏊj쐬ۂɁA
+vWFNg̊TvLREADME.mdt@CIɐIvVłB 
+
+ɃN[\ɂȂ: |WgiEmptyjł͂ȂȂ邽߁A쐬シɃ[Jgit cloneł܂B
+ŏ烁Cu`: ʏAmaini܂masterju`ō쐬܂B 
+ǂ̂悤ȏꍇɃ`FbN邩
+GitHubŐVK|Wg쐬ꍇij: S҂A܂̓|Wg쐬ČォR[hǉꍇA`FbNĂƎԂȂ܂B
+vWFNg̍ŏ̈: vWFNg̖ړIREADMEɋLڂꍇB 
+
+
+
+Git Ignore: 킩Ȃ炻̂܂܂OK
+
+Licence: 킩ȂuMIT Licensev(Ɛӎƒ쌠\`)IĂ--------------------------------------------------------------------------------No local changes
+
+Publish your repository to GitHub
+
+vCoV[ݒ: pubVہAuKeep this code privateĩR[hJɂjṽ`FbNOƒNłJ|WgɂȂA`FbNƎJ|WgɂȂ܂B 
+
+
+View the files of your repository in Explorer
+GitHubȂǂ̃c[玩̃Rs[^i[Jj̃tH_𒼐ڊJāAg̃t@CmF鑀̂ƂłB
+
+uView the files of your repository in ExplorervNbNƁÃvWFNgi|WgjۑĂWindows̃tH_pbƊJ܂B
+ut@CPĈǂɕۑꂽȂvƂɎgƕ֗łB
+
+
+
+
+
+
+
+yNew Repositoryz@V|Wg
+
+yAdd local Repositoryz@[J|Wgǉ
+
+yClone Repositoryz@N[|Wg
+
+yOptionsz@IvV
+
+yExitzo
+
+
+yUndozɖ߂
+
+yRedoz蒼
+
+yCutzJbg
+
+yCopyzRs[
+
+yPastezy[Xg
+
+ySelect allzSĂI
+
+yFindz
+
+
+
+yChangeszύX_
+
+yHistoryzXV
+
+yRepository listz|Wgꗗ
+
+yBranches listzu`ꗗ
+
+yGo To Summaryz܂Ƃ߂ֈړ
+
+yShow stashed changeszۑꂽύX̕\
+
+yToggle full screenzSʕ\
+
+yReset zoomzY[Zbg
+
+yZoom inzg
+
+yZoom outzk
+
+yExpand active resizablez
+
+yContract active resizeblez
+
+yToggle developer toolsz
+
+
+yPushzvbV
+
+yPullzv
+
+yFetchztFb`
+
+yRemovez폜
+
+yview on GitHubzGitHubŌ
+
+yOpen in Command PromptzR}hvvgŊJ
+
+yShow in ExplorerzGNXv[[ŕ\
+
+yOpen in Visual Studio CodezVisual Studio CodeŊJ
+
+yCreate issue on GitHubzGitHubɖ쐬
+
+yRepository Settingsz|Wgݒ
+
+
+yNew BranchzVu`
+
+yRename Branchzu`ύX
+
+yDeletez폜
+
+yDiscard all ChangeszׂĂ̕ύXj
+
+yStash all ChangeszׂĂ̕ύXۑ
+
+yUpdate frome mainzC̃u`XV
+
+yCompare on GitHubzGitHubŔr
+
+yView branch on GitHubzGitHubŃu`
+
+yPreview pull requestzvNGXg̃vr[
+
+
+yReport  issuesz񍐂
+
+yContact GitHub SupportzGitHubT|[gւ̂₢킹
+
+yShow User Guidesz[U[KCh\
+
+yShow keyboard shortcutszL[{[hV[gJbg\
+
+yShow logs in ExplorerzGNXv[[ɃO\
+
+yAbout GitHub DeskTopzGitHub DeskTopɂ
+
+
+yCreate  aliaszGCAX쐬
+
+yCopy repo namez|Rs[
+
+yCopy repo pathz|pX̃Rs[
+
+yView on GitHubzGitHubŌ
+
+yOpen in Command PromptzR}hvvgŊJ
+
+yShow in ExplorerzGNXv[[ŊJ
+
+yOpen in Visual Studio CodezVScode ŊJ
+
+yRemovecz폜

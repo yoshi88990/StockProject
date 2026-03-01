@@ -1,0 +1,5 @@
+{
+  "main_broker": "SBI_Securities",
+  "commission_model": "ZERO_REVOLUTION",
+  "nisa_strategy": "Flexible_Rebalance_2026"
+}
