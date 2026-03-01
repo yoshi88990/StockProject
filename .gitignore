@@ -1,0 +1,18 @@
+# OS Temporary files
+Thumbs.db
+Desktop.ini
+
+# Commander results/orders
+_order_*.json
+_result_*.json
+commander.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Application data (maybe keep? but maybe better to keep separate or encrypted later)
+# assets_db.json  # <-- For now, keep it for sync

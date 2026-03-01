@@ -1,0 +1,4 @@
+{
+    "command": "git init && git add . && git commit -m \"feat: Initial project structure with Turbo Commander and DNA (Stealth Boot)\"",
+    "cwd": "c:\\Users\\yoshi\OneDrive\\Desktop\\StockProject"
+}
