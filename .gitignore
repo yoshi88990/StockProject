@@ -5,6 +5,7 @@ Desktop.ini
 # Commander results/orders
 _order_*.json
 _result_*.json
+_result_*.txt
 commander.log
 
 # Python
