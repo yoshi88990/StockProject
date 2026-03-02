@@ -1,4 +1,5 @@
 import pywinauto
+import win32api
 import time
 import keyboard
 import sys
@@ -6,69 +7,72 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 def sentinel_observer_v69():
-    """
-    Sentinel Observer v69.0 (The F12 Trigger)
-    - 師匠の「座標は不要。出たら F12 を押せ」という戦略的転換を採用。
-    - UIスキャンでターゲット（Run/Accept）を検知した瞬間に F12 ホットキーを仮想打鍵する。
-    - 物理的な座標計算に頼らず、師匠が設定した「F12（必殺連撃）」を自動で引き出す。
-    """
-    print("センチネル監視システム v69.0 起動... (F12 自動トリガー方式)")
+    print("センチネル監視システム v69.0 (完全沈黙・一撃必殺版) 起動...")
+    print("UIスキャンによる文字入力の妨害を防ぐため、10秒に1回のみ索敵を行います。")
+    print("敵（Run/Accept）を発見した場合のみ、F8と座標狙撃を【1度だけ】行い、即座に沈黙します。")
+    print("連打は一切行いません。師匠の手を止めないことを最優先します。")
     
-    keywords = ["always run", "run", "accept", "run command?"]
+    # 師匠がクリックして記録してくれた「一連の正しい座標」
+    targets = [
+        (1319, 286),   # 聖なる座標 (Run)
+        (1292, 595),   # Accept
+        (1165, 641),   
+        (1135, 650),   
+        (1150, 650)    
+    ]
+    
+    keywords = ["always run", "run", "accept", "run command?", "accept all"]
     
     try:
         desktop = pywinauto.Desktop(backend="uia")
         
         while True:
-            # ESCで監視停止
             if keyboard.is_pressed('esc'): break
             
+            found = False
+            
+            # --- 索敵フェーズ（10秒に1回しか実行しないため、師匠の文字入力は9.9秒間完全に自由） ---
             try:
-                found = False
                 for win in desktop.windows():
-                    # VS Code またはそれに関連する窓を監視
-                    if "Visual Studio Code" in win.window_text() or "Stock" in win.window_text() or not win.window_text():
-                        # ウィンドウ内または通知内のテキストをスキャン
-                        # 文言ベースの判定
+                    win_text = win.window_text() or ""
+                    if "Visual Studio Code" in win_text or "Stock" in win_text or win_text == "":
                         try:
-                            # ボタン要素を直接探す
-                            all_btns = win.descendants(control_type="Button")
-                            for btn in all_btns:
+                            # ボタンをスキャン
+                            for btn in win.descendants(control_type="Button"):
                                 name = btn.window_text().lower()
                                 if name and any(k in name for k in keywords):
                                     found = True
-                                    target_name = name
                                     break
-                            
-                            # またはダイアログ内のテキスト
-                            if not found:
-                                all_texts = win.descendants(control_type="Text")
-                                for t in all_texts:
-                                    t_txt = t.window_text().lower()
-                                    if any(k in t_txt for k in keywords):
-                                        found = True
-                                        target_name = t_txt
-                                        break
-                        except: continue
-
-                    if found:
-                        print(f"!!! ターゲット捕捉: '{target_name}' !!!")
-                        print("F12 プロトコルを自動発動します。")
-                        
-                        # 師匠のホットキーを発動
-                        keyboard.press_and_release('f12')
-                        
-                        # 連射を避けるための待機 (2秒)
-                        time.sleep(2.0)
-                        break
+                        except: pass
+                    if found: break
             except: pass
             
-            # 高速監視
-            time.sleep(0.1)
+            # --- 狙撃フェーズ（敵がいなければ何もせず沈黙） ---
+            if found:
+                print("敵（Run / Accept All）を捕捉。F8と座標狙撃を開始します。")
+                
+                orig_x, orig_y = win32api.GetCursorPos()
+                
+                # F8を一度だけ押す（長押しや連打はしない）
+                keyboard.press_and_release('f8')
+                
+                # 座標を一通り1回ずつクリックする（連打排除）
+                for coord in targets:
+                    win32api.SetCursorPos(coord)
+                    win32api.mouse_event(2, 0, 0, 0, 0) # Left Down
+                    win32api.mouse_event(4, 0, 0, 0, 0) # Left Up
+                    
+                # すぐにマウスを元の位置に戻して師匠の作業を妨害しない
+                win32api.SetCursorPos((orig_x, orig_y))
+                
+                print("敵を排除しました。思考をとめないため連打を終了し、沈黙に入ります。")
+                
+            # 【師匠の教え】「発生したらすぐ消す。その後は10秒に1回。連打不要」
+            # 発見した・していないに関わらず、次の索敵まで10秒間完全にシステムを眠らせる（文字入力妨害をゼロにする）
+            time.sleep(10.0)
             
     except Exception as e:
         pass
 
 if __name__ == "__main__":
     sentinel_observer_v69()
- Greenland
