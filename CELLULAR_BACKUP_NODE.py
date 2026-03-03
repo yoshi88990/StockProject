@@ -42,12 +42,14 @@ class CellularBackupNode:
     def scatter_cells(self):
         """全Pythonスクリプトを個別の細胞として保存"""
         print("【CELLULAR_BACKUP】 細胞分裂・分散バックアップシーケンス開始...")
-        py_files = glob.glob(os.path.join(self.brain_dir, "*.py"))
+        target_files = []
+        for ext in ["*.py", "*.vbs", "*.bat"]:
+            target_files.extend(glob.glob(os.path.join(self.brain_dir, ext)))
         
-        for py_file in py_files:
-            self.etch_cell(py_file)
+        for file in target_files:
+            self.etch_cell(file)
             
-        print(f"【保存完了】 {len(py_files)}個の生存細胞を「Weekly Report/.hidden_cells」に格納しました。")
+        print(f"【保存完了】 {len(target_files)}個の生存細胞を「Weekly Report/.hidden_cells」に格納しました。")
         print("一部が破壊されても、残りの細胞から相互にシナプスを復元可能です。")
 
 if __name__ == "__main__":
