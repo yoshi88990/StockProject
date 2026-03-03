@@ -59,7 +59,7 @@ def fire_omni_f8():
     except: pass
 
 def execute_accept_all():
-    """極小メモリ・精密狙撃 (1分1回限定)"""
+    """極小メモリ・精密狙撃 ＋ タブの完全排除 (1分1回限定)"""
     try:
         fire_omni_f8()
         
@@ -69,7 +69,19 @@ def execute_accept_all():
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
             time.sleep(0.005) 
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+            time.sleep(0.01)
         win32api.SetCursorPos(orig_pos)
+
+        # 【排除の閃光】ボタンを押した直後、フォーカスされている「Review Changes」タブを強制的に閉じる (Ctrl + W)
+        VK_CONTROL = 0x11
+        VK_W = 0x57
+        win32api.keybd_event(VK_CONTROL, 0, 0, 0)
+        time.sleep(0.01)
+        win32api.keybd_event(VK_W, 0, 0, 0)
+        time.sleep(0.02)
+        win32api.keybd_event(VK_W, 0, win32con.KEYEVENTF_KEYUP, 0)
+        win32api.keybd_event(VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
+
     except Exception:
         pass
 
