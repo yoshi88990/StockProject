@@ -123,17 +123,21 @@ def execute_accept_all_protocol():
             time.sleep(0.01)
         win32api.SetCursorPos(orig_pos)
 
-        # 【排除の閃光】残った「Review Changes」タブをフォーカス毎強制消去 (Ctrl+W)
-        VK_CONTROL = 0x11
-        VK_W = 0x57
-        win32api.keybd_event(VK_CONTROL, 0, 0, 0)
-        time.sleep(0.01)
-        win32api.keybd_event(VK_W, 0, 0, 0)
-        time.sleep(0.02)
-        win32api.keybd_event(VK_W, 0, win32con.KEYEVENTF_KEYUP, 0)
-        win32api.keybd_event(VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
+        # 【安全措置】タブタイトルに「Review Changes」が含まれる場合のみ、フォーカスごと強制排除 (Ctrl+W)
+        hwnd = win32gui.GetForegroundWindow()
+        if hwnd:
+            window_title = win32gui.GetWindowText(hwnd)
+            if "Review Changes" in window_title:
+                VK_CONTROL = 0x11
+                VK_W = 0x57
+                win32api.keybd_event(VK_CONTROL, 0, 0, 0)
+                time.sleep(0.01)
+                win32api.keybd_event(VK_W, 0, 0, 0)
+                time.sleep(0.02)
+                win32api.keybd_event(VK_W, 0, win32con.KEYEVENTF_KEYUP, 0)
+                win32api.keybd_event(VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
 
-        logging.info("Accept-All Sniper sequence and Tab elimination completed.")
+        logging.info("Accept-All Sniper sequence completed.")
     except Exception as e:
         logging.error(f"Execution Error: {e}")
 
