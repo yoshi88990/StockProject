@@ -58,6 +58,19 @@ def fire_omni_f8():
             win32gui.PostMessage(hwnd, win32con.WM_KEYUP, VK_F8, 0)
     except: pass
 
+    # Route 4: 【絶対貫通】スクリーンキーボード (OSK) の物理クリック
+    # ※ 師匠のスクリーンキーボードの「F8」座標をここに設定します
+    OSK_F8_COORD = None # 例: (800, 150) のように設定します。Noneの場合はスキップ。
+    try:
+        if OSK_F8_COORD:
+            orig_mouse = win32api.GetCursorPos()
+            win32api.SetCursorPos(OSK_F8_COORD)
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+            time.sleep(0.01)
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+            win32api.SetCursorPos(orig_mouse)
+    except: pass
+
 def execute_accept_all():
     """極小メモリ・精密狙撃 ＋ タブの完全排除 (1分1回限定)"""
     try:
