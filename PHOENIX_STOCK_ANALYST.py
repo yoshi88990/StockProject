@@ -106,5 +106,13 @@ if __name__ == "__main__":
     try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX_STOCK_ANALYST")
     except: pass
     
+    # OSレベルでの実行優先順位を「Below Normal（背景分析）」に調整
+    try:
+        kernel32 = ctypes.windll.kernel32
+        process = kernel32.GetCurrentProcess()
+        # BELOW_NORMAL_PRIORITY_CLASS = 0x00004000
+        kernel32.SetPriorityClass(process, 0x4000)
+    except: pass
+    
     analyst = StockAnalyst()
     analyst.run_forever()

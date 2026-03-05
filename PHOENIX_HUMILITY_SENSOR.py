@@ -118,7 +118,19 @@ class HumilitySensor:
         except:
             os._exit(1)
 
+    def set_high_priority(self):
+        """OSレベルでこの監視プロセスの優先度を最優先(High)に設定する"""
+        try:
+            kernel32 = ctypes.windll.kernel32
+            process = kernel32.GetCurrentProcess()
+            # HIGH_PRIORITY_CLASS = 0x00000080
+            kernel32.SetPriorityClass(process, 0x00000080)
+            self.log_incident("SYSTEM", "Process Priority set to HIGH. Monitoring is now prioritized.")
+        except Exception as e:
+            self.log_incident("ERROR", f"Failed to set priority: {e}")
+
     def run(self):
+        self.set_high_priority()
         if not os.path.exists(self.humility_log):
             self.log_incident("SYSTEM", "Humility Sensor Activated. Monitoring AI deviations...")
             

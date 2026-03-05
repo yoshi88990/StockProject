@@ -75,4 +75,13 @@ def watch():
 if __name__ == "__main__":
     try: ctypes.windll.kernel32.SetConsoleTitleW("SNIPER_WATCHDOG_24H")
     except: pass
+    
+    # OSレベルでの実行優先順位をHighに設定 (防御の優先)
+    try:
+        kernel32 = ctypes.windll.kernel32
+        process = kernel32.GetCurrentProcess()
+        # HIGH_PRIORITY_CLASS = 0x00000080
+        kernel32.SetPriorityClass(process, 0x00000080)
+    except: pass
+    
     watch()

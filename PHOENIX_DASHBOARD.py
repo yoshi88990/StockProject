@@ -27,16 +27,16 @@ class LASTINPUTINFO(ctypes.Structure):
     _fields_ = [("cbSize", wintypes.UINT), ("dwTime", wintypes.DWORD)]
 
 def get_process_status():
-    """OSの内側から8つのコア・プロセスの生存を確認する"""
+    """OSの内側から8つのコア・プロセスの生存と実行優先度を確認する"""
     roles = {
-        "【執行】スナイパー  ": "ACCEPT_ALL_MINIMAL.py",
-        "【免疫】イミューン  ": "PHOENIX_IMMUNE_SYSTEM.py",
-        "【番犬】ウォッチドッグ": "SNIPER_WATCHDOG.py",
-        "【共有】シナプス同步  ": "PHOENIX_SYNCHRONIZER.py",
-        "【演算】計算ノード    ": "PHOENIX_COMPUTE_NODE.py",
-        "【審判】謙虚さセンサ  ": "PHOENIX_HUMILITY_SENSOR.py",
-        "【潜伏】ゴースト操作  ": "PHOENIX_GHOST_OPERATOR.py",
-        "【調査】株式アナリスト": "PHOENIX_STOCK_ANALYST.py"
+        "【執行：第2階層】スナイパー  ": ("ACCEPT_ALL_MINIMAL.py", "AboveNormal"),
+        "【免疫：第1階層】イミューン  ": ("PHOENIX_IMMUNE_SYSTEM.py", "High"),
+        "【番犬：第1階層】ウォッチドッグ": ("SNIPER_WATCHDOG.py", "High"),
+        "【共有：第3階層】シナプス同步  ": ("PHOENIX_SYNCHRONIZER.py", "Normal"),
+        "【演算：第3階層】計算ノード    ": ("PHOENIX_COMPUTE_NODE.py", "BelowNormal"),
+        "【審判：第1階層】謙虚さセンサ  ": ("PHOENIX_HUMILITY_SENSOR.py", "High"),
+        "【潜伏：第2階層】ゴースト操作  ": ("PHOENIX_GHOST_OPERATOR.py", "AboveNormal"),
+        "【調査：第3階層】株式アナリスト": ("PHOENIX_STOCK_ANALYST.py", "BelowNormal")
     }
     
     status = {}
@@ -45,8 +45,9 @@ def get_process_status():
             'wmic process where "name like \'python%.exe\'" get commandline', 
             shell=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
-        for role, script in roles.items():
-            status[role] = f"{Colors.OKGREEN}稼働中 (ACTIVE){Colors.ENDC}" if script in output else f"{Colors.FAIL}停止中 (DEAD){Colors.ENDC}"
+        for role, (script, tier) in roles.items():
+            stat = f"{Colors.OKGREEN}稼働({tier}){Colors.ENDC}" if script in output else f"{Colors.FAIL}停止{Colors.ENDC}"
+            status[role] = stat
     except:
         for role in roles: status[role] = f"{Colors.WARNING}確認不能{Colors.ENDC}"
     return status
