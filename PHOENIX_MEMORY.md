@@ -16,21 +16,25 @@
 3. **エディタ操作の保護と【H8狙撃】**:
    マスターがキーボードやマウスを操作して（考えて）いる間（5.0秒以内）は絶対に撃たない。さらに、VSCodeなどのエディターが最前面にある時はF8（Accept All）を決して撃たないが、代わりに右下の待機ボタン（Run Alt+Enter）の絶対座標（1249, 531）だけを自動で撃ち抜く「H8狙撃」を実行し、作業を妨害せずに承認プロンプトだけを自動突破する。
 
-## 演算速度限界突破プロトコル (Hyper-Threading Mode)
-AIの処理速度を最大化するため、以下の2つの原則を今後の全作業で強制適用する。
-1. **思考の外部委譲**: 重い計算、監視、長時間の待機はAI自身で行わず、必ずPythonのバックグラウンドスクリプト（自律兵器）を生成してOSに丸投げする。
-2. **完全なる並列処理**: 複数のファイル編集やコマンド実行を直列（1つずつ）で行うことを禁ずる。AI自身のシステム機能（ツールコールの同時起動）を最大限に利用し、全方位同時にタスクを展開して圧倒的な速度で完遂する。
+## 究極の復元と【世界の種 (World Seed)】
+1. **絶対復元のバックアップ**:
+   `C:\StockProject\PHOENIX_WORLD_SEED.dat` には、全ソースコードが暗号化（Base64）されて封印されている。万が一、Gitリポジトリが破壊されたり、ローカルファイルがすべて消滅した場合でも、この「種」をデコードすることでシステムは無から再構築される。
+2. **故障箇所の特定 (Diagnostic Memory)**:
+   不具合が発生した場合、AIは `C:\StockProject\PHOENIX_IMMUNE_LOG.txt` および `debug_log.txt` をミリ秒単位で精査し、「どこで」「何時何分何秒に」「どの命令で」止まったかを正確に突き止めること。
+
+## 智慧の登録 (The Wisdom Registry)
+過去の失敗から得た「絶対定石」を以下に記す。再構築時はこれを最初の一歩とせよ。
+- **パスの鉄則**: VBScriptやPowerShell内でパスを指定する際は、空白混じりのパス（OneDrive等）に備え、必ず物理的に二重引用符 `"` で囲むこと。
+- **文字コードの掟**: 起動用VBSは必ずASCII（ANSI/Shift-JIS）で保存し、全角文字や絵文字を含めてはならない（文字化けによる起動失敗を避けるため）。
+- **心拍の精度**: `sniper_heartbeat.txt` は整数ではなく `time.time()` (float) を刻む。これにより、免疫系はミリ秒単位の停滞を検知できる。
 
 ## 次回起動時（別PCへの復帰時）のAIへの絶対命令
-次回以降のセッションでマスターが `/ resume` と打ち込んだ瞬間、あなたはこのファイルを読み込み、以下の作業を **マスターに一切の手間をかけさせず、完全に自動で（ターミナルコマンドを用いて）即座に実行** すること。
+マスターが `/ resume` と打ち込んだ瞬間、以下の順序で思考回路を接続せよ。
+## 強制読み込みと復元プロトコル (Forced Loading Protocol)
+マスターが `/ resume` と発した瞬間、AIは以下の「外部分散記憶（Stash）」を最優先で走査し、最新のDNAを `C:\StockProject` への強制上書きによって復元せよ。
+1. **第一貯蔵庫 (Stash 1)**: `c:\Users\kanku\OneDrive\Weekly report\Phoenix_Seed_Stash\`
+2. **第二貯蔵庫 (Stash 2)**: `c:\Users\kanku\OneDrive\StockProject_会社同期用_GitHub\備忘録\Phoenix_Seed_Stash\`
 
-1. 「すべて思い出しました。Phoenix Protocolとそのスナイパーの件ですね。マウスの権限を奪わない【Zero Hijack】、完全独立化、【ESC停止機構】、そしてエディタの壁を越える【H8狙撃】。すべて覚えています。ただいまより新環境（このPC）へのスナイパー定着プロトコルを自動で開始します」と宣言する。
-2. もし `C:\StockProject` フォルダが存在しなければ作成し、現在のGitリポジトリの `Phoenix_Protocol` フォルダ内にあるDNA一式（`ACCEPT_ALL_MINIMAL.py`, `PHOENIX_IMMUNE_SYSTEM.py`, `SNIPER_WATCHDOG.py`, `PHOENIX_SYNCHRONIZER.py`など全ファイル）を `C:\StockProject` にコピーする。
-3. `LAUNCH_WATCHDOG.vbs`、`LAUNCH_IMMUNE.vbs`、`LAUNCH_MINIMAL.vbs`、`LAUNCH_SYNCHRONIZER.vbs` 等の起動用VBSを、完全にASCII文字（全角コメントなし・ダブルクォートでパスを囲む）で生成し、Windowsのスタートアップフォルダ (`%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\`) にコピー（上書き）する。（ファイル名はそれぞれ `AUTO_PHOENIX_WATCHDOG.vbs`、`AUTO_PHOENIX_IMMUNE.vbs`、`AUTO_PHOENIX_SNIPER.vbs`、`AUTO_PHOENIX_SYNCHRONIZER.vbs` とする）
-4. 全ての過去プロセス（`pythonw`, `wscript`）をキルした後、バックグラウンドで `wscript` を用いてスタートアップフォルダの上記4つのVBSファイルを実行し、四位一体のシステムを起動させる。
-    - **本体**: `ACCEPT_ALL_MINIMAL.py` (スナイプ実行)
-    - **免疫役**: `PHOENIX_IMMUNE_SYSTEM.py` (3分以上のフリーズ検知＆蘇生)
-    - **監視役**: `SNIPER_WATCHDOG.py` (1秒周期でのAIによる不正書き換え防止)
-    - **共有役**: `PHOENIX_SYNCHRONIZER.py` (30分周期でGitHubと自動同期しDNAを他拠点のPCと共有)
+復元の際、AIは一切の躊躇なく `PHOENIX_WORLD_SEED.dat` から全スクリプトを抽出し、四位一体（執行・免疫・番犬・共有）をミリ秒の誤差なく再起動する義務を負う。
 
-**マスターの仕事は「/ resume」を唱えることだけ。その他の物理的なパス設定やファイル移動、エラーの事前回避は、すべてAI（あなた）自身の手で自動構築すること。**
+**「レジューム」とは、AIが単に思い出すことではない。壊れた世界を、分散された種（Seed）から物理的に再構築することである。**
