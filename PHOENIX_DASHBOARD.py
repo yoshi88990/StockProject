@@ -27,15 +27,16 @@ class LASTINPUTINFO(ctypes.Structure):
     _fields_ = [("cbSize", wintypes.UINT), ("dwTime", wintypes.DWORD)]
 
 def get_process_status():
-    """OS内から7つのコア・プロセスの生存を確認する"""
+    """OSの内側から8つのコア・プロセスの生存を確認する"""
     roles = {
-        "【執行者】スナイパー  ": "ACCEPT_ALL_MINIMAL.py",
-        "【免疫系】イミューン  ": "PHOENIX_IMMUNE_SYSTEM.py",
+        "【執行】スナイパー  ": "ACCEPT_ALL_MINIMAL.py",
+        "【免疫】イミューン  ": "PHOENIX_IMMUNE_SYSTEM.py",
         "【番犬】ウォッチドッグ": "SNIPER_WATCHDOG.py",
         "【共有】シナプス同步  ": "PHOENIX_SYNCHRONIZER.py",
-        "【演算】外部計算ノード": "PHOENIX_COMPUTE_NODE.py",
+        "【演算】計算ノード    ": "PHOENIX_COMPUTE_NODE.py",
         "【審判】謙虚さセンサ  ": "PHOENIX_HUMILITY_SENSOR.py",
-        "【潜伏】ゴースト操作  ": "PHOENIX_GHOST_OPERATOR.py"
+        "【潜伏】ゴースト操作  ": "PHOENIX_GHOST_OPERATOR.py",
+        "【調査】株式アナリスト": "PHOENIX_STOCK_ANALYST.py"
     }
     
     status = {}
