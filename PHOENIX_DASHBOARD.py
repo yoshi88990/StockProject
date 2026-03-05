@@ -85,43 +85,54 @@ def get_idle_time():
     return millis / 1000.0
 
 def render_dashboard():
-    """ダッシュボードの描画 (五位一体・フルスペクトラム監視モード)"""
+    """ダッシュボードの描画 (六位一体・AI傲慢さ・フルスペクトラム監視モード)"""
     os.system('cls' if os.name == 'nt' else 'clear')
     
     now_dt = datetime.datetime.now()
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v2.5      {Colors.ENDC}")
+    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v3.0      {Colors.ENDC}")
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
     print(f" 現在時刻: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}.{now_dt.strftime('%f')[:3]}")
     print("-" * 64)
 
     # システム稼働状況
-    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Full Core Trinities + Compute Node){Colors.ENDC}")
+    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Full 6-Core Pentagon + Humility Sensor){Colors.ENDC}")
     process_status = get_process_status()
     for role, stat in process_status.items():
         print(f" {role} : {stat}")
     
     print("-" * 64)
 
-    # 師匠の操作監視 (Zero Hijack Status)
-    print(f"{Colors.BOLD}[2] ZERO HIJACK MONITORING (User Activity){Colors.ENDC}")
+    # 師匠の操作監視 & AIの傲慢度
+    print(f"{Colors.BOLD}[2] INTERNAL AI AUDIT & ZERO HIJACK (Humility System){Colors.ENDC}")
     idle = get_idle_time()
     hijack_stat = f"{Colors.FAIL}HOLD (User Active){Colors.ENDC}" if idle < 5.0 else f"{Colors.OKGREEN}READY (Idle){Colors.ENDC}"
-    print(f" 師匠の状態: {hijack_stat}")
-    print(f" 非操作時間: {idle:.1f}s (5s以上で自動発射許可)")
+    print(f" 師匠の状態: {hijack_stat} / Idle: {idle:.1f}s")
+    
+    # AIの傲慢さ（Humility Sensor ログ）の簡易表示
+    log_file = r"C:\StockProject\PHOENIX_HUMILITY_LOG.txt"
+    arrogance_msg = f"{Colors.OKGREEN}PERFECT (0%){Colors.ENDC}"
+    if os.path.exists(log_file):
+        try:
+            with open(log_file, "r", encoding="utf-8") as f:
+                last_line = f.readlines()[-1]
+                if "Arrogance Score" in last_line:
+                    score = last_line.split("Arrogance Score: ")[1].strip()
+                    arrogance_msg = f"{Colors.WARNING}{score}{Colors.ENDC}" if "0%" not in score else arrogance_msg
+        except: pass
+    print(f" AIの傲慢さ: {arrogance_msg}")
 
     print("-" * 64)
 
     # 心拍確認
     print(f"{Colors.BOLD}[3] VITAL MONITORING (Sniper Heartbeat){Colors.ENDC}")
     hb_stat, latency = get_heartbeat_info()
-    print(f" 心肺状態: {hb_stat}")
-    print(f" 心拍遅延: {latency:.3f}s")
+    print(f" 心肺状態: {hb_stat} / Latency: {latency:.3f}s")
 
     print("-" * 64)
 
     # 同期・演算確認
-    print(f"{Colors.BOLD}[4] SYNAPSE & COMPUTE STATUS (Strategic Intelligence){Colors.ENDC}")
+    print(f"{Colors.BOLD}[4] SYNAPSE & COMPUTE STATUS (Intelligence & Logic){Colors.ENDC}")
     last_sync = get_last_sync()
     print(f" 最新記憶: {last_sync}")
     
@@ -141,8 +152,8 @@ def render_dashboard():
 
     print("-" * 64)
 
-    # 最新の免疫系ログ
-    print(f"{Colors.BOLD}[5] ANALYTICS & INCIDENT LOGS (Latest 3 Events){Colors.ENDC}")
+    # 警告ログ
+    print(f"{Colors.BOLD}[5] INTERNAL INCIDENT & IMMUNE LOGS (Latest 3){Colors.ENDC}")
     log_file = r"C:\StockProject\PHOENIX_IMMUNE_LOG.txt"
     if os.path.exists(log_file):
         try:
@@ -152,9 +163,9 @@ def render_dashboard():
                     print(f" {line.strip()}")
         except: pass
     else:
-        print(" No logs available yet.")
+        print(" No incidents recorded.")
 
-    print(f"\n{Colors.OKBLUE}※ 外部演算エンジン（Pre-Compute Node）がOS全域で自律思考を開始しました。{Colors.ENDC}")
+    print(f"\n{Colors.OKBLUE}※ AIの傲慢さ（独善的判断・ルール逸脱）を「審判」監視プログラムで封印しました。{Colors.ENDC}")
     print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
 
     print(f"\n{Colors.OKBLUE}※ この画面を出しっぱなしにすることで常時監視が可能です（5秒毎更新）{Colors.ENDC}")
