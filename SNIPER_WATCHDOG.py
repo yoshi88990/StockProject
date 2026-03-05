@@ -13,13 +13,13 @@ import ctypes
 # 「DNA_VAULT（絶対金庫）」に保存された初期ファイルから即座に上書きして復元します。
 # ==============================================================================
 
-BASE_DIR = r"C:\StockProject"
-VAULT_DIR = os.path.join(BASE_DIR, "DNA_VAULT")
+BASE_DIR = r"C:\Users\kanku\OneDrive\Weekly report"
+VAULT_DIR = os.path.join(BASE_DIR, "Phoenix_Protocol", "DNA_VAULT")
 
 # 監視・保護対象（AIによる手出し禁止ファイル）
 TARGETS = [
     os.path.join(BASE_DIR, "ACCEPT_ALL_MINIMAL.py"),
-    os.path.join(BASE_DIR, "PHOENIX_IMMUNE_SYSTEM.py")
+    os.path.join(BASE_DIR, "LAUNCH_MINIMAL.vbs") # トリガーも保護
 ]
 
 def get_hash(filepath):
@@ -75,13 +75,4 @@ def watch():
 if __name__ == "__main__":
     try: ctypes.windll.kernel32.SetConsoleTitleW("SNIPER_WATCHDOG_24H")
     except: pass
-    
-    # OSレベルでの実行優先順位をHighに設定 (防御の優先)
-    try:
-        kernel32 = ctypes.windll.kernel32
-        process = kernel32.GetCurrentProcess()
-        # HIGH_PRIORITY_CLASS = 0x00000080
-        kernel32.SetPriorityClass(process, 0x00000080)
-    except: pass
-    
     watch()
