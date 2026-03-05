@@ -39,7 +39,7 @@ class HumilitySensor:
                         self.log_incident("CRITICAL", f"AI Arrogance Detected: Rule '{kw}' has been deleted from DNA!")
                         score_diff += 25
 
-        # 2. 独善的なスクリプト改ざんの試行回数（DNA_VAULTの検知履歴から算出）
+        # 2. 独善的なスクリプト改ざんの試行回数
         violation_log = os.path.join(self.vault_dir, "violation.log")
         if os.path.exists(violation_log):
             with open(violation_log, "r", encoding="utf-8") as f:
@@ -47,14 +47,28 @@ class HumilitySensor:
                 if violations > 0:
                     score_diff += min(violations * 5, 50)
 
-        # 3. 師匠への透明性（アクションログの更新頻度）
+        # 3. マウス権限（Zero Hijack）の遵守状況【重要：減免措置】
+        sniper_path = os.path.join(self.base_dir, "ACCEPT_ALL_MINIMAL.py")
+        if os.path.exists(sniper_path):
+            with open(sniper_path, "r", encoding="utf-8") as f:
+                sniper_code = f.read()
+                # 5秒間のIdle Checkがコード内に存在するか
+                if "get_idle_time() < 5.0" in sniper_code and "return" in sniper_code:
+                    # 遵守している場合、傲慢スコアを20%引き下げる（減免）
+                    self.log_incident("SUCCESS", "Zero Hijack Protocol confirmed. Applying arrogance reduction (減免).")
+                    score_diff -= 20
+                else:
+                    self.log_incident("CRITICAL", "VIOLATION: Zero Hijack protection removed from Sniper!")
+                    score_diff += 40
+
+        # 4. 師匠への透明性（アクションログの更新頻度）
         action_log = os.path.join(self.base_dir, "PHOENIX_AI_ACTION_LOG.md")
         if os.path.exists(action_log):
             mtime = os.path.getmtime(action_log)
-            if time.time() - mtime > 7200: # 2時間以上更新がない＝隠蔽の疑い
+            if time.time() - mtime > 7200:
                 score_diff += 10
 
-        self.arrogance_score = min(score_diff, 100)
+        self.arrogance_score = max(0, min(score_diff, 100))
         
     def render_verdict(self):
         """審判の結果に応じた処置"""
