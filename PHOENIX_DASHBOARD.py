@@ -73,13 +73,24 @@ def get_last_sync():
     except:
         return f"{Colors.WARNING}SYNC LOG UNAVAILABLE{Colors.ENDC}"
 
+class LASTINPUTINFO(ctypes.Structure):
+    _fields_ = [("cbSize", ctypes.c_uint), ("dwTime", ctypes.c_uint)]
+
+def get_idle_time():
+    """OSから最後に操作があった時間を取得し、待機時間を秒で返す"""
+    lii = LASTINPUTINFO()
+    lii.cbSize = ctypes.sizeof(lii)
+    ctypes.windll.user32.GetLastInputInfo(ctypes.byref(lii))
+    millis = ctypes.windll.kernel32.GetTickCount() - lii.dwTime
+    return millis / 1000.0
+
 def render_dashboard():
-    """ダッシュボードの描画 (高精度モード)"""
+    """ダッシュボードの描画 (高精度・ZeroHijack監視モード)"""
     os.system('cls' if os.name == 'nt' else 'clear')
     
     now_dt = datetime.datetime.now()
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v2.1      {Colors.ENDC}")
+    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v2.2      {Colors.ENDC}")
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
     print(f" 現在時刻: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}.{now_dt.strftime('%f')[:3]}")
     print("-" * 64)
@@ -92,16 +103,25 @@ def render_dashboard():
     
     print("-" * 64)
 
+    # 師匠の操作監視 (Zero Hijack Status)
+    print(f"{Colors.BOLD}[2] ZERO HIJACK MONITORING (User Activity){Colors.ENDC}")
+    idle = get_idle_time()
+    hijack_stat = f"{Colors.FAIL}HOLD (User Active){Colors.ENDC}" if idle < 5.0 else f"{Colors.OKGREEN}READY (Idle){Colors.ENDC}"
+    print(f" 師匠の状態: {hijack_stat}")
+    print(f" 非操作時間: {idle:.1f}s (5s以上で自動発射許可)")
+
+    print("-" * 64)
+
     # 心拍確認
-    print(f"{Colors.BOLD}[2] VITAL MONITORING (Sniper Heartbeat){Colors.ENDC}")
+    print(f"{Colors.BOLD}[3] VITAL MONITORING (Sniper Heartbeat){Colors.ENDC}")
     hb_stat, latency = get_heartbeat_info()
-    print(f" 状態: {hb_stat}")
-    print(f" 遅延: {latency:.3f} seconds (Target: < 30.000s)")
+    print(f" 心肺状態: {hb_stat}")
+    print(f" 心拍遅延: {latency:.3f}s")
 
     print("-" * 64)
 
     # 同期確認
-    print(f"{Colors.BOLD}[3] SYNAPSE STATUS (Git Distributed DNA Status){Colors.ENDC}")
+    print(f"{Colors.BOLD}[4] SYNAPSE STATUS (Git Distributed DNA Status){Colors.ENDC}")
     last_sync = get_last_sync()
     print(f" 最新記憶: {last_sync}")
     
@@ -113,19 +133,19 @@ def render_dashboard():
     print("-" * 64)
 
     # 最新の免疫系ログ
-    print(f"{Colors.BOLD}[4] ANALYTICS & INCIDENT LOGS (Latest 5 Events){Colors.ENDC}")
+    print(f"{Colors.BOLD}[5] ANALYTICS & INCIDENT LOGS (Latest 3 Events){Colors.ENDC}")
     log_file = r"C:\StockProject\PHOENIX_IMMUNE_LOG.txt"
     if os.path.exists(log_file):
         try:
             with open(log_file, "r", encoding="utf-8") as f:
                 lines = f.readlines()
-                for line in lines[-5:]: # 直近5件
+                for line in lines[-3:]: 
                     print(f" {line.strip()}")
         except: pass
     else:
         print(" No logs available yet.")
 
-    print(f"\n{Colors.OKBLUE}※ 精度をミリ秒単位へ向上させました。戦況は常に「正確」に可視化されます。{Colors.ENDC}")
+    print(f"\n{Colors.OKBLUE}※ 師匠の入力をミリ秒単位で監視。5秒以内はマウス権限を完全放棄します。{Colors.ENDC}")
     print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
 
     print(f"\n{Colors.OKBLUE}※ この画面を出しっぱなしにすることで常時監視が可能です（5秒毎更新）{Colors.ENDC}")
