@@ -27,16 +27,17 @@ class LASTINPUTINFO(ctypes.Structure):
     _fields_ = [("cbSize", wintypes.UINT), ("dwTime", wintypes.DWORD)]
 
 def get_process_status():
-    """OSの内側から8つのコア・プロセスの生存と実行優先度を確認する"""
+    """OSの内側から9つのコア・プロセスの生存と実行優先度を確認する"""
     roles = {
-        "【執行：第2階層】スナイパー  ": ("ACCEPT_ALL_MINIMAL.py", "AboveNormal"),
+        "【執行：第2階層】スナイパー  ": ("ACCEPT_ALL_MINIMAL.py", "Above"),
         "【免疫：第1階層】イミューン  ": ("PHOENIX_IMMUNE_SYSTEM.py", "High"),
         "【番犬：第1階層】ウォッチドッグ": ("SNIPER_WATCHDOG.py", "High"),
         "【共有：第3階層】シナプス同步  ": ("PHOENIX_SYNCHRONIZER.py", "Normal"),
-        "【演算：第3階層】計算ノード    ": ("PHOENIX_COMPUTE_NODE.py", "BelowNormal"),
+        "【演算：第3階層】計算ノード    ": ("PHOENIX_COMPUTE_NODE.py", "Below"),
         "【審判：第1階層】謙虚さセンサ  ": ("PHOENIX_HUMILITY_SENSOR.py", "High"),
-        "【潜伏：第2階層】ゴースト操作  ": ("PHOENIX_GHOST_OPERATOR.py", "AboveNormal"),
-        "【調査：第3階層】株式アナリスト": ("PHOENIX_STOCK_ANALYST.py", "BelowNormal")
+        "【潜伏：第2階層】ゴースト操作  ": ("PHOENIX_GHOST_OPERATOR.py", "Above"),
+        "【調査：第3階層】株式アナリスト": ("PHOENIX_STOCK_ANALYST.py", "Below"),
+        "【封印：第3階層】記憶移管ノード": ("PHOENIX_CRYPTO_VAULT.py", "Below")
     }
     
     status = {}
