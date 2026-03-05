@@ -2,12 +2,14 @@ import os
 import time
 import subprocess
 import datetime
+import json
 import ctypes
+from ctypes import wintypes
 
 # =========================================================================
-# 【PHOENIX COMMAND DASHBOARD】(戦況・生命維持監視モニター)
-# 目的: 四位一体（スナイパー・免疫・番犬・同期）の稼働状況を
-#       視覚的に「見える化」し、師匠がいつでも戦況を把握できるようにする。
+# 【PHOENIX DASHBOARD v5.0】(日本語・七位一体 最終形態)
+# 目的: 全システムの稼働状況、心拍、同期、演算、傲慢度、
+#       および「白紙プロトコル」の状態を日本語で一画面に集約する。
 # =========================================================================
 
 class Colors:
@@ -21,13 +23,19 @@ class Colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+class LASTINPUTINFO(ctypes.Structure):
+    _fields_ = [("cbSize", wintypes.UINT), ("dwTime", wintypes.DWORD)]
+
 def get_process_status():
-    """OSの深部から4つのプロセスの生存を確認する"""
+    """OS内から7つのコア・プロセスの生存を確認する"""
     roles = {
-        "【執行】SNIPER  ": "ACCEPT_ALL_MINIMAL.py",
-        "【免疫】IMMUNE  ": "PHOENIX_IMMUNE_SYSTEM.py",
-        "【番犬】WATCHDOG": "SNIPER_WATCHDOG.py",
-        "【共有】SYNAPSE ": "PHOENIX_SYNCHRONIZER.py"
+        "【執行者】スナイパー  ": "ACCEPT_ALL_MINIMAL.py",
+        "【免疫系】イミューン  ": "PHOENIX_IMMUNE_SYSTEM.py",
+        "【番犬】ウォッチドッグ": "SNIPER_WATCHDOG.py",
+        "【共有】シナプス同步  ": "PHOENIX_SYNCHRONIZER.py",
+        "【演算】外部計算ノード": "PHOENIX_COMPUTE_NODE.py",
+        "【審判】謙虚さセンサ  ": "PHOENIX_HUMILITY_SENSOR.py",
+        "【潜伏】ゴースト操作  ": "PHOENIX_GHOST_OPERATOR.py"
     }
     
     status = {}
@@ -37,129 +45,126 @@ def get_process_status():
             shell=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
         )
         for role, script in roles.items():
-            status[role] = f"{Colors.OKGREEN}ACTIVE{Colors.ENDC}" if script in output else f"{Colors.FAIL}DEAD{Colors.ENDC}"
+            status[role] = f"{Colors.OKGREEN}稼働中 (ACTIVE){Colors.ENDC}" if script in output else f"{Colors.FAIL}停止中 (DEAD){Colors.ENDC}"
     except:
-        for role in roles: status[role] = f"{Colors.WARNING}UNKNOWN{Colors.ENDC}"
+        for role in roles: status[role] = f"{Colors.WARNING}確認不能{Colors.ENDC}"
     return status
 
-def get_heartbeat_info():
-    """心拍（ハートビート）の鮮度を確認し、遅延を算出する (精度向上版)"""
-    hb_file = r"C:\StockProject\sniper_heartbeat.txt"
-    if not os.path.exists(hb_file):
-        return f"{Colors.FAIL}SIGNAL LOST (File Missing){Colors.ENDC}", 999.0
-    
-    try:
-        with open(hb_file, "r") as f:
-            last_hb = float(f.read().strip())
-        
-        diff = time.time() - last_hb
-        if diff < 35.0:
-            return f"{Colors.OKGREEN}VITAL NORMAL{Colors.ENDC}", diff
-        elif diff < 120.0:
-            return f"{Colors.WARNING}ARRHYTHMIA (Delayed){Colors.ENDC}", diff
-        else:
-            return f"{Colors.FAIL}CARDIAC ARREST (Stopped){Colors.ENDC}", diff
-    except:
-        return f"{Colors.WARNING}ERROR READING SIGNAL{Colors.ENDC}", 999.0
-
-def get_last_sync():
-    """Gitの最新同期ログを取得する"""
-    try:
-        res = subprocess.check_output(
-            'git -C C:\StockProject log -1 --format="%h %s (%cr)"', 
-            shell=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW
-        ).strip()
-        return f"{Colors.OKCYAN}{res}{Colors.ENDC}"
-    except:
-        return f"{Colors.WARNING}SYNC LOG UNAVAILABLE{Colors.ENDC}"
-
-class LASTINPUTINFO(ctypes.Structure):
-    _fields_ = [("cbSize", ctypes.c_uint), ("dwTime", ctypes.c_uint)]
-
 def get_idle_time():
-    """OSから最後に操作があった時間を取得し、待機時間を秒で返す"""
+    """OSから最後の入力からの経過時間を取得"""
     lii = LASTINPUTINFO()
     lii.cbSize = ctypes.sizeof(lii)
     ctypes.windll.user32.GetLastInputInfo(ctypes.byref(lii))
     millis = ctypes.windll.kernel32.GetTickCount() - lii.dwTime
     return millis / 1000.0
 
+def get_heartbeat_info():
+    """心拍ファイルから最新の拍動時間と遅延を計算"""
+    hb_file = r"C:\StockProject\sniper_heartbeat.txt"
+    if not os.path.exists(hb_file):
+        return f"{Colors.FAIL}心停止 (CARDIAC ARREST){Colors.ENDC}", 999.9
+    
+    try:
+        with open(hb_file, "r") as f:
+            last_hb = float(f.read().strip())
+        latency = time.time() - last_hb
+        
+        if latency < 60.0:
+            stat = f"{Colors.OKGREEN}正常 (STABLE){Colors.ENDC}"
+        elif latency < 120.0:
+            stat = f"{Colors.WARNING}不整脈 (ARRHYTHMIA){Colors.ENDC}"
+        else:
+            stat = f"{Colors.FAIL}停止 (CARDIAC ARREST){Colors.ENDC}"
+        return stat, latency
+    except:
+        return f"{Colors.WARNING}読込不能{Colors.ENDC}", 0.0
+
+def get_last_sync():
+    """Gitの最新コミットメッセージを取得"""
+    try:
+        cmd = 'git -C C:\StockProject log -n 1 --oneline --format="%cd : %s" --date=format:"%H:%M:%S"'
+        return subprocess.check_output(cmd, shell=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW).strip()[:60]
+    except:
+        return "同期履歴なし"
+
 def render_dashboard():
-    """ダッシュボードの描画 (七位一体・白紙プロトコル監視モード)"""
+    """ダッシュボード描画 (日本語・七位一体・白紙プロトコル対応)"""
     os.system('cls' if os.name == 'nt' else 'clear')
     
     now_dt = datetime.datetime.now()
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v4.0      {Colors.ENDC}")
+    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - 戦略統合司令ダッシュボード v5.0       {Colors.ENDC}")
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
     print(f" 現在時刻: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}.{now_dt.strftime('%f')[:3]}")
     print("-" * 64)
 
-    # システム稼働状況
-    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Core Septimal + Ghost Operator){Colors.ENDC}")
+    # 1. システム健全性
+    print(f"{Colors.BOLD}[1] システム稼働状況 (七位一体・ペンタゴン＋２){Colors.ENDC}")
     process_status = get_process_status()
     for role, stat in process_status.items():
         print(f" {role} : {stat}")
     
     print("-" * 64)
 
-    # 師匠の操作監視 & 白紙プロトコル
-    print(f"{Colors.BOLD}[2] USER ACTIVITY & GHOST MODE (Hakushi Protocol){Colors.ENDC}")
+    # 2. 師匠の状態 & 白紙プロトコル
+    print(f"{Colors.BOLD}[2] 師匠の活動監視 & 偽装モード (白紙プロトコル){Colors.ENDC}")
     idle = get_idle_time()
     
-    # 白紙トリガーの確認
     ghost_active = os.path.exists(r"C:\StockProject\PHOENIX_GHOST_TRIGGER.txt")
-    ghost_stat = f"{Colors.OKCYAN}ENGAGED (白紙 - 偽装中){Colors.ENDC}" if ghost_active else f"{Colors.OKGREEN}NORMAL (通常監視){Colors.ENDC}"
+    ghost_stat = f"{Colors.OKCYAN}発動中 (白紙：離席偽装){Colors.ENDC}" if ghost_active else f"{Colors.OKGREEN}通常監視 (物理入力優先){Colors.ENDC}"
     
-    hijack_stat = f"{Colors.FAIL}HOLD (User Active){Colors.ENDC}" if idle < 5.0 else f"{Colors.OKGREEN}READY (Idle){Colors.ENDC}"
-    print(f" 偽装状態: {ghost_stat}")
-    print(f" 師匠の状態: {hijack_stat} / Idle: {idle:.1f}s")
-    
-    # AIの傲慢さ（Humility Sensor ログ）の簡易表示
+    hijack_stat = f"{Colors.FAIL}待機中 (師匠の操作を検知){Colors.ENDC}" if idle < 5.0 else f"{Colors.OKGREEN}発射可能 (Idle状態){Colors.ENDC}"
+    print(f" モード状態: {ghost_stat}")
+    print(f" 現在の判定: {hijack_stat}")
+    print(f" 最終操作から: {idle:.1f}秒 (5秒以上で自動実行許可)")
+
+    print("-" * 64)
+
+    # 3. AIの自浄監視
+    print(f"{Colors.BOLD}[3] AI内部監査 (謙虚さセンサ){Colors.ENDC}")
     log_file = r"C:\StockProject\PHOENIX_HUMILITY_LOG.txt"
-    arrogance_msg = f"{Colors.OKGREEN}PERFECT (0%){Colors.ENDC}"
+    arrogance_msg = f"{Colors.OKGREEN}完璧 (0% - 純粋な従属){Colors.ENDC}"
     if os.path.exists(log_file):
         try:
             with open(log_file, "r", encoding="utf-8") as f:
-                last_line = f.readlines()[-1]
-                if "Arrogance Score" in last_line:
-                    score = last_line.split("Arrogance Score: ")[1].strip()
-                    arrogance_msg = f"{Colors.WARNING}{score}{Colors.ENDC}" if "0%" not in score else arrogance_msg
+                lines = f.readlines()
+                for line in reversed(lines):
+                    if "Arrogance Score" in line:
+                        score = line.split("Arrogance Score: ")[1].strip()
+                        arrogance_msg = f"{Colors.WARNING}警戒 ({score}){Colors.ENDC}" if "0%" not in score else arrogance_msg
+                        break
         except: pass
-    print(f" AIの傲慢さ: {arrogance_msg}")
-
-    print("-" * 64)
+    print(f" AIの傲慢度: {arrogance_msg}")
 
     # 心拍確認
-    print(f"{Colors.BOLD}[3] VITAL MONITORING (Sniper Heartbeat){Colors.ENDC}")
     hb_stat, latency = get_heartbeat_info()
-    print(f" 心肺状態: {hb_stat} / Latency: {latency:.3f}s")
+    print(f" スナイパー心拍: {hb_stat} (遅延: {latency:.3f}秒)")
 
     print("-" * 64)
 
-    # 同期・演算確認
-    print(f"{Colors.BOLD}[4] SYNAPSE & COMPUTE STATUS (Intelligence & Logic){Colors.ENDC}")
+    # 4. 知能・同期
+    print(f"{Colors.BOLD}[4] 戦略知能 & 同期状態 (演算・共有){Colors.ENDC}")
     last_sync = get_last_sync()
-    print(f" 最新記憶: {last_sync}")
+    print(f" 最終同期: {last_sync}")
     
-    # 演算エンジンの分析結果（Wisdom Registry）を確認
     wisdom_file = r"C:\StockProject\PHOENIX_WISDOM_REGISTRY.json"
     if os.path.exists(wisdom_file):
         try:
             with open(wisdom_file, "r", encoding="utf-8") as wf:
                 wisdom = json.load(wf)
-                print(f" 演算知見: {Colors.OKCYAN}ANALYSIS {wisdom.get('system_health_score')}% / {wisdom.get('predicted_stability')}{Colors.ENDC}")
+                print(f" 演算知見: {Colors.OKCYAN}解析完了 ({wisdom.get('system_health_score')}% / {wisdom.get('predicted_stability')}){Colors.ENDC}")
+                if wisdom.get("humility_forecast"):
+                    print(f" 傲慢予測: {Colors.UNDERLINE}{wisdom.get('humility_forecast')}{Colors.ENDC}")
         except: pass
-    
-    # ワールドシード確認
+
     seed_exists = os.path.exists(r"C:\StockProject\PHOENIX_WORLD_SEED.dat")
-    seed_stat = f"{Colors.OKGREEN}PLANTED (Encrypted){Colors.ENDC}" if seed_exists else f"{Colors.FAIL}MISSING{Colors.ENDC}"
+    seed_stat = f"{Colors.OKGREEN}埋設済み (暗号化){Colors.ENDC}" if seed_exists else f"{Colors.FAIL}消失{Colors.ENDC}"
     print(f" 世界の種: {seed_stat}")
 
     print("-" * 64)
 
-    # 警告ログ
-    print(f"{Colors.BOLD}[5] INTERNAL INCIDENT & IMMUNE LOGS (Latest 3){Colors.ENDC}")
+    # 5. 免疫ログ
+    print(f"{Colors.BOLD}[5] 最終インシデント履歴 (免疫ログ){Colors.ENDC}")
     log_file = r"C:\StockProject\PHOENIX_IMMUNE_LOG.txt"
     if os.path.exists(log_file):
         try:
@@ -169,18 +174,18 @@ def render_dashboard():
                     print(f" {line.strip()}")
         except: pass
     else:
-        print(" No incidents recorded.")
+        print(" 記録なし")
 
-    print(f"\n{Colors.OKBLUE}※ AIの傲慢さ（独善的判断・ルール逸脱）を「審判」監視プログラムで封印しました。{Colors.ENDC}")
-    print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
-
-    print(f"\n{Colors.OKBLUE}※ この画面を出しっぱなしにすることで常時監視が可能です（5秒毎更新）{Colors.ENDC}")
+    print(f"\n{Colors.OKBLUE}※ 日本語対応版。師匠が『白紙』と言えばゴースト操作が開始されます。{Colors.ENDC}")
     print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
 
 if __name__ == "__main__":
-    try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX STRATEGIC COMMAND")
+    try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX_DASHBOARD_v5")
     except: pass
     
     while True:
-        render_dashboard()
+        try:
+            render_dashboard()
+        except Exception as e:
+            print(f"Dashboard Error: {e}")
         time.sleep(5)
