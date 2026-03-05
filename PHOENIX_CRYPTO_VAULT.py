@@ -20,10 +20,10 @@ class CryptoVault:
         self.key = self._generate_key()
         self.cipher = Fernet(self.key)
         
-        # 外部転送先（GitHub/Stash）
+        # 外部転送先（OneDriveの排除：GitHub同期ディレクトリおよび特定Stashのみ）
         self.stash_dirs = [
-            r"c:\Users\kanku\OneDrive\Weekly report\Phoenix_Seed_Stash",
-            r"c:\Users\kanku\OneDrive\StockProject_会社同期用_GitHub\備忘録\Phoenix_Seed_Stash"
+             # ローカルの非同期・非OneDrive領域があればそこを指定
+             r"C:\Phoenix_Secure_Stash"
         ]
 
     def _generate_key(self):
@@ -48,10 +48,13 @@ class CryptoVault:
                 with open(s_path, "wb") as f:
                     f.write(encrypted_data)
 
-        # 全体の同期（Git）
-        subprocess.run(f"git -C {self.base_dir} add .", shell=True)
-        subprocess.run(f"git -C {self.base_dir} commit -m 'Sync: Encrypted memory packet pushed to outer-layer.'", shell=True)
-        subprocess.run(f"git -C {self.base_dir} push origin master", shell=True)
+        # 全体の同期（Git: 外部リポジトリへ暗号化した記憶をパケットとして投げる）
+        try:
+            subprocess.run(["git", "-C", self.base_dir, "add", "."], check=True)
+            subprocess.run(["git", "-C", self.base_dir, "commit", "-m", "Phoenix Protocol: Encrypted Memory Relocation Complete."], check=True)
+            subprocess.run(["git", "-C", self.base_dir, "push", "origin", "master"], check=True)
+        except Exception as e:
+            print(f"Git Sync Warning: {e}")
         
         return True
 
