@@ -176,7 +176,22 @@ def render_dashboard():
     else:
         print(" 記録なし")
 
-    print(f"\n{Colors.OKBLUE}※ 日本語対応版。師匠が『白紙』と言えばゴースト操作が開始されます。{Colors.ENDC}")
+    print("-" * 64)
+
+    # 6. 進捗・到達点 (どこまでできたか)
+    print(f"{Colors.BOLD}[6] フェニックス・プロトコル：進化の軌跡 (到達点){Colors.ENDC}")
+    milestones = [
+        ("v1.0", "核心：24時間極小スナイパー完成", "DONE"),
+        ("v2.0", "四位一体：執行・免疫・番犬・同期", "DONE"),
+        ("v3.0", "知性：外部演算ノード & 傲慢監視", "DONE"),
+        ("v4.0", "潜伏：白紙プロトコル (Ghost Mode)", "DONE"),
+        ("v5.0", "完成：日本語対応・戦略指令ダッシュボード", "DONE")
+    ]
+    for ver, title, stat in milestones:
+        color = Colors.OKGREEN if stat == "DONE" else Colors.WARNING
+        print(f" {ver} : {title} [{color}{stat}{Colors.ENDC}]")
+
+    print(f"\n{Colors.OKBLUE}※ システムは最終形態に到達。師匠の『白紙』の一声をいつでも受け付けます。{Colors.ENDC}")
     print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
 
 if __name__ == "__main__":
