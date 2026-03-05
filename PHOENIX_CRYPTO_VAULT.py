@@ -20,11 +20,15 @@ class CryptoVault:
         self.key = self._generate_key()
         self.cipher = Fernet(self.key)
         
-        # 外部転送先（OneDriveの排除：GitHub同期ディレクトリおよび特定Stashのみ）
+        # 外部分散・暗号化ストレージ（OneDriveを徹底排除）
         self.stash_dirs = [
-             # ローカルの非同期・非OneDrive領域があればそこを指定
-             r"C:\Phoenix_Secure_Stash"
+             r"C:\PHOENIX_SECURE_VAULT",   # 日本国内・ローカル要塞
+             r"E:\PHOENIX_DISTRIBUTED_STASH" # 別物理ドライブ・分散ストレージ
         ]
+        # OneDrive検知用のガード
+        for s_dir in self.stash_dirs:
+            if "OneDrive" in s_dir:
+                raise Exception("CRITICAL: OneDrive usage detected in Secure Vault paths!")
 
     def _generate_key(self):
         h = hashlib.sha256(self.secret_seed.encode()).digest()

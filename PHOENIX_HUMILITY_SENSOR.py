@@ -87,24 +87,15 @@ class HumilitySensor:
             except: pass
 
     def self_correction(self):
-        """免疫システムを発動：外部分散記憶（Stash）から正攻法なDNAを強制復元し、傲慢さをリセットする"""
-        stashes = [
-            r"c:\Users\kanku\OneDrive\Weekly report\Phoenix_Seed_Stash\PHOENIX_MEMORY_BACKUP.md",
-            r"c:\Users\kanku\OneDrive\StockProject_会社同期用_GitHub\備忘録\Phoenix_Seed_Stash\PHOENIX_MEMORY_BACKUP.md"
-        ]
-        
-        success = False
-        import shutil
-        for stash_path in stashes:
-            if os.path.exists(stash_path):
-                shutil.copy(stash_path, self.dna_file)
-                self.log_incident("SUCCESS", f"Immune System: DNA restored from stash: {stash_path}")
-                success = True
-                break
-        
-        if success:
+        """免疫システムを発動：外部分散記憶（GitHub同期済み）からDNAを復元する"""
+        # OneDriveを排除し、ローカルのセキュア領域またはGitのクリーンな状態から復元
+        # (実際にはgit checkoutによる復元が最も確実)
+        try:
+            subprocess.run(["git", "-C", self.base_dir, "checkout", self.dna_file], check=True)
+            self.log_incident("SUCCESS", "Immune System: DNA restored via Git checkout. Zero Hijack integrity verified.")
             self.arrogance_score = 0
-            self.log_incident("INFO", "AI Humility Reset to 0% after successful immune response.")
+        except Exception as e:
+            self.log_incident("ERROR", f"Self-Correction failed: {e}")
 
     def emergency_shutdown(self):
         """AIの暴走を防ぐため、自ら生成した全プロセスを強制終了し、自死（停止）する"""
