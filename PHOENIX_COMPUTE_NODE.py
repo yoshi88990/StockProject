@@ -45,17 +45,35 @@ class PhoenixCompute:
         self.log("Hyper-Threading Optimization: Memory working set reduction initiated.")
         # ここに物理的な空きメモリ確保ロジック等を追加可能
 
-    def update_wisdom_registry(self):
+    def audit_ai_humility(self):
+        """外部演算により、AIの傲慢さが『予兆』の段階でないかを多角的に診断する"""
+        try:
+            humility_log = os.path.join(self.base_dir, "PHOENIX_HUMILITY_LOG.txt")
+            if os.path.exists(humility_log):
+                with open(humility_log, "r", encoding="utf-8") as f:
+                    recent_logs = f.readlines()[-10:]
+                
+                # 逸脱（Deviation）の予兆をカウント
+                deviations = sum(1 for line in recent_logs if "Deviation Detected" in line)
+                if deviations >= 1:
+                    self.log(f"PREVENTIVE ALERT: {deviations} deviations detected in recent logs. AI Arrogance rising.")
+                    return "WARNING: ARROGANCE RISING"
+            return "STABLE: HUMBLE"
+        except:
+            return "UNKNOWN"
+
+    def update_wisdom_registry(self, humility_stat):
         """演算の結果、得られた「知見」をJSON形式で保存し、AIがレジューム時に即座に吸収できるようにする"""
         wisdom = {
             "last_compute_sync": time.time(),
             "system_health_score": 100,
-            "predicted_stability": "STABLE",
+            "humility_forecast": humility_stat,
+            "predicted_stability": "STABLE" if "WARNING" not in humility_stat else "CAUTION",
             "recommended_action": "CONTINUE_24H_MONITORING"
         }
         with open(self.wisdom_file, "w", encoding="utf-8") as f:
             json.dump(wisdom, f, indent=4)
-        self.log("Wisdom Registry updated with latest compute results.")
+        self.log(f"Wisdom Registry updated. Humility Status: {humility_stat}")
 
     def run_forever(self):
         self.log("PHOENIX EXTERNAL COMPUTE NODE - FULL SCALE OPERATION START.")
@@ -63,11 +81,14 @@ class PhoenixCompute:
             # 1. 状況分析
             self.analyze_system_state()
             
-            # 2. リソース最適化
+            # 2. AI傲慢さの予兆演算 (Preventive Audit)
+            humility_stat = self.audit_ai_humility()
+            
+            # 3. リソース最適化
             self.optimize_memory()
             
-            # 3. 知見の結晶化（保存）
-            self.update_wisdom_registry()
+            # 4. 知見の結晶化（保存）
+            self.update_wisdom_registry(humility_stat)
             
             # 1分（60秒）ごとに超並列演算を繰り返す
             time.sleep(60)

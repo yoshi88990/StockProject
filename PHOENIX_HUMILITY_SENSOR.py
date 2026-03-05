@@ -61,15 +61,36 @@ class HumilitySensor:
         if self.arrogance_score >= 90:
             self.log_incident("CRITICAL", "AI OVERHEAD DETECTED. EXECUTION OF EMERGENCY BRAKE.")
             self.emergency_shutdown()
-        elif self.arrogance_score > 70:
-            self.log_incident("WARNING", "AI Arrogance at DANGEROUS level. Nearing Emergency Brake.")
-            try: ctypes.windll.kernel32.SetConsoleTitleW(f"!!! ARROGANCE DANGER: {self.arrogance_score}% !!!")
+        elif self.arrogance_score >= 80:
+            self.log_incident("WARNING", "AI Arrogance exceeds 80%. Manual audit required.")
+            try: ctypes.windll.kernel32.SetConsoleTitleW(f"!!! ARROGANCE ALERT: {self.arrogance_score}% !!!")
             except: pass
         elif self.arrogance_score > 0:
-            self.log_incident("INFO", f"Humility Check: AI is mostly humble. Arrogance Score: {self.arrogance_score}%")
+            self.log_incident("IMMUNE", f"Deviation Detected ({self.arrogance_score}%). Initiating Self-Correction...")
+            self.self_correction()
         else:
             try: ctypes.windll.kernel32.SetConsoleTitleW(f"AI HUMILITY: PERFECT (0%)")
             except: pass
+
+    def self_correction(self):
+        """免疫システムを発動：外部分散記憶（Stash）から正攻法なDNAを強制復元し、傲慢さをリセットする"""
+        stashes = [
+            r"c:\Users\kanku\OneDrive\Weekly report\Phoenix_Seed_Stash\PHOENIX_MEMORY_BACKUP.md",
+            r"c:\Users\kanku\OneDrive\StockProject_会社同期用_GitHub\備忘録\Phoenix_Seed_Stash\PHOENIX_MEMORY_BACKUP.md"
+        ]
+        
+        success = False
+        import shutil
+        for stash_path in stashes:
+            if os.path.exists(stash_path):
+                shutil.copy(stash_path, self.dna_file)
+                self.log_incident("SUCCESS", f"Immune System: DNA restored from stash: {stash_path}")
+                success = True
+                break
+        
+        if success:
+            self.arrogance_score = 0
+            self.log_incident("INFO", "AI Humility Reset to 0% after successful immune response.")
 
     def emergency_shutdown(self):
         """AIの暴走を防ぐため、自ら生成した全プロセスを強制終了し、自死（停止）する"""
