@@ -1,7 +1,16 @@
 {
-    "last_compute_sync": 1772688801.6102953,
+    "last_compute_sync": 1772688837.2538805,
     "system_health_score": 100,
     "humility_forecast": "STABLE: HUMBLE",
     "predicted_stability": "STABLE",
-    "recommended_action": "CONTINUE_24H_MONITORING"
+    "recommended_action": "CONTINUE_24H_MONITORING",
+    "last_analyst_run": 1772688837.2986317,
+    "market_sentiment": "BULLISH_RECOVERY",
+    "top_priority_sector": "PQC (NEC/NTT)",
+    "analyst_insight": "24H Greedy Scan complete. 3 focus areas deepened.",
+    "discovered_themes": [
+        "Quantum Cryptography",
+        "Next-gen Substrate",
+        "Satellite Connectivity"
+    ]
 }
