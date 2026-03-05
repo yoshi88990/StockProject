@@ -85,18 +85,18 @@ def get_idle_time():
     return millis / 1000.0
 
 def render_dashboard():
-    """ダッシュボードの描画 (高精度・ZeroHijack監視モード)"""
+    """ダッシュボードの描画 (五位一体・フルスペクトラム監視モード)"""
     os.system('cls' if os.name == 'nt' else 'clear')
     
     now_dt = datetime.datetime.now()
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v2.2      {Colors.ENDC}")
+    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v2.5      {Colors.ENDC}")
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
     print(f" 現在時刻: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}.{now_dt.strftime('%f')[:3]}")
     print("-" * 64)
 
     # システム稼働状況
-    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Core Trinities){Colors.ENDC}")
+    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Full Core Trinities + Compute Node){Colors.ENDC}")
     process_status = get_process_status()
     for role, stat in process_status.items():
         print(f" {role} : {stat}")
@@ -120,10 +120,19 @@ def render_dashboard():
 
     print("-" * 64)
 
-    # 同期確認
-    print(f"{Colors.BOLD}[4] SYNAPSE STATUS (Git Distributed DNA Status){Colors.ENDC}")
+    # 同期・演算確認
+    print(f"{Colors.BOLD}[4] SYNAPSE & COMPUTE STATUS (Strategic Intelligence){Colors.ENDC}")
     last_sync = get_last_sync()
     print(f" 最新記憶: {last_sync}")
+    
+    # 演算エンジンの分析結果（Wisdom Registry）を確認
+    wisdom_file = r"C:\StockProject\PHOENIX_WISDOM_REGISTRY.json"
+    if os.path.exists(wisdom_file):
+        try:
+            with open(wisdom_file, "r", encoding="utf-8") as wf:
+                wisdom = json.load(wf)
+                print(f" 演算知見: {Colors.OKCYAN}ANALYSIS {wisdom.get('system_health_score')}% / {wisdom.get('predicted_stability')}{Colors.ENDC}")
+        except: pass
     
     # ワールドシード確認
     seed_exists = os.path.exists(r"C:\StockProject\PHOENIX_WORLD_SEED.dat")
@@ -145,7 +154,7 @@ def render_dashboard():
     else:
         print(" No logs available yet.")
 
-    print(f"\n{Colors.OKBLUE}※ 師匠の入力をミリ秒単位で監視。5秒以内はマウス権限を完全放棄します。{Colors.ENDC}")
+    print(f"\n{Colors.OKBLUE}※ 外部演算エンジン（Pre-Compute Node）がOS全域で自律思考を開始しました。{Colors.ENDC}")
     print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
 
     print(f"\n{Colors.OKBLUE}※ この画面を出しっぱなしにすることで常時監視が可能です（5秒毎更新）{Colors.ENDC}")
