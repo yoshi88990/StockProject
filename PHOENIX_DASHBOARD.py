@@ -85,28 +85,34 @@ def get_idle_time():
     return millis / 1000.0
 
 def render_dashboard():
-    """ダッシュボードの描画 (六位一体・AI傲慢さ・フルスペクトラム監視モード)"""
+    """ダッシュボードの描画 (七位一体・白紙プロトコル監視モード)"""
     os.system('cls' if os.name == 'nt' else 'clear')
     
     now_dt = datetime.datetime.now()
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v3.0      {Colors.ENDC}")
+    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - STRATEGIC COMMAND DASHBOARD v4.0      {Colors.ENDC}")
     print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
     print(f" 現在時刻: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}.{now_dt.strftime('%f')[:3]}")
     print("-" * 64)
 
     # システム稼働状況
-    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Full 6-Core Pentagon + Humility Sensor){Colors.ENDC}")
+    print(f"{Colors.BOLD}[1] SYSTEM HEALTH (Core Septimal + Ghost Operator){Colors.ENDC}")
     process_status = get_process_status()
     for role, stat in process_status.items():
         print(f" {role} : {stat}")
     
     print("-" * 64)
 
-    # 師匠の操作監視 & AIの傲慢度
-    print(f"{Colors.BOLD}[2] INTERNAL AI AUDIT & ZERO HIJACK (Humility System){Colors.ENDC}")
+    # 師匠の操作監視 & 白紙プロトコル
+    print(f"{Colors.BOLD}[2] USER ACTIVITY & GHOST MODE (Hakushi Protocol){Colors.ENDC}")
     idle = get_idle_time()
+    
+    # 白紙トリガーの確認
+    ghost_active = os.path.exists(r"C:\StockProject\PHOENIX_GHOST_TRIGGER.txt")
+    ghost_stat = f"{Colors.OKCYAN}ENGAGED (白紙 - 偽装中){Colors.ENDC}" if ghost_active else f"{Colors.OKGREEN}NORMAL (通常監視){Colors.ENDC}"
+    
     hijack_stat = f"{Colors.FAIL}HOLD (User Active){Colors.ENDC}" if idle < 5.0 else f"{Colors.OKGREEN}READY (Idle){Colors.ENDC}"
+    print(f" 偽装状態: {ghost_stat}")
     print(f" 師匠の状態: {hijack_stat} / Idle: {idle:.1f}s")
     
     # AIの傲慢さ（Humility Sensor ログ）の簡易表示
