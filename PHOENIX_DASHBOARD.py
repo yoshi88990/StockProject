@@ -203,4 +203,4 @@ if __name__ == "__main__":
             render_dashboard()
         except Exception as e:
             print(f"Dashboard Error: {e}")
-        time.sleep(5)
+        time.sleep(60)
