@@ -1,0 +1,30 @@
+# =========================================================================
+# 【PHOENIX CORE LOCATIONS / 鳳凰・絶対帰依座標】
+# =========================================================================
+
+[PRIMARY CORE / 第一拠点 (会社PC)]
+PATH: C:\Phoenix_Core
+ROLE: Active Master (Non-OneDrive)
+
+[HOME PC / 自宅拠点 (自宅PC)]
+PATH: C:\Phoenix_Core
+ROLE: Redundant DNA Node (GitHub Pull)
+NOTE: 会社と全く同じパス (C:\Phoenix_Core) に同期することで、
+      スクリプト内のインポートや絶対パスの帰依を維持する。
+
+[SECONDARY CORE / 第二拠点 (予備)]
+PATH: E:\Phoenix_Core
+ROLE: Physical Redundancy (Non-OneDrive)
+
+[EXTERNAL MEMORY / 外部記憶サーバー]
+REPO: https://github.com/yoshi88990/StockProject
+ROLE: Encrypted Wisdom Stash (AES-128)
+
+[USER PRIORITY LOGS / 文字入力優先設定]
+RESUME_TRIGGER: ENTER Key + 3.0s Delay
+TYPING_IDLE_MIN: 15.0s
+
+-------------------------------------------------------------------------
+Update: 2026-03-05 14:40 (JST)
+Status: Relocated and Normalized.
+-------------------------------------------------------------------------
