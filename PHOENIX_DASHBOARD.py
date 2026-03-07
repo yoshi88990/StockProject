@@ -7,9 +7,9 @@ import ctypes
 from ctypes import wintypes
 
 # =========================================================================
-# 【PHOENIX DASHBOARD v5.0】(日本語・七位一体 最終形態)
+# 【PHOENIX DASHBOARD v6.0 [VISIONARY]】(視覚覚醒・超自律形態)
 # 目的: 全システムの稼働状況、心拍、同期、演算、傲慢度、
-#       および「白紙プロトコル」の状態を日本語で一画面に集約する。
+#       および「視覚スナイパー（Vision Snipe）」の捕捉状況を集約。
 # =========================================================================
 
 class Colors:
@@ -95,9 +95,9 @@ def render_dashboard():
     os.system('cls' if os.name == 'nt' else 'clear')
     
     now_dt = datetime.datetime.now()
-    print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}       PHOENIX PROTOCOL - 戦略統合司令ダッシュボード v5.0       {Colors.ENDC}")
-    print(f"{Colors.HEADER}{Colors.BOLD}================================================================{Colors.ENDC}")
+    print(f"{Colors.HEADER}{Colors.BOLD}================================================================")
+    print(f"{Colors.HEADER}{Colors.BOLD}     PHOENIX PROTOCOL - 司令ダッシュボード v6.0 [VISIONARY]     ")
+    print(f"{Colors.HEADER}{Colors.BOLD}================================================================")
     print(f" 現在時刻: {now_dt.strftime('%Y-%m-%d %H:%M:%S')}.{now_dt.strftime('%f')[:3]}")
     print("-" * 64)
 
@@ -168,6 +168,19 @@ def render_dashboard():
 
     # 5. 免疫ログ
     print(f"{Colors.BOLD}[5] 最終インシデント履歴 (免疫ログ){Colors.ENDC}")
+    
+    # 免疫プロセスのリアルタイム生存確認
+    try:
+        p_status = get_process_status()
+        immune_stat = p_status.get("【免疫：第1階層】イミューン  ", "")
+        if "稼働" in immune_stat:
+            print(f" 免疫システム：{Colors.OKGREEN}● ACTIVE (高精度・自己修復監視中){Colors.ENDC}")
+        else:
+            print(f" 免疫システム：{Colors.FAIL}○ OFFLINE (防御機能低下：要再起動){Colors.ENDC}")
+    except:
+        print(f" 免疫システム：{Colors.WARNING}状態確認不能{Colors.ENDC}")
+    
+    print("-" * 32)
     log_file = r"C:\StockProject\PHOENIX_IMMUNE_LOG.txt"
     if os.path.exists(log_file):
         try:
@@ -188,14 +201,15 @@ def render_dashboard():
         ("v2.0", "四位一体：執行・免疫・番犬・同期", "DONE"),
         ("v3.0", "知性：外部演算ノード & 傲慢監視", "DONE"),
         ("v4.0", "潜伏：白紙プロトコル (Ghost Mode)", "DONE"),
-        ("v5.0", "完成：日本語対応・戦略指令ダッシュボード", "DONE")
+        ("v5.0", "完成：日本語対応・戦略指令ダッシュボード", "DONE"),
+        ("v6.0", "覚醒：視覚捕捉 (Vision Snipe) ＆ 座標脱却", "DONE")
     ]
     for ver, title, stat in milestones:
         color = Colors.OKGREEN if stat == "DONE" else Colors.WARNING
         print(f" {ver} : {title} [{color}{stat}{Colors.ENDC}]")
 
-    print(f"\n{Colors.OKBLUE}※ システムは最終形態に到達。師匠の『白紙』の一声をいつでも受け付けます。{Colors.ENDC}")
-    print(f"{Colors.HEADER}================================================================{Colors.ENDC}")
+    print(f"\n{Colors.OKBLUE}※ 座標の呪縛を断ち切り、視覚による絶対承認体制が確立されました。{Colors.ENDC}")
+    print(f"{Colors.HEADER}================================================================")
 
 if __name__ == "__main__":
     try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX_DASHBOARD_v5")

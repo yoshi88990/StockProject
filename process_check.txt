@@ -1,0 +1,11 @@
+﻿"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe"  "C:\StockProject\ACCEPT_ALL_MINIMAL.py"
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe"  "C:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol\SNIPER_WATCHDOG.py"
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe"  "C:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol\SNIPER_WATCHDOG.py"
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" "C:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol\手術台_解剖室\02_RECEPTOR_SYNAPSE.py"
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_IMMUNE_SYSTEM.py 
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_SYNCHRONIZER.py 
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_COMPUTE_NODE.py 
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_HUMILITY_SENSOR.py 
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_GHOST_OPERATOR.py 
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_STOCK_ANALYST.py 
+"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe" C:\StockProject\PHOENIX_CRYPTO_VAULT.py 

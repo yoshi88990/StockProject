@@ -89,18 +89,48 @@ def execute_accept_all():
         if "Visual Studio Code" in window_title or "Cursor" in window_title:
             is_editor_active = True
 
-    # --- 【H8狙撃】(Run Alt+Enter ボタン専用の絶対座標撃ち) ---
-    # 師匠が5秒間アイドル状態であれば、エディターが最前面であってもこの座標だけは撃ち抜く
+    # --- 【ビジョン・スナイプ (覚醒)】 ---
+    # 固定座標(1249, 531)の周囲をスキャンし、青いボタン(Alt+Enter)の色を視認して撃ち抜く
     orig_pos = win32api.GetCursorPos()
-    H8_COORD = (1249, 531)
+    base_x, base_y = 1249, 531
+    found_target = None
+    
     try:
-        win32api.SetCursorPos(H8_COORD)
-        MOUSEEVENTF_LEFTDOWN = 0x0002
-        MOUSEEVENTF_LEFTUP = 0x0004
-        ctypes.windll.user32.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-        ctypes.windll.user32.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+        # win32gui を使って画面の色を直接取得（速度優先）
+        hdc = ctypes.windll.user32.GetDC(0)
+        
+        # 師匠の画面ズレに対応するため、縦横100pxの範囲をスキャン
+        # Cursor/VSCodeのボタン色: (R:0, G:122, B:204) 付近
+        for dy in range(-80, 80, 4):
+            if found_target: break
+            for dx in range(-150, 50, 4):
+                tx, ty = base_x + dx, base_y + dy
+                pixel = ctypes.windll.gdi32.GetPixel(hdc, tx, ty)
+                # COLORREF は 0xBBGGRR 形式
+                r = pixel & 0xFF
+                g = (pixel >> 8) & 0xFF
+                b = (pixel >> 16) & 0xFF
+                
+                # ボタンの青色判定：Rが低く、Bが高い、かつ鮮やかな青 (0B > 150 程度)
+                if r < 100 and g > 80 and b > 160:
+                    found_target = (tx, ty)
+                    break
+        ctypes.windll.user32.ReleaseDC(0, hdc)
     except Exception:
         pass
+
+    if found_target:
+        try:
+            target_x, target_y = found_target
+            # 視認した標的にカーソルを合わせ、即座に撃ち抜く
+            win32api.SetCursorPos((target_x, target_y))
+            MOUSEEVENTF_LEFTDOWN = 0x0002
+            MOUSEEVENTF_LEFTUP = 0x0004
+            ctypes.windll.user32.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+            ctypes.windll.user32.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+        except Exception:
+            pass
+    
     win32api.SetCursorPos(orig_pos)
 
     # アシスタントへの入力中やコード編集中である場合、仮想キー(F8)による暴発を防ぐため絶対に見送る
