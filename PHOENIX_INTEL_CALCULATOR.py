@@ -14,7 +14,7 @@ HEARTBEAT_FILE = r"P:\PHOENIX_HEARTBEATS\hb_Calculator.txt"
 def run_calculation():
     asset_dirs = [
         os.path.join(PROTOCOL_DIR, "INTELLIGENCE_STASH"),
-        os.path.join(ROOT_DIR, "Legacy_StockProject_Full_Backup"),
+        os.path.join(PROTOCOL_DIR, "Legacy_StockProject_Full_Backup"),
         os.path.join(PROTOCOL_DIR, "OFFSHORE_VAULT"),
         os.path.join(PROTOCOL_DIR, "CLOUD_VANGUARD", "DATA_VAULT")
     ]
