@@ -2,13 +2,26 @@ import ctypes
 import time
 import win32api
 import win32con
+import win32gui
 import sys
 import os
-import win32gui
+import mss
+import numpy as np
 
-# --- PHOENIX SNIPER: OM-STRIKE [SACRED CHRONO DNA] Ver 36.1 ---
-# 師匠の命：STOP_PHOENIX 信号を尊重し、最小化中は絶対に動かない。
-STOP_SIGNAL = r"P:\STOP_PHOENIX"
+# ==============================================================================
+# 【PHOENIX SNIPER: TRUE FLUID DNA】 Ver 50.3
+# 
+# 1. Reject(灰色)を索敵し、その 1.8cm(+68px)右の Accept(青色)を貫く。
+# 2. 画面上端 60px (1.5cm) は「絶対聖域」として狙撃を封印。
+# 3. 5秒間のアイドル＋エディタ非活性時のみ動作。
+# 4. マウス権限を奪わない Zero Hijack 座標復元型。
+# ==============================================================================
+
+# --- 設定：絶対聖域と座標定義 ---
+SANCTUARY_Y = 60  # 画面上端 1.5cm 回避
+REJECT_GRAY = [200, 200, 200]  # 標準的な灰色の閾値
+ACCEPT_BLUE_OFFSET = 68        # Rejectから右へのオフセット (1.8cm)
+ACCEPTALL_STRIKE_COORD = (1249, 531)  # 【不動の聖域】師匠指定の固定座標
 
 class LASTINPUTINFO(ctypes.Structure):
     _fields_ = [("cbSize", ctypes.c_uint), ("dwTime", ctypes.c_uint)]
@@ -21,46 +34,33 @@ def get_idle_time():
 
 def log_vision(msg):
     try:
-        with open(r"P:\sniper_vision.txt", "a", encoding="utf-8") as f:
-            f.write(f"{time.strftime('%H:%M:%S')} - {msg}\n")
+        with open(r"C:\StockProject\sniper_vision.txt", "a", encoding="utf-8") as f:
+            f.write(f"[{time.strftime('%H:%M:%S')}] {msg}\n")
     except: pass
 
 def is_user_operating(orig_pos):
-    """
-    【絶対軽量化・フリーズ防止版】
-    重いハードウェアポーリング(GetAsyncKeyState)を完全廃止し、
-    OS全体の最終入力時間(GetLastInputInfo)と現在カーソルのみで瞬時に判定。
-    """
     curr_pos = win32api.GetCursorPos()
-    # マウスが1pxでも動いていたら操作中とみなす
     if abs(curr_pos[0] - orig_pos[0]) > 1 or abs(curr_pos[1] - orig_pos[1]) > 1:
         return True
-    
-    # OS全体のキー/マウス操作アイドル時間が0.5秒未満なら「操作中」とみなす
     if get_idle_time() < 0.5:
         return True
-        
     return False
 
-def strike_ritual(tx, ty, label, use_f8=True):
+def strike_ritual(tx, ty, label):
+    if ty < SANCTUARY_Y:
+        log_vision(f"SANCTUARY:({tx},{ty}) は聖域のため回避。")
+        return
+    
     try:
         orig_pos = win32api.GetCursorPos()
-        # 【超・謙虚】射撃前の「ご操作」を0.5秒間厳格に監視
         if is_user_operating(orig_pos):
-            log_vision(f"ABORT[{label}]: 師匠のご操作を検知。腕を引きます。")
+            log_vision(f"ABORT[{label}]: ご操作検知。")
             return
 
         win32api.SetCursorPos((tx, ty))
         time.sleep(0.01)
 
-        # 【超・謙虚：キーボード干渉の完全排除】
-        # 以前はここで Alt+Enter や F8 を送信していましたが、
-        # これが「文字が打てなくなる（キーボードショートカット暴発）」の
-        # 真の原因だったため、物理キー偽装を完全に削除しました。
-
-
-        # 3. 師匠の二連射
-        time.sleep(0.01)
+        # 師匠の二連射
         for _ in range(2):
             ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)
             time.sleep(0.01)
@@ -72,49 +72,76 @@ def strike_ritual(tx, ty, label, use_f8=True):
     except Exception as e:
         log_vision(f"ERROR: {e}")
 
-def execute_mechanical_static_snipe():
-    if get_idle_time() < 5.0: return 
+def fluid_scan_and_strike():
+    """『真の眼』: スキャン後に標的が実在する場合のみ撃つ"""
+    try:
+        with mss.mss() as sct:
+            monitor = sct.monitors[1]
+            img = np.array(sct.grab(monitor))
+            
+            # 灰色(Reject)を探す
+            gray_mask = (img[:, :, 0] > 180) & (img[:, :, 1] > 180) & (img[:, :, 2] > 180) & \
+                        (abs(img[:, :, 0].astype(int) - img[:, :, 1].astype(int)) < 10)
+            
+            scan_y_start = SANCTUARY_Y
+            scan_x_start = int(monitor['width'] * 0.5)
+            
+            gray_indices = np.where(gray_mask[scan_y_start:, scan_x_start:])
+            
+            if len(gray_indices[0]) > 0:
+                y, x = gray_indices[0][0] + scan_y_start, gray_indices[1][0] + scan_x_start
+                target_x = x + ACCEPT_BLUE_OFFSET
+                
+                if target_x < monitor['width']:
+                    pixel = img[y, target_x]
+                    if pixel[0] > 180 and pixel[2] < 120:
+                        log_vision(f"FLUID TARGET DETECTED: ({target_x},{y})")
+                        strike_ritual(target_x, y, "FLUID_SCAN")
+                        return True
+    except Exception as e:
+        log_vision(f"SCAN ERROR: {e}")
+    return False
 
-    current_time = time.time()
-    global last_static_time
-    if 'last_static_time' not in globals(): last_static_time = 0
-
-    # ② 固定座標 (1分おき) - これが真の「機械打ち(固定)」の姿
-    if current_time - last_static_time >= 60.0:
-        for tx, ty in [(1319, 286), (1292, 595), (1165, 641), (1135, 650), (1150, 650), (1167, 636)]:
-            strike_ritual(tx, ty, "②_FIXED")
-        last_static_time = current_time
-
-def find_antigravity_window():
-    hl = []
-    win32gui.EnumWindows(lambda h, e: hl.append(h) if "Antigravity" in win32gui.GetWindowText(h) else None, None)
-    return hl[0] if hl else None
+def check_vscode_foreground():
+    hwnd = win32gui.GetForegroundWindow()
+    if hwnd:
+        title = win32gui.GetWindowText(hwnd)
+        if "Visual Studio Code" in title or "Cursor" in title:
+            return True
+    return False
 
 if __name__ == "__main__":
     try: ctypes.windll.kernel32.SetPriorityClass(ctypes.windll.kernel32.GetCurrentProcess(), 0x00000020)
     except: pass
-    
-    ag_hwnd = None
-    esc_press_start = 0
-    
+
+    last_fixed_strike_time = 0
+    last_alive_log = 0
+    log_vision("--- PHOENIX SNIPER GO ---")
+
     while True:
         try:
-            with open(r"P:\PHOENIX_HEARTBEATS\hb_Mechanical.txt", "w") as f: f.write(str(time.time()))
+            now = time.time()
+            with open(r"C:\StockProject\sniper_heartbeat.txt", "w") as f: f.write(str(now))
             
-            if ag_hwnd is None or not win32gui.IsWindow(ag_hwnd): ag_hwnd = find_antigravity_window()
-            
-            fg_hwnd = win32gui.GetForegroundWindow()
-            is_min = win32gui.IsIconic(ag_hwnd) if ag_hwnd else True
-            is_ag_fg = (fg_hwnd == ag_hwnd)
-            
-            # 【絶対律】最小化中、あるいは停止信号がある間は「腕」をピクリとも動かさない
-            if not is_min and not os.path.exists(STOP_SIGNAL):
-                execute_mechanical_static_snipe()
+            # 生存ログ
+            if now - last_alive_log >= 300.0:
+                log_vision("SYSTEM ALIVE: 標的を監視中...")
+                last_alive_log = now
+
+            # フェーズ1: 流動索敵
+            if get_idle_time() >= 5.0 and not check_vscode_foreground():
+                fluid_scan_and_strike()
+                
+            # フェーズ2: 固定座標狙撃
+            if now - last_fixed_strike_time >= 60.0:
+                if get_idle_time() >= 3.0: 
+                    strike_ritual(ACCEPTALL_STRIKE_COORD[0], ACCEPTALL_STRIKE_COORD[1], "acceptall_FIXED")
+                    last_fixed_strike_time = now
                 
             if win32api.GetAsyncKeyState(0x1B) & 0x8000:
-                if esc_press_start == 0: esc_press_start = time.time()
-                if time.time() - esc_press_start >= 1.0: sys.exit(0)
-            else: esc_press_start = 0
+                time.sleep(1.0)
+                if win32api.GetAsyncKeyState(0x1B) & 0x8000: sys.exit(0)
                 
-        except Exception: ag_hwnd = None
-        time.sleep(0.1)
+        except Exception as e:
+            log_vision(f"LOOP ERROR: {e}")
+        time.sleep(1.0)

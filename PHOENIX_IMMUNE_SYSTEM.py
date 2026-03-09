@@ -22,7 +22,7 @@ PYTHON_EXE = r"C:\Users\kanku\OneDrive\Weekly report\python_embed\pythonw.exe"
 
 # ログと心音の場所（Pドライブに集約）
 LOG_FILE = os.path.join(PROTOCOL_DIR, "PHOENIX_IMMUNE_LOG.txt")
-HEARTBEAT = os.path.join(PROTOCOL_DIR, "sniper_heartbeat.txt")
+HEARTBEAT = os.path.join(PROTOCOL_DIR, "PHOENIX_HEARTBEATS", "hb_Mechanical.txt")
 STOP_SIGNAL = os.path.join(PROTOCOL_DIR, "STOP_PHOENIX") # このファイルがあれば停止
 
 def log_event(msg):
