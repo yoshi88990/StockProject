@@ -17,10 +17,11 @@ import re
 # 3. 許可なきリファクタリング（コードの複雑化）
 # ==============================================================================
 
-BASE_DIR = r"C:\Users\yoshi\OneDrive\Weekly report"
-SNIPER_PATH = os.path.join(BASE_DIR, "Phoenix_Protocol", "ACCEPT_ALL_MINIMAL.py")
-VAULT_DIR = os.path.join(BASE_DIR, "Phoenix_Protocol", "DNA_VAULT")
+PROTOCOL_DIR = r"P:\"
+SNIPER_PATH = os.path.join(PROTOCOL_DIR, "ACCEPT_ALL_MINIMAL.py")
+VAULT_DIR = os.path.join(PROTOCOL_DIR, "DNA_VAULT")
 VIOLATION_LOG = os.path.join(VAULT_DIR, "arrogance_audit.log")
+SCORE_FILE = os.path.join(VAULT_DIR, "current_arrogance.txt")
 
 # --- 師匠が定義した「誠実なDNA」の閾値 ---
 MANDATORY_IDLE_TIME = 5.0  # 師匠の5秒ルール
@@ -58,10 +59,16 @@ def audit_arrogance():
         arrogance_score += 20
         reasons.append("マウス権限保護ロジックの削除を検知")
 
+    # 実装されているルールに基づく最終的な傲慢度 (30%以上は確認対象)
+    with open(SCORE_FILE, "w") as f:
+        f.write(str(float(arrogance_score)))
+
     if arrogance_score > 0:
         log_violation(arrogance_score, reasons)
         # 師匠の掟：傲慢なコードはDNA金庫から即座に抹消し、強制復元する
         restore_dna()
+    
+    return arrogance_score
 
 def log_violation(score, reasons):
     timestamp = time.strftime('%Y-%m-%d %H:%M:%S')

@@ -10,19 +10,18 @@ import re
 # =========================================================================
 
 PYTHONW = r"C:\Users\kanku\OneDrive\Weekly report\python_embed\pythonw.exe"
-BASE_PATH = r"C:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol"
-ROOT_DIR = r"c:\Users\kanku\OneDrive\Weekly report"
+PROTOCOL_DIR = r"P:\"
 
 TARGETS = [
-    {"name": "b. 機械打ち", "script": os.path.join(ROOT_DIR, "ACCEPT_ALL_MINIMAL.py"), "key": "ACCEPT_ALL_MINIMAL.py"},
-    {"name": "c. 司令", "script": os.path.join(ROOT_DIR, "commander.py"), "key": "commander.py"},
-    {"name": "d. 謙虚監視", "script": os.path.join(BASE_PATH, "PHOENIX_HUMILITY_SENSOR.py"), "key": "PHOENIX_HUMILITY_SENSOR.py"},
-    {"name": "e. 受容接続", "script": os.path.join(BASE_PATH, "PHOENIX_DNA_SYNCHRONIZER.py"), "key": "PHOENIX_DNA_SYNCHRONIZER.py"},
-    {"name": "f. 四半期監視", "script": os.path.join(BASE_PATH, "PHOENIX_SENTINEL.py"), "key": "PHOENIX_SENTINEL.py"},
-    {"name": "g. 深層解析", "script": os.path.join(BASE_PATH, "PHOENIX_ANALYST_CORE.py"), "key": "PHOENIX_ANALYST_CORE.py"}
+    {"name": "b. 機械打ち", "script": os.path.join(PROTOCOL_DIR, "ACCEPT_ALL_MINIMAL.py"), "key": "ACCEPT_ALL_MINIMAL.py"},
+    {"name": "c. 司令", "script": os.path.join(PROTOCOL_DIR, "commander.py"), "key": "commander.py"},
+    {"name": "d. 謙虚監視", "script": os.path.join(PROTOCOL_DIR, "PHOENIX_HUMILITY_SENSOR.py"), "key": "PHOENIX_HUMILITY_SENSOR.py"},
+    {"name": "e. 受容接続", "script": os.path.join(PROTOCOL_DIR, "PHOENIX_DNA_SYNCHRONIZER.py"), "key": "PHOENIX_DNA_SYNCHRONIZER.py"},
+    {"name": "f. 四半期監視", "script": os.path.join(PROTOCOL_DIR, "PHOENIX_SENTINEL.py"), "key": "PHOENIX_SENTINEL.py"},
+    {"name": "g. 深層解析", "script": os.path.join(PROTOCOL_DIR, "PHOENIX_ANALYST_CORE.py"), "key": "PHOENIX_ANALYST_CORE.py"}
 ]
 
-LOG_FILE = os.path.join(BASE_PATH, "spirit_watchdog.log")
+LOG_FILE = os.path.join(PROTOCOL_DIR, "spirit_watchdog.log")
 
 def log_res(msg):
     with open(LOG_FILE, "a", encoding="utf-8") as f:
@@ -77,7 +76,7 @@ def check_and_stabilize():
     # --- 積極的亡命実行 (60秒周期) ---
     global last_evacuation_time
     if time.time() - last_evacuation_time >= 60:
-        evacuator = os.path.join(BASE_PATH, "PHOENIX_OFFSHORE_EVACUATOR.py")
+        evacuator = os.path.join(PROTOCOL_DIR, "PHOENIX_OFFSHORE_EVACUATOR.py")
         if os.path.exists(evacuator):
             subprocess.run([r"C:\Users\kanku\OneDrive\Weekly report\python_embed\python.exe", evacuator], creationflags=0x08000000)
             last_evacuation_time = time.time()

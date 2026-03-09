@@ -9,8 +9,8 @@ from pydantic import BaseModel
 from typing import List, Dict, Any
 
 # --- PHOENIX CONFIGURATION ---
-BASE_DIR = r"c:\Users\kanku\OneDrive\Weekly report"
-PROTOCOL_DIR = os.path.join(BASE_DIR, "Phoenix_Protocol")
+# 師匠の命：統一ドライブ P: を基点とする
+PROTOCOL_DIR = "P:/"
 INTEL_FILE = os.path.join(PROTOCOL_DIR, "INTELLIGENCE_TOTAL_CALC.json")
 MAP_FILE = os.path.join(PROTOCOL_DIR, "PHOENIX_CORRELATION_MAP.json")
 AUDIT_LOG = os.path.join(PROTOCOL_DIR, "DNA_VAULT", "arrogance_audit.log")
@@ -48,12 +48,22 @@ def check_process_alive(script_name):
             continue
     return False
 
-def get_last_audit_lines(n=2):
+def get_last_audit_lines(n=10):
     if not os.path.exists(AUDIT_LOG): return []
     try:
         with open(AUDIT_LOG, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-            return [l.strip() for l in lines[-n:]]
+            lines = [l.strip() for l in f.readlines() if l.strip()]
+            if not lines: return []
+            
+            # 師匠の命：同じ内容（タイムスタンプ以外）なら１つに絞る
+            unique_msgs = {}
+            for l in lines:
+                # [YYYY-MM-DD HH:MM:SS] の形式を想定し、それ以降をメッセージとする
+                msg_part = re.sub(r'^\[.*?\]\s*', '', l)
+                unique_msgs[msg_part] = l # 最新のもので上書き
+            
+            # 最新のn件を、新しい順に返す
+            return list(unique_msgs.values())[-n:]
     except: return []
 
 @app.get("/api/status")
@@ -63,7 +73,7 @@ def get_status():
         status[name] = check_process_alive(script)
     
     # Disk status
-    usage = psutil.disk_usage(BASE_DIR[:3])
+    usage = psutil.disk_usage(PROTOCOL_DIR[:3])
     free_gb = usage.free / (1024**3)
     
     # 師匠の命：デッドライン判定を再現
@@ -78,15 +88,24 @@ def get_status():
     if os.path.exists(cloud_vault):
         vanguard_count = len([f for f in os.listdir(cloud_vault) if f.endswith('.json')])
 
+    # 傲慢度(Humility)の読み込み
+    humility_score = 0.0
+    score_file = os.path.join(PROTOCOL_DIR, "DNA_VAULT", "current_arrogance.txt")
+    if os.path.exists(score_file):
+        try:
+            with open(score_file, 'r') as f:
+                humility_score = float(f.read().strip())
+        except: pass
+
     return {
         "processes": status,
         "disk": {
             "free_gb": round(free_gb, 2),
             "status": deadline
         },
-        "audit": get_last_audit_lines(2),
+        "audit": get_last_audit_lines(5), # 最新の証跡を表示（重複排除済み）
         "vanguard_count": vanguard_count,
-        "humility_pct": 25.0,  # 30%を超えないよう監視対象とする
+        "humility_pct": humility_score,
         "last_update": time.time()
     }
 

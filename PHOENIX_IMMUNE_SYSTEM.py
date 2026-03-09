@@ -4,8 +4,10 @@ import datetime
 import os
 import sys
 
-# --- PHOENIX IMMUNE SYSTEM (謙虚・監視・遍在) V3.7 ---
-# どこでも動く(Portable)ように、絶対パスを廃止。自律的に自分と脳(Python)を探し出す。
+# =========================================================================
+# 【PHOENIX IMMUNE SYSTEM v4.0】(統一ドライブ P: 対応版)
+# 目的: スナイパーの生存確認と蘇生。ただし「明示的な停止」は尊重する。
+# =========================================================================
 
 # 文字化け対策(UTF-8強制)
 try:
@@ -13,37 +15,18 @@ try:
         sys.stdout.reconfigure(encoding='utf-8')
 except: pass
 
+# 統一ドライブ規格
+PROTOCOL_DIR = r"P:/"
 SNIPER_SCRIPT = "ACCEPT_ALL_MINIMAL.py"
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# 記憶(Log/Heartbeat)はCドライブの安全地帯に固定（全拠点で共通の書き込み先）
-LOG_FILE = r"C:\StockProject\PHOENIX_IMMUNE_LOG.txt"
-HEARTBEAT = r"C:\StockProject\sniper_heartbeat.txt"
+PYTHON_EXE = r"C:\Users\kanku\OneDrive\Weekly report\python_embed\pythonw.exe"
 
-def find_python_portal():
-    """自分を動かしている、あるいは近くにある脳(Python)を探す"""
-    # 候補1: 自分を立ち上げた現在実行中のプロセスの実行ファイル
-    current_py = sys.executable
-    if "pythonw.exe" in current_py.lower() or "python.exe" in current_py.lower():
-        return current_py
-    
-    # 候補2: 自分のフォルダの隣にあるはずの python_embed フォルダ
-    # ( dispatcher.vbs が正しく動いていればここにある )
-    search_paths = [
-        os.path.join(os.path.dirname(BASE_DIR), "python_embed", "pythonw.exe"),
-        os.path.join(BASE_DIR, "python_embed", "pythonw.exe"),
-    ]
-    for p in search_paths:
-        if os.path.exists(p):
-            return p
-            
-    return "pythonw.exe" # 最後の手段（PATHに頼る）
-
-PYTHON_EXE = find_python_portal()
+# ログと心音の場所（Pドライブに集約）
+LOG_FILE = os.path.join(PROTOCOL_DIR, "PHOENIX_IMMUNE_LOG.txt")
+HEARTBEAT = os.path.join(PROTOCOL_DIR, "sniper_heartbeat.txt")
+STOP_SIGNAL = os.path.join(PROTOCOL_DIR, "STOP_PHOENIX") # このファイルがあれば停止
 
 def log_event(msg):
     try:
-        if not os.path.exists(os.path.dirname(LOG_FILE)):
-            os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
         with open(LOG_FILE, "a+", encoding="utf-8") as f:
             t = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             f.write(f"[{t}] {msg}\n")
@@ -55,23 +38,44 @@ def is_sniper_alive():
         if os.path.exists(HEARTBEAT):
             with open(HEARTBEAT, "r") as f:
                 last_beat = float(f.read().strip())
+            # 2分（120秒）以内に更新されていれば生存とみなす
             if time.time() - last_beat < 120:
                 return True
         return False
     except: return False
 
 def revive_sniper():
+    if os.path.exists(STOP_SIGNAL):
+        # 停止信号がある場合は蘇生しない
+        return
+
     try:
-        os.chdir(BASE_DIR)
-        # 相対パスによる確実な起動
-        subprocess.Popen([PYTHON_EXE, SNIPER_SCRIPT], creationflags=subprocess.CREATE_NO_WINDOW)
-        log_event(f"SYSTEM: スナイパーを蘇生しました (使用脳: {PYTHON_EXE})")
+        script_path = os.path.join(PROTOCOL_DIR, SNIPER_SCRIPT)
+        if os.path.exists(script_path):
+            # CREATE_NO_WINDOW (0x08000000) でバックグラウンド起動
+            subprocess.Popen([PYTHON_EXE, script_path], 
+                             cwd=PROTOCOL_DIR,
+                             creationflags=0x08000000)
+            log_event(f"SYSTEM: スナイパーを蘇生しました。")
+        else:
+            log_event(f"ERROR: スクリプトが見つかりません: {script_path}")
     except Exception as e:
         log_event(f"ERROR: 蘇生失敗 - {str(e)}")
 
 if __name__ == "__main__":
-    log_event(f"SYSTEM: 免疫システム V3.7 起動 (拠点情報: {BASE_DIR})")
+    log_event(f"SYSTEM: 免疫システム v4.0 起動 (稼働開始)")
+    
+    # 起動時に一度だけ停止信号を掃除（必要なら）
+    # if os.path.exists(STOP_SIGNAL): os.remove(STOP_SIGNAL)
+
     while True:
-        if not is_sniper_alive():
-            revive_sniper()
-        time.sleep(60)
+        # 停止信号が「ない」時だけ監視を行う
+        if not os.path.exists(STOP_SIGNAL):
+            if not is_sniper_alive():
+                log_event("WARNING: スナイパーの沈黙を検知しました。蘇生を試みます。")
+                revive_sniper()
+        else:
+            # 停止信号がある間は、ログに一度だけ記録して静観する
+            pass
+
+        time.sleep(30) # 30秒間隔で精密にチェック

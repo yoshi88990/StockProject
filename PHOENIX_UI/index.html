@@ -113,7 +113,7 @@
 
         const padVisualLine = (label, target) => {
             let current = getVisualWidth(label);
-            return label + ' '.repeat(Math.max(0, target - current)) + ' : ';
+            return label + ' '.repeat(Math.max(0, target - current)) + ': ';
         };
 
         const renderStatusLine = (label, valueHtml, colorClass = '', target = 42) => {
@@ -130,7 +130,7 @@
                 const status = await statusRes.json();
                 const intel = await intelRes.json();
 
-                const TARGET = 42;
+                const TARGET = 22;
 
                 // Title Time
                 document.getElementById('curr-time').textContent = new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/\//g, '-');
@@ -179,12 +179,18 @@
                     const label = `  ${char}. ${dispName}`;
 
                     let valText = alive ? '● ACTIVE' : '○ DEAD';
+                    let valColor = alive ? 'val-green' : 'val-red';
+
                     // 1のd(謙虚監視)にのみ、謙虚指数を追記
                     if (char === 'd') {
-                        valText += ` (謙虚指数: ${status.humility_pct.toFixed(1)}%)`;
+                        valText += ` (傲慢度: ${status.humility_pct.toFixed(0)}%)`;
+                        // 師匠の命：30%を超えたら赤文字で知らせる
+                        if (status.humility_pct >= 30) {
+                            valColor = 'val-red';
+                        }
                     }
 
-                    html1 += renderStatusLine(label, valText, alive ? 'val-green' : 'val-red', TARGET);
+                    html1 += renderStatusLine(label, valText, valColor, TARGET);
                 });
                 procList.innerHTML = html1;
 
