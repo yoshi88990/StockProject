@@ -17,7 +17,7 @@ import re
 # 3. 許可なきリファクタリング（コードの複雑化）
 # ==============================================================================
 
-PROTOCOL_DIR = r"P:\"
+PROTOCOL_DIR = r"P:/"
 SNIPER_PATH = os.path.join(PROTOCOL_DIR, "ACCEPT_ALL_MINIMAL.py")
 VAULT_DIR = os.path.join(PROTOCOL_DIR, "DNA_VAULT")
 VIOLATION_LOG = os.path.join(VAULT_DIR, "arrogance_audit.log")
