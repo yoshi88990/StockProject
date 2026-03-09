@@ -218,22 +218,3 @@ while True:
                 return hl[0] if hl else None
             
             ag_hwnd = find_ag()
-            is_min = win32gui.IsIconic(ag_hwnd) if ag_hwnd else True
-
-            if current_time - last_f8_time >= 15.0:
-                if not is_min:
-                    execute_accept_all_protocol()
-                last_f8_time = current_time
-                last_pulse_time = current_time
-        else:
-            if current_time - last_pulse_time >= 60.0:
-                striker.strike()
-                last_pulse_time = current_time
-
-        process_orders()
-        time.sleep(0.05)
-
-    except KeyboardInterrupt: break
-    except Exception as e:
-        logging.error(f"Loop Error: {e}")
-        time.sleep(1.0)

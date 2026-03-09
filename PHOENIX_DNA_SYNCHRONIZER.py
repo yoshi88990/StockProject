@@ -9,7 +9,7 @@ from datetime import datetime
 # ・Git操作時のコンソールウィンドウ（チカチカ）をOSレベルで封殺しました。
 # ==============================================================================
 
-PROJECT_DIR = r"c:\Users\yoshi\OneDrive\Weekly report"
+PROJECT_DIR = r"P:/"
 
 def run_git_sync():
     try:
@@ -18,6 +18,9 @@ def run_git_sync():
         # 【重要】CREATE_NO_WINDOW (0x08000000) を指定してコンパイル
         # これにより、いかなる場合も新しいコンソール窓が作成されません。
         CREATE_NO_WINDOW = 0x08000000
+
+        # 0. 吸引 (Pull)
+        subprocess.run(["git", "pull", "origin", "master"], creationflags=CREATE_NO_WINDOW)
 
         # 1. 変更があるか確認
         status = subprocess.check_output(
@@ -41,7 +44,7 @@ def run_git_sync():
                 subprocess.run(["git", "commit", "-m", msg], check=True, creationflags=CREATE_NO_WINDOW)
             
             # 5. 投擲 (Push)
-            subprocess.run(["git", "push", "origin", "main"], check=True, creationflags=CREATE_NO_WINDOW)
+            subprocess.run(["git", "push", "origin", "master"], check=True, creationflags=CREATE_NO_WINDOW)
             
     except Exception:
         pass
