@@ -1,0 +1,13 @@
+--- PHOENIX VISION DIAGNOSTIC Ver 2.0 ---
+スキャンプロトコル開始...
+OSからの描画権限(HDC)取得成功。
+--- PHOENIX HYPER-VISION Ver 3.0 ---
+索敵開始 (広域スキャン)...
+近似色検知: (1159, 361) RGB(94,94,165) - 精密ロックオン開始
+--- PHOENIX ADAPTIVE-VISION Ver 4.0 ---
+全方位・最強色覚スキャン開始...
+--- PHOENIX REALTIME-VISION Ver 5.0 ---
+コア・スキャン開始...
+エリア 1 索敵中: 中心(1159, 361)
+エリア 2 索敵中: 中心(1249, 531)
+エリア 3 索敵中: 中心(1000, 400)

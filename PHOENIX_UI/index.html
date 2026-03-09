@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鳳凰プロトコル - 統括ダッシュボード</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@600;900&family=Noto+Sans+JP:wght@400;700&family=Space+Mono&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="terminal-view">
+        <div class="title-box">
+            <div class="title-line">PHOENIX v12.8.5 - 【 資産形成・キャピタル 】</div>
+            <div class="time-line"><span id="curr-time">---- -- -- --:--:--</span> | REFRESH: 60s</div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 0. システム資源 (SYSTEM HEALTH) 】</div>
+            <div id="section-0-content"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 1. 核心プロセスの拍動 (CORE PULSE) 】</div>
+            <div id="process-list"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 2. 誠実さの審判 (HUMILITY AUDIT) 】</div>
+            <div id="audit-log" class="audit-line"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 3. 全世界・分散脳 接続監視 (NETWORK SYNAPSE) 】</div>
+            <div id="network-log"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 4. IPO新興銘柄 (ASSET FORMATION) 】</div>
+            <div class="status-row-static"> [ 現在の使命 ] 少額資金からの資産形成を加速。</div>
+            <div class="status-row-static"> ┗ 伸びしろ最大のIPOへ知能を集中。</div>
+            <div class="status-row-static"> [ 本日ノルマ ] <span id="mission-bar">░░░░░░░░░░░░░░░</span> <span
+                    id="mission-pct" class="val-cyan">0.0%</span> (<span id="mission-count">0</span>/45)</div>
+            <div class="status-row-static"> [ 資産総計 ] <span class="val-green">● 鳳凰・知能資産合計 (<span
+                        id="mission-total">0</span>銘柄 /
+                    4000社)</span></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 5. 鳳凰・万巻読破 (PHOENIX CHRONICLE - 10Y Legacy) 】</div>
+            <div class="status-row-static val-cyan" style="font-weight: bold;"> 🏆 [読破完了] 4,000社/10年分 (100.00%)</div>
+            <div class="status-row-static"> [ 知能状態 ] Seed Stash への永続的知能化。</div>
+            <div class="status-row-static val-magenta"> -> クラウド特務部隊(VANGUARD) 同期物理資産: <span id="vanguard-count">0</span>
+                /
+                4,000 件</div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 6. ミラーサーバー (STORAGE ARCHIVE) 】</div>
+            <div id="section-6-content"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 7. 深層知能トピックス (INTELLIGENCE - LIVE MONITORING) 】</div>
+            <div id="topics-list"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 8. 知能融合・相関解析 (FUSION & MONITORING) 】</div>
+            <div class="status-row-static val-cyan"> [ 凡例 ] <span style="color:var(--yellow)">🐶: ワンマン</span> / 👔: 雇われ
+                / 🏦:
+                VC</div>
+            <div class="status-row-static val-cyan"> [ 監視主軸 ] <span class="val-white">🐶 理想のワンマンIPO</span></div>
+            <div class="status-row-static val-dim"> ------------------------------------------------</div>
+            <div class="status-row-static"> > 王者オーナー系 <span class="val-cyan">95%</span> <span class="val-green">●
+                    成長連動</span>
+            </div>
+            <div class="status-row-static"> > VC主導型IPO <span class="val-cyan">70%</span> <span class="val-red">⚠️
+                    需給悪化</span>
+            </div>
+            <div class="status-row-static"> > 雇われ社長(新興) <span class="val-cyan">40%</span> <span class="val-red">○
+                    熱量不足</span>
+            </div>
+            <div class="status-row-static val-dim"> ------------------------------------------------</div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">【 9. 巡回・収集基準 (PATROL CRITERIA) 】</div>
+            <div class="status-row-static"> [履歴] 四季報 10年 | 全 4,000社 網羅</div>
+            <div class="status-row-static val-green"> [収集] <span class="val-cyan">☁️ 外部委託 (PC負荷0)</span></div>
+            <div class="status-row-static"> [進捗] <span class="val-cyan">100.00%</span> (解析完了)</div>
+        </div>
+
+        <div class="section" style="margin-top: 30px; border-top: 1px double var(--light-black); padding-top: 10px;">
+            <div class="val-green" style="font-weight: bold;"> 👁️ 【 F 】キー相当：判定小窓 (DNA Sniper) は背景で待機中</div>
+            <div class="val-red" style="font-weight: bold; margin-top: 5px;"> 🚨 【 K 】キー相当：緊急停止はデスクトップの KILL を使用</div>
+        </div>
+    </div>
+
+    <script>
+        const getVisualWidth = (str) => {
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                count += str.charCodeAt(i) > 255 ? 2 : 1;
+            }
+            return count;
+        };
+
+        const padVisualLine = (label, target) => {
+            let current = getVisualWidth(label);
+            return label + ' '.repeat(Math.max(0, target - current)) + ' : ';
+        };
+
+        const renderStatusLine = (label, valueHtml, colorClass = '', target = 42) => {
+            const prefix = padVisualLine(label, target);
+            return `<div class="status-row"><span class="label-text">${prefix}</span><span class="${colorClass}">${valueHtml}</span></div>`;
+        };
+
+        async function updateTerminal() {
+            try {
+                const [statusRes, intelRes] = await Promise.all([
+                    fetch('/api/status'),
+                    fetch('/api/intelligence')
+                ]);
+                const status = await statusRes.json();
+                const intel = await intelRes.json();
+
+                const TARGET = 42;
+
+                // Title Time
+                document.getElementById('curr-time').textContent = new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/\//g, '-');
+
+                // Section 0
+                const sec0 = document.getElementById('section-0-content');
+                let html0 = renderStatusLine(" > Cドライブ空き容量", `${status.disk.free_gb} GB`, "val-green", TARGET);
+                html0 += renderStatusLine(" > 動作環境ステータス", `● ${status.disk.status}`, status.disk.status === 'SAFE' ? 'val-green' : 'val-red', TARGET);
+                html0 += `<div style="height: 10px;"></div>`;
+                html0 += renderStatusLine(" > 知能亡命状態", intel.evac_enabled ? '● 暗号化(有効)' : '○ 無効', intel.evac_enabled ? 'val-cyan' : 'val-red', TARGET);
+                html0 += renderStatusLine(" > 亡命資産数", `${intel.evac_count} 銘柄`, "val-green", TARGET);
+                html0 += renderStatusLine(" > 知能分散状況", "（最適化）", "val-cyan", TARGET);
+                html0 += `<div class="status-row-static" style="color: var(--gray);">    ┗ System-Bus により、全負荷を分散脳へ逃がしています。</div>`;
+                sec0.innerHTML = html0;
+
+                // Section 1
+                const procList = document.getElementById('process-list');
+                const alphabet = 'abcdefghi';
+                const nameMap = {
+                    "Sniper": "狙撃(流動) (Sniper)",
+                    "Mechanical": "機械打ち(固定)",
+                    "Commander": "司令 (Commander)",
+                    "Humility": "謙虚監視 (Humility)",
+                    "Receptor": "受容接続 (Receptor)",
+                    "Sentinel": "四半期監視 (Sentinel)",
+                    "Calculator": "知能計算 (Calc)",
+                    "Analyst": "深層解析 (Analyst)",
+                    "DNA_Sniper": "判定小窓 (DNA Sniper)"
+                };
+                let html1 = '';
+                Object.entries(status.processes).forEach(([key, alive], idx) => {
+                    const char = alphabet[idx];
+                    // Extract name from the backend key if needed
+                    let simpleKey = key;
+                    if (key.includes(' (')) simpleKey = key.split(' (')[0];
+                    if (key.includes('機械打ち')) simpleKey = 'Mechanical';
+                    if (key.includes('司令')) simpleKey = 'Commander';
+                    if (key.includes('謙虚監視')) simpleKey = 'Humility';
+                    if (key.includes('受容接続')) simpleKey = 'Receptor';
+                    if (key.includes('四半期監視')) simpleKey = 'Sentinel';
+                    if (key.includes('知能計算')) simpleKey = 'Calculator';
+                    if (key.includes('深層解析')) simpleKey = 'Analyst';
+                    if (key.includes('Sniper')) simpleKey = 'Sniper';
+
+                    const dispName = nameMap[simpleKey] || key;
+                    const label = `  ${char}. ${dispName}`;
+
+                    let valText = alive ? '● ACTIVE' : '○ DEAD';
+                    // 1のd(謙虚監視)にのみ、謙虚指数を追記
+                    if (char === 'd') {
+                        valText += ` (謙虚指数: ${status.humility_pct.toFixed(1)}%)`;
+                    }
+
+                    html1 += renderStatusLine(label, valText, alive ? 'val-green' : 'val-red', TARGET);
+                });
+                procList.innerHTML = html1;
+
+                // Section 2
+                const auditDiv = document.getElementById('audit-log');
+                if (status.audit.length > 0) {
+                    auditDiv.innerHTML = `<span class="val-red">  ${status.audit.join('<br>  ')}</span>`;
+                } else {
+                    auditDiv.innerHTML = `<span class="val-green">  [!] HUMILITY 100% - No Arrogance Detected</span>`;
+                }
+
+                // Section 3
+                const netLog = document.getElementById('network-log');
+                const timeStr = new Date().toLocaleTimeString('ja-JP', { hour12: false });
+                const newLog = document.createElement('div');
+                newLog.className = 'log-line';
+                newLog.innerHTML = `<span class="log-time">  ${timeStr}</span> - <span class="log-content">RECEPTOR_PULSE: 思考回路の巡回完了</span>`;
+                netLog.prepend(newLog);
+                if (netLog.children.length > 2) netLog.lastChild.remove();
+
+                // Section 4
+                const dailyTotal = 45;
+                const dailyCount = intel.today_count || 0;
+                const dailyPct = Math.min((dailyCount / dailyTotal) * 100, 100);
+                const barLen = 15;
+                const filled = Math.floor(barLen * dailyPct / 100);
+                document.getElementById('mission-bar').innerHTML = '<span class="val-green">' + '█'.repeat(filled) + '</span>' + '░'.repeat(barLen - filled);
+                document.getElementById('mission-pct').textContent = dailyPct.toFixed(1) + '%';
+                document.getElementById('mission-count').textContent = dailyCount;
+                document.getElementById('mission-total').textContent = intel.total_collected;
+
+                // Section 5
+                document.getElementById('vanguard-count').textContent = status.vanguard_count;
+
+                // Section 6
+                const sec6 = document.getElementById('section-6-content');
+                let html6 = renderStatusLine(" > 拠点1: チューリッヒ (Zurich Vault)", "● SECURE", "val-cyan", TARGET);
+                html6 += renderStatusLine(" > 拠点2: GitHub (Distributed DNA)", "● SYNC OK", "val-cyan", TARGET);
+                html6 += renderStatusLine(" > 拠点3: ローカルミラー (Mirror Node)", "● READY", "val-cyan", TARGET);
+                sec6.innerHTML = html6;
+
+                // Section 7
+                const topicsList = document.getElementById('topics-list');
+                let html7 = '';
+                intel.topics.forEach(t => {
+                    html7 += `<div class="status-row-static"><span class="val-magenta">${t.tag}</span> <span class="val-white">${t.msg.replace(/\n/g, '<br>         ')}</span></div>`;
+                });
+                topicsList.innerHTML = html7;
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        setInterval(updateTerminal, 3000);
+        updateTerminal();
+    </script>
+</body>
+
+</html>

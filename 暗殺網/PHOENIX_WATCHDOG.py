@@ -47,8 +47,8 @@ def is_sniper_alive():
 def revive_sniper():
     """【Smart Revive】ターミナルを出さず、完全背面で蘇生する"""
     try:
-        python_exe = r"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe"
-        script_path = r"c:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol\暗殺網\PHOENIX_SMART_SNIPER.py"
+        python_exe = r"C:\Users\yoshi\AppData\Local\Python\bin\pythonw.exe"
+        script_path = r"c:\Users\yoshi\OneDrive\Weekly report\Phoenix_Protocol\暗殺網\PHOENIX_SMART_SNIPER.py"
         # 以前の『-WindowStyle Maximized』という暴挙を捨て、完全に隠蔽(pythonw)して起動
         cmd = f'"{python_exe}" "{script_path}"'
         subprocess.Popen(cmd, shell=False, creationflags=subprocess.CREATE_NO_WINDOW)

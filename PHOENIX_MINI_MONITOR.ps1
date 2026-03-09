@@ -56,7 +56,7 @@ $btnStart.FlatAppearance.BorderSize = 0
 $btnStart.ForeColor = [Drawing.Color]::Cyan
 $btnStart.Font = New-Object Drawing.Font("Arial", 8)
 $btnStart.add_Click({
-    Start-Process "cscript.exe" "//B ""C:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol\SMART_PHOENIX_LAUNCHER.vbs"""
+    Start-Process "cscript.exe" "//B ""C:\Users\yoshi\OneDrive\Weekly report\Phoenix_Protocol\SMART_PHOENIX_LAUNCHER.vbs"""
 })
 $panel.Controls.Add($btnStart)
 
@@ -70,7 +70,7 @@ $btnStop.FlatAppearance.BorderSize = 0
 $btnStop.ForeColor = [Drawing.Color]::DeepPink
 $btnStop.Font = New-Object Drawing.Font("Arial", 8)
 $btnStop.add_Click({
-    Start-Process "cscript.exe" "//B ""C:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol\PHOENIX_STOPPER.vbs"""
+    Start-Process "cscript.exe" "//B ""C:\Users\yoshi\OneDrive\Weekly report\Phoenix_Protocol\PHOENIX_STOPPER.vbs"""
 })
 $panel.Controls.Add($btnStop)
 
@@ -125,6 +125,7 @@ $timer.add_Tick({
         $infoLabel.Text = "IDLE"
     }
 })
+
 $timer.Start()
 
 $form.ShowDialog()

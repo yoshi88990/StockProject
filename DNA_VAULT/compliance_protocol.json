@@ -1,0 +1,8 @@
+﻿{
+    "abide_by_robots_txt":  true,
+    "wait_type":  "HUMID_RANDOM",
+    "legal_note":  "Only public financial data for personal research.",
+    "max_requests_per_min":  20,
+    "status":  "LAWFUL_EXECUTION",
+    "protocol":  "CLEAN_SOVEREIGNTY_V1"
+}

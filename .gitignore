@@ -17,3 +17,15 @@ venv/
 
 # Application data (maybe keep? but maybe better to keep separate or encrypted later)
 # assets_db.json  # <-- For now, keep it for sync
+
+# PHOENIX LOGS & DEBUG
+*.log
+output.txt
+debug_*.py
+fix_mojibake.py
+_target_coord.txt
+sniper_diag.txt
+sniper_heartbeat.txt
+sentinel_heartbeat.txt
+synapse_pulse.txt
+process_check.txt

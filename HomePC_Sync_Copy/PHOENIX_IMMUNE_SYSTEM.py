@@ -65,7 +65,7 @@ def revive_sniper():
     try:
         # 師匠の命令: 蘇生時は通常のVBS（隠れ身）ではなく、最大化ウィンドウで堂々と復活し、
         # 自分が死から蘇ったことを自覚させる引数(--revived)を渡す
-        python_exe = r"C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\python.exe"
+        python_exe = r"C:\Users\yoshi\AppData\Local\Python\bin\python.exe"
         script_path = r"c:\StockProject\ACCEPT_ALL_MINIMAL.py"
         cmd = f'powershell -Command "Start-Process -FilePath \'{python_exe}\' -ArgumentList \'{script_path} --revived\' -WindowStyle Maximized"'
         subprocess.call(cmd, shell=True, creationflags=subprocess.CREATE_NO_WINDOW)

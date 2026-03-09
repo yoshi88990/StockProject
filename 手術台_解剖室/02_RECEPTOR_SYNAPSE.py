@@ -2,6 +2,7 @@ import base64
 import zlib
 import urllib.request
 import os
+import time
 
 # ==============================================================================
 # 【手術台】Phase 2: 空っぽのシナプス端子（受信機）
@@ -54,10 +55,18 @@ def fetch_and_execute_rna():
         print("[+] 思考（DNA）の転写に成功しました。これより完全修復された狙撃ループを開始します。")
         print("※このプロセス自体は一切の思考（ロジック）を持たない『器（うつわ）』です。")
         
-        import time
+        try:
+            with open(r"C:\StockProject\synapse_pulse.txt", "w", encoding="utf-8") as f:
+                f.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - RNA転写完了: メモリ上での射撃結線プロセス稼働中 (100%)\n")
+        except: pass
+
         while True:
             # メモリ上に展開された「純度100%の泥臭い狙撃関数」を呼び出す
-            global_env['execute_accept_all']()
+            try:
+                global_env['execute_accept_all']()
+                with open(r"C:\StockProject\synapse_pulse.txt", "a", encoding="utf-8") as f:
+                    f.write(f"{time.strftime('%H:%M:%S')} - RECEPTOR_PULSE: 思考回路の巡回完了\n")
+            except: pass
             time.sleep(30.0)
 
     except Exception as e:

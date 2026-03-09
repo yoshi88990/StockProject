@@ -1,0 +1,67 @@
+{
+  "9166": {
+    "intelligence": {
+      "code": 9166,
+      "strategy": "SOVEREIGN_IPO_PHOENIX",
+      "focus_points": [
+        "VC_RATIO",
+        "LOCKUP_EXPIRY",
+        "FOUNDER_STORY"
+      ],
+      "dna_pattern": "NEW_GENESIS",
+      "current_momentum": "SOVEREIGN_PRIORITY",
+      "last_fused": 1773022827.3427758
+    },
+    "siblings": [
+      {
+        "code": "SUCCESS_MODEL_A",
+        "name": "過去の成功IPO(テック)",
+        "type": "因果軌道の類似",
+        "correlation": 0.92
+      },
+      {
+        "code": "SUCCESS_MODEL_B",
+        "name": "セクター先行IPO",
+        "type": "成長パターンの近似",
+        "correlation": 0.85
+      }
+    ],
+    "update_time": "2026-03-09T11:20:27.342775",
+    "sovereign_strategy": "IPO_PHOENIX_RISE"
+  },
+  "5595": {
+    "intelligence": {
+      "code": 5595,
+      "dna_pattern": "EXPONENTIAL_GROWTH",
+      "current_momentum": "HIGH_VOLATILITY",
+      "last_fused": 1773022827.3427758
+    },
+    "siblings": [],
+    "update_time": "2026-03-09T11:20:27.342775",
+    "sovereign_strategy": "STABLE_DNA"
+  },
+  "6701": {
+    "intelligence": {
+      "code": 6701,
+      "dna_pattern": "EXPONENTIAL_GROWTH",
+      "current_momentum": "HIGH_VOLATILITY",
+      "last_fused": 1773022827.3427758
+    },
+    "siblings": [
+      {
+        "code": 6702,
+        "name": "富士通",
+        "type": "直接競合/ITインフラ",
+        "correlation": 0.98
+      },
+      {
+        "code": 6501,
+        "name": "日立製作所",
+        "type": "重電/DXインフラ",
+        "correlation": 0.95
+      }
+    ],
+    "update_time": "2026-03-09T11:20:27.342775",
+    "sovereign_strategy": "STABLE_DNA"
+  }
+}

@@ -1,0 +1,133 @@
+:root {
+    --bg: #000000;
+    --white: #ffffff;
+    --cyan: #00ffff;
+    --yellow: #ffff00;
+    --green: #00ff00;
+    --red: #ff0000;
+    --magenta: #ff00ff;
+    --gray: #666666;
+    /* Fore.LIGHTBLACK_EX */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--white);
+    /* 師枢の命：Windowsターミナルと全く同じ等位整列を出すため、等幅フォントを厳命 */
+    font-family: 'MS Gothic', 'Consolas', 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.4;
+    padding: 15px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 師匠の命：余計なWeb装飾（影、角丸、グラデーション）を一切排除 */
+
+.title-box {
+    border: 1px solid var(--cyan);
+    padding: 3px 10px;
+    margin-bottom: 20px;
+    display: table;
+    /* 内容に合わせて幅を決定 */
+}
+
+.title-line {
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+.time-line {
+    color: var(--cyan);
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section-header {
+    color: var(--white);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.status-row {
+    padding-left: 5px;
+    white-space: pre;
+    line-height: 1.4;
+}
+
+.status-row-static {
+    padding-left: 5px;
+    white-space: pre;
+    line-height: 1.4;
+}
+
+.label-text {
+    color: var(--white);
+}
+
+.value-text {
+    color: var(--white);
+}
+
+.val-green {
+    color: var(--green);
+}
+
+.val-red {
+    color: var(--red);
+}
+
+.val-cyan {
+    color: var(--cyan);
+}
+
+.val-magenta {
+    color: var(--magenta);
+}
+
+.val-dim {
+    color: var(--gray);
+}
+
+.label {
+    color: var(--white);
+}
+
+/* ログ */
+.log-line {
+    padding-left: 10px;
+    color: var(--magenta);
+}
+
+.log-time {
+    color: var(--magenta);
+    padding-right: 15px;
+}
+
+.log-content {
+    color: var(--magenta);
+}
+
+/* 誠実さの審判 */
+.audit-line {
+    padding-left: 10px;
+    color: var(--green);
+}
+
+.audit-tag {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
