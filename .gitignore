@@ -29,3 +29,7 @@ sniper_heartbeat.txt
 sentinel_heartbeat.txt
 synapse_pulse.txt
 process_check.txt
+
+# Phoenix Pulse
+PHOENIX_HEARTBEATS/
+
