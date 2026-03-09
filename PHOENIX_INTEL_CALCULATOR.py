@@ -7,9 +7,9 @@ import sys
 # 師匠の命：ダッシュボードから計算を分離。外部で「不変」の数値を保持する。
 # このプログラムはメモリ消費を極限まで抑え、ファイルとして結果を出力する。
 
-ROOT_DIR = r"C:\Users\yoshi\OneDrive\Weekly report"
-PROTOCOL_DIR = os.path.join(ROOT_DIR, "Phoenix_Protocol")
+PROTOCOL_DIR = r"P:/"
 CALC_CACHE = os.path.join(PROTOCOL_DIR, "INTELLIGENCE_TOTAL_CALC.json")
+HEARTBEAT_FILE = r"P:\PHOENIX_HEARTBEATS\hb_Calculator.txt"
 
 def run_calculation():
     asset_dirs = [
@@ -63,10 +63,10 @@ def persistent_calc():
             run_calculation()
             # 師匠の命：心拍（Heartbeat）を刻む。ダッシュボードへの生存報告。
             try:
-                with open(r"C:\StockProject\hb_Calculator.txt", "w") as f:
+                with open(HEARTBEAT_FILE, "w") as f:
                     f.write(str(time.time()))
             except: pass
-            time.sleep(30)
+            time.sleep(10) # 10秒間隔
         except Exception:
             time.sleep(10)
 

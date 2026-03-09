@@ -11,11 +11,12 @@ import zlib
 # 師匠の命：決算のみならず、経済・金融・社会・SNSの全情報を24時間網羅する。
 # 自宅PCの負荷をゼロに保ち、GitHub特務部隊(VANGUARD)と連携して「亡命投擲」を繰り返す。
 
-PROTOCOL_DIR = r"c:\Users\kanku\OneDrive\Weekly report\Phoenix_Protocol"
-HEARTBEAT_FILE = r"C:\StockProject\sentinel_heartbeat.txt"
+PROTOCOL_DIR = r"P:/"
+HEARTBEAT_FILE = r"P:\PHOENIX_HEARTBEATS\hb_Sentinel.txt"
 
 def write_heartbeat():
     try:
+        # 師匠の命：心拍(Heartbeat)を刻む
         with open(HEARTBEAT_FILE, "w") as f: f.write(str(time.time()))
     except: pass
 

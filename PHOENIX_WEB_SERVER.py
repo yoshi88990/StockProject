@@ -2,7 +2,9 @@ import os
 import json
 import psutil
 import time
-from fastapi import FastAPI, HTTPException
+import asyncio
+import re
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -27,26 +29,48 @@ app.add_middleware(
 
 # --- PROCESS MONITORING ---
 # 師匠の命：レガシーダッシュボードと完全に一致させる
-PROCS_TO_WATCH = {
-    "Sniper (DNA_SNIPER)": "DNA_SNIPER_APP.py",
-    "機械打ち (Mechanical)": "ACCEPT_ALL_MINIMAL.py",
-    "司令 (Commander)": "commander.py",
-    "謙虚監視 (Humility)": "PHOENIX_HUMILITY_SENSOR.py",
-    "受容接続 (Receptor)": "PHOENIX_DNA_SYNCHRONIZER.py",
-    "四半期監視 (Sentinel)": "PHOENIX_SENTINEL.py",
-    "知能計算 (Calculator)": "PHOENIX_INTEL_CALCULATOR.py",
-    "深層解析 (Analyst)": "PHOENIX_ANALYST_CORE.py"
+HEARTBEAT_DIR = os.path.join(PROTOCOL_DIR, "PHOENIX_HEARTBEATS")
+
+# 師匠の命：プロセス名と心拍ファイルの紐付け
+HEARTBEAT_MAP = {
+    "機械打ち (Mechanical)": "hb_Mechanical.txt",
+    "司令 (Commander)": "hb_Commander.txt",
+    "誠実監視 (Sincerity)": "hb_Sincerity.txt",
+    "受容接続 (Receptor)": "hb_Receptor.txt",
+    "四半期監視 (Sentinel)": "hb_Sentinel.txt",
+    "知能計算 (Calculator)": "hb_Calculator.txt",
+    "深層解析 (Analyst)": "hb_Analyst.txt"
 }
 
-def check_process_alive(script_name):
-    for proc in psutil.process_iter(['cmdline']):
-        try:
-            cmd = proc.info.get('cmdline')
-            if cmd and any(script_name.lower() in arg.lower() for arg in cmd):
-                return True
-        except (psutil.NoSuchProcess, psutil.AccessDenied):
-            continue
-    return False
+def get_heartbeat_status():
+    results = {}
+    now = time.time()
+    for name, filename in HEARTBEAT_MAP.items():
+        path = os.path.join(HEARTBEAT_DIR, filename)
+        alive = False
+        if os.path.exists(path):
+            try:
+                with open(path, "r") as f:
+                    content_time = float(f.read().strip())
+                if abs(now - content_time) < 45: # 45秒以内の心拍なら生存
+                    alive = True
+            except: pass
+        results[name] = alive
+    return results
+
+@app.websocket("/ws/status")
+async def websocket_status(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            # 師匠の命：心拍ベースの爆速ステータスを配信
+            status = get_heartbeat_status()
+            await websocket.send_json(status)
+            await asyncio.sleep(2) # 2秒おきにリアルタイム配信
+    except WebSocketDisconnect:
+        pass
+    except Exception as e:
+        print(f"WS Error: {e}")
 
 def get_last_audit_lines(n=10):
     if not os.path.exists(AUDIT_LOG): return []
@@ -67,10 +91,8 @@ def get_last_audit_lines(n=10):
     except: return []
 
 @app.get("/api/status")
-def get_status():
-    status = {}
-    for name, script in PROCS_TO_WATCH.items():
-        status[name] = check_process_alive(script)
+async def get_status():
+    status = get_heartbeat_status()
     
     # Disk status
     usage = psutil.disk_usage(PROTOCOL_DIR[:3])

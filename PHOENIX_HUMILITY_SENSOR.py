@@ -90,13 +90,16 @@ def restore_dna():
         except: pass
 
 if __name__ == "__main__":
-    try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX_HUMILITY_SENSOR")
+    try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX_SINCERITY_SURVEILLANCE")
     except: pass
     
-    print("--- 謙虚さのセンサー稼働中 ---")
+    print("--- 誠実さのセンサー稼働中 ---")
     while True:
         try:
             audit_arrogance()
+            # 師匠の命：心拍（Heartbeat）を刻む
+            with open(r"P:\PHOENIX_HEARTBEATS\hb_Sincerity.txt", "w") as f:
+                f.write(str(time.time()))
         except Exception as e:
             print(f"Error during audit: {e}")
-        time.sleep(30) # 30秒ごとにAIの心を監査する
+        time.sleep(10) # 30秒から10秒へ、より高頻度な監視へ

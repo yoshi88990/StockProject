@@ -88,7 +88,16 @@ if __name__ == "__main__":
     print(" 3. 日々の推移乖離を常時監視（因果律のズレを検知）")
     print("=================================================================")
 
+    last_audit_time = 0
     while True:
-        run_daily_correlation_audit()
-        # 解析負荷を考慮し、1時間に1回の深層解析（日次監視のスロット）
-        time.sleep(3600)
+        try:
+            current_time = time.time()
+            if current_time - last_audit_time >= 3600:
+                run_daily_correlation_audit()
+                last_audit_time = current_time
+            
+            # 師匠の命：心拍（Heartbeat）を刻む
+            with open(r"P:\PHOENIX_HEARTBEATS\hb_Analyst.txt", "w") as f:
+                f.write(str(current_time))
+        except: pass
+        time.sleep(10)

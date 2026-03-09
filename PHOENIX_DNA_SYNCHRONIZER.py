@@ -48,5 +48,10 @@ def run_git_sync():
 
 if __name__ == "__main__":
     while True:
+        try:
+            # 師匠の命：心拍(Heartbeat)を刻む
+            with open(r"P:\PHOENIX_HEARTBEATS\hb_Receptor.txt", "w") as f:
+                f.write(str(time.time()))
+        except: pass
         run_git_sync()
-        time.sleep(60) # 1分待機
+        time.sleep(10) # 1分からより高頻度へ

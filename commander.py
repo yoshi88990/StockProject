@@ -10,9 +10,9 @@ import win32api
 import win32con
 import win32gui
 
-# --- DNA: The Unstoppable Sovereignty v52.1 (Precision Fix) ---
-# 師匠の「座標忘れたの？」という真理の追及に応え、狙撃ロジックのオフセットバグを完全修正。
-# 1292, 600 を含む聖なる座標群を、「現在地 0,0 射撃」で正確に墜とす。
+# --- DNA: The Unstoppable Sovereignty v52.2 (Precision Fix) ---
+# 師匠の命：STOP_PHOENIX 信号を尊重し、不要な狙撃（亡霊）を封印。
+STOP_SIGNAL = r"P:\STOP_PHOENIX"
 
 def usurper_protocol():
     """真の1枚化：簒奪プロトコル (見える王座の確立)"""
@@ -186,7 +186,11 @@ prev_enter = False
 while True:
     try:
         current_time = time.time()
-        
+        # 師匠の命：心拍(Heartbeat)を刻む
+        try:
+            with open(r"P:\PHOENIX_HEARTBEATS\hb_Commander.txt", "w") as f: f.write(str(current_time))
+        except: pass
+
         if check_key(0x1B): sys.exit(0) # ESC
         
         curr_enter = check_key(0x0D)
@@ -206,9 +210,19 @@ while True:
                 logging.info("[STATE] 安定検知 -> 再開")
 
         # 聖なる15秒の鼓動 (Accept All 踏襲)
-        if not is_paused:
+        if not is_paused and not os.path.exists(STOP_SIGNAL):
+            # 師匠の命：Antigravity窓が最小化されていない時だけ狙撃を許可する
+            def find_ag():
+                hl = []
+                win32gui.EnumWindows(lambda h, e: hl.append(h) if "Antigravity" in win32gui.GetWindowText(h) else None, None)
+                return hl[0] if hl else None
+            
+            ag_hwnd = find_ag()
+            is_min = win32gui.IsIconic(ag_hwnd) if ag_hwnd else True
+
             if current_time - last_f8_time >= 15.0:
-                execute_accept_all_protocol()
+                if not is_min:
+                    execute_accept_all_protocol()
                 last_f8_time = current_time
                 last_pulse_time = current_time
         else:
