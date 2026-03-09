@@ -3,14 +3,15 @@ import time
 import os
 import sys
 import re
+import psutil
 
 # =========================================================================
-# 【PHOENIX SPIRIT-WATCHDOG v4.5】(亡霊根絶・一極集中版)
-# 目的: 重複プロセスを検知し、多重起動（亡霊）を完全に消去して一貫性を保つ。
+# 【PHOENIX SPIRIT-WATCHDOG v4.8】(軽量・亡霊根絶版)
+# 目的: psutilを使用して軽量にプロセスを監視し、多重起動を物理的に根絶。
 # =========================================================================
 
 PYTHONW = r"C:\Users\kanku\OneDrive\Weekly report\python_embed\pythonw.exe"
-PROTOCOL_DIR = r"P:\"
+PROTOCOL_DIR = r"P:/"
 
 TARGETS = [
     {"name": "b. 機械打ち", "script": os.path.join(PROTOCOL_DIR, "ACCEPT_ALL_MINIMAL.py"), "key": "ACCEPT_ALL_MINIMAL.py"},
@@ -28,31 +29,31 @@ def log_res(msg):
         f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}\n")
 
 def get_running_processes():
+    """psutilを使用して軽量にプロセスリスト（コマンドライン）を取得"""
     try:
-        # WMICでコマンドラインを取得。null文字を除去しデコード
-        cmd = 'wmic process where "name like \'python%.exe\'" get commandline,processid'
-        output = subprocess.check_output(cmd, shell=True, creationflags=0x08000000)
-        return output.replace(b'\x00', b'').decode('cp932', errors='ignore').lower().replace("\\", "/")
+        procs = []
+        for p in psutil.process_iter(['cmdline', 'pid']):
+            try:
+                cmdline = " ".join(p.info['cmdline']) if p.info['cmdline'] else ""
+                procs.append(cmdline.lower().replace("\\", "/"))
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+        return "\n".join(procs)
     except:
         return ""
 
 def kill_by_key(key):
-    """特定のキーワードを持つPythonプロセスを、このWatchdog自身を除いて全削除"""
-    try:
-        cmd = 'wmic process where "name like \'python%.exe\'" get commandline,processid'
-        raw = subprocess.check_output(cmd, shell=True, creationflags=0x08000000)
-        lines = raw.replace(b'\x00', b'').decode('cp932', errors='ignore').lower().replace("\\", "/").splitlines()
-        
-        my_pid = os.getpid()
-        for line in lines:
-            if key.lower() in line and "spirit_watchdog" not in line:
-                parts = line.strip().split()
-                if parts:
-                    pid = parts[-1] 
-                    if pid.isdigit() and int(pid) != my_pid:
-                        subprocess.run(f"taskkill /F /PID {pid}", shell=True, creationflags=0x08000000)
-    except:
-        pass
+    """特定のキーワードを持つプロセスをpsutilで安全かつ高速に削除"""
+    my_pid = os.getpid()
+    for p in psutil.process_iter(['cmdline', 'pid']):
+        try:
+            cmdline = " ".join(p.info['cmdline']) if p.info['cmdline'] else ""
+            if key.lower() in cmdline.lower().replace("\\", "/") and "spirit_watchdog" not in cmdline.lower():
+                if p.info['pid'] != my_pid:
+                    p.terminate() # 優しく停止
+                    # p.kill() # 師匠の命：必要なら強引に
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
 
 def check_and_stabilize():
     processes = get_running_processes()

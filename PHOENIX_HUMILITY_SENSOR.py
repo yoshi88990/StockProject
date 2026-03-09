@@ -102,4 +102,4 @@ if __name__ == "__main__":
                 f.write(str(time.time()))
         except Exception as e:
             print(f"Error during audit: {e}")
-        time.sleep(10) # 30秒から10秒へ、より高頻度な監視へ
+        time.sleep(30) # 10秒から30秒へ緩和（CPU負荷軽減）

@@ -57,4 +57,4 @@ if __name__ == "__main__":
                 f.write(str(time.time()))
         except: pass
         run_git_sync()
-        time.sleep(10) # 1分からより高頻度へ
+        time.sleep(120) # 10秒から2分へ緩和（Git操作の負荷軽減）
