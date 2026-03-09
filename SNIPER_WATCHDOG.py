@@ -13,8 +13,8 @@ import ctypes
 # 「DNA_VAULT（絶対金庫）」に保存された初期ファイルから即座に上書きして復元します。
 # ==============================================================================
 
-BASE_DIR = r"C:\Users\kanku\OneDrive\Weekly report"
-VAULT_DIR = os.path.join(BASE_DIR, "Phoenix_Protocol", "DNA_VAULT")
+BASE_DIR = r"P:\"
+VAULT_DIR = os.path.join(BASE_DIR, "DNA_VAULT")
 
 # 監視・保護対象（AIによる手出し禁止ファイル）
 TARGETS = [

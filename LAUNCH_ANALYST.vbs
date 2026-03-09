@@ -1,4 +1,4 @@
 Set ws = CreateObject("WScript.Shell")
-pythonExe = "C:\Users\kanku\Desktop\Weekly report\Weekly-report\python_embed\pythonw.exe"
-scriptPath = "C:\StockProject\PHOENIX_STOCK_ANALYST.py"
+pythonExe = "P:\python_embed\pythonw.exe"
+scriptPath = "P:\PHOENIX_STOCK_ANALYST.py"
 ws.Run """" & pythonExe & """ """ & scriptPath & """", 0, False

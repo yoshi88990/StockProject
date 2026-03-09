@@ -14,7 +14,7 @@ import json
 
 class PhoenixCompute:
     def __init__(self):
-        self.base_dir = r"C:\StockProject"
+        self.base_dir = r"P:\"
         self.wisdom_file = os.path.join(self.base_dir, "PHOENIX_WISDOM_REGISTRY.json")
         self.log_file = os.path.join(self.base_dir, "PHOENIX_COMPUTE_LOG.txt")
 

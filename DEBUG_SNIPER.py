@@ -1,4 +1,4 @@
-import ctypes
+をimport ctypes
 import time
 import win32api
 import win32con

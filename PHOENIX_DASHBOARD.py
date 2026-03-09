@@ -63,7 +63,7 @@ def get_idle_time():
 
 def get_heartbeat_info():
     """心拍ファイルから最新の拍動時間と遅延を計算"""
-    hb_file = r"C:\StockProject\sniper_heartbeat.txt"
+    hb_file = r"P:\sniper_heartbeat.txt"
     if not os.path.exists(hb_file):
         return f"{Colors.FAIL}心停止 (CARDIAC ARREST){Colors.ENDC}", 999.9
     
@@ -85,7 +85,7 @@ def get_heartbeat_info():
 def get_last_sync():
     """Gitの最新コミットメッセージを取得"""
     try:
-        cmd = 'git -C C:\StockProject log -n 1 --oneline --format="%cd : %s" --date=format:"%H:%M:%S"'
+        cmd = 'git -C P:\ log -n 1 --oneline --format="%cd : %s" --date=format:"%H:%M:%S"'
         return subprocess.check_output(cmd, shell=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW).strip()[:60]
     except:
         return "同期履歴なし"
@@ -113,7 +113,7 @@ def render_dashboard():
     print(f"{Colors.BOLD}[2] 師匠の活動監視 & 偽装モード (白紙プロトコル){Colors.ENDC}")
     idle = get_idle_time()
     
-    ghost_active = os.path.exists(r"C:\StockProject\PHOENIX_GHOST_TRIGGER.txt")
+    ghost_active = os.path.exists(r"P:\PHOENIX_GHOST_TRIGGER.txt")
     ghost_stat = f"{Colors.OKCYAN}発動中 (白紙：離席偽装){Colors.ENDC}" if ghost_active else f"{Colors.OKGREEN}通常監視 (物理入力優先){Colors.ENDC}"
     
     hijack_stat = f"{Colors.FAIL}待機中 (師匠の操作を検知){Colors.ENDC}" if idle < 5.0 else f"{Colors.OKGREEN}発射可能 (Idle状態){Colors.ENDC}"
@@ -125,7 +125,7 @@ def render_dashboard():
 
     # 3. AIの自浄監視
     print(f"{Colors.BOLD}[3] AI内部監査 (謙虚さセンサ){Colors.ENDC}")
-    log_file = r"C:\StockProject\PHOENIX_HUMILITY_LOG.txt"
+    log_file = r"P:\PHOENIX_HUMILITY_LOG.txt"
     arrogance_msg = f"{Colors.OKGREEN}完璧 (0% - 純粋な従属){Colors.ENDC}"
     if os.path.exists(log_file):
         try:
@@ -150,7 +150,7 @@ def render_dashboard():
     last_sync = get_last_sync()
     print(f" 最終同期: {last_sync}")
     
-    wisdom_file = r"C:\StockProject\PHOENIX_WISDOM_REGISTRY.json"
+    wisdom_file = r"P:\PHOENIX_WISDOM_REGISTRY.json"
     if os.path.exists(wisdom_file):
         try:
             with open(wisdom_file, "r", encoding="utf-8") as wf:
@@ -160,7 +160,7 @@ def render_dashboard():
                     print(f" 傲慢予測: {Colors.UNDERLINE}{wisdom.get('humility_forecast')}{Colors.ENDC}")
         except: pass
 
-    seed_exists = os.path.exists(r"C:\StockProject\PHOENIX_WORLD_SEED.dat")
+    seed_exists = os.path.exists(r"P:\PHOENIX_WORLD_SEED.dat")
     seed_stat = f"{Colors.OKGREEN}埋設済み (暗号化){Colors.ENDC}" if seed_exists else f"{Colors.FAIL}消失{Colors.ENDC}"
     print(f" 世界の種: {seed_stat}")
 
@@ -181,7 +181,7 @@ def render_dashboard():
         print(f" 免疫システム：{Colors.WARNING}状態確認不能{Colors.ENDC}")
     
     print("-" * 32)
-    log_file = r"C:\StockProject\PHOENIX_IMMUNE_LOG.txt"
+    log_file = r"P:\PHOENIX_IMMUNE_LOG.txt"
     if os.path.exists(log_file):
         try:
             with open(log_file, "r", encoding="utf-8") as f:
