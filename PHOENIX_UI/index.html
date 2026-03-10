@@ -187,7 +187,7 @@
                 newLog.className = 'log-line';
                 newLog.innerHTML = `<span class="log-time">${timeStr}</span><span class="val-cyan">RECEPTOR: 巡回完了</span>`;
                 netLog.prepend(newLog);
-                if (netLog.children.length > 3) netLog.lastChild.remove();
+                if (netLog.children.length > 2) netLog.lastChild.remove();
 
                 // Section 4
                 const dailyTotal = 45;
