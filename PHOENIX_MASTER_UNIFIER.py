@@ -7,7 +7,7 @@ import time
 # 目的: 「あいことば」一つで、自宅・会社の全知能を同じ「平和な」設定に同期する
 # =========================================================================
 
-PASS_PHRASE = "PHOENIX_REBIRTH_2026"
+PASS_PHRASE = "/resume" # 師匠の指定した『あいことば』
 
 def unify_intelligence():
     print(f"[*] あいことばを受理: {PASS_PHRASE}")
