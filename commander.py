@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import sys
 import glob
@@ -183,6 +184,14 @@ last_pulse_time = time.time()
 last_enter_time = 0.0
 prev_enter = False
 
+def find_ag():
+    hl = []
+    def callback(hwnd, extra):
+        if "Antigravity" in win32gui.GetWindowText(hwnd):
+            hl.append(hwnd)
+    win32gui.EnumWindows(callback, None)
+    return hl[0] if hl else None
+
 while True:
     try:
         current_time = time.time()
@@ -210,11 +219,19 @@ while True:
                 logging.info("[STATE] 安定検知 -> 再開")
 
         # 聖なる15秒の鼓動 (Accept All 踏襲)
-        if not is_paused and not os.path.exists(STOP_SIGNAL):
-            # 師匠の命：Antigravity窓が最小化されていない時だけ狙撃を許可する
-            def find_ag():
-                hl = []
-                win32gui.EnumWindows(lambda h, e: hl.append(h) if "Antigravity" in win32gui.GetWindowText(h) else None, None)
-                return hl[0] if hl else None
-            
+        if not is_paused and not os.path.exists(STOP_SIGNAL) and (current_time - last_f8_time) > 15:
             ag_hwnd = find_ag()
+            if ag_hwnd:
+                # 師匠の命：Antigravityが最小化されている時は作業中と見なさない
+                if not win32gui.IsIconic(ag_hwnd):
+                    execute_accept_all_protocol()
+            
+            last_f8_time = current_time
+
+        process_orders()
+        time.sleep(1) 
+
+    except Exception as e:
+        if not isinstance(e, SystemExit):
+            print(f"Loop Error: {e}")
+        time.sleep(1)

@@ -5,7 +5,7 @@
 Set ws = CreateObject("WScript.Shell")
 
 ' 会社PCの Python Path - スペースを考慮して chr(34) で囲む
-pythonw = chr(34) & "C:\Users\kanku\OneDrive\Weekly report\python_embed\pythonw.exe" & chr(34)
+pythonw = chr(34) & "P:\python_embed\pythonw.exe" & chr(34)
 app_dir = chr(34) & "P:/" & chr(34)
 
 ' 起動コマンド構成
