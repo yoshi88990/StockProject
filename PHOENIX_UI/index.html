@@ -127,21 +127,21 @@
             const procList = document.getElementById('process-list');
             const alphabet = 'bcdefgh';
             const nameMap = {
-                "Sincerity": "誠実監視 (Sincerity)",
-                "Mechanical": "機械打ち (Mech)",
-                "Commander": "司令 (Commander)",
-                "Receptor": "受容接続 (Receptor)",
-                "Sentinel": "四半期監視 (Sentinel)",
-                "Calculator": "知能計算 (Calc)",
-                "Analyst": "深層解析 (Analyst)"
+                "機械打ち (Mechanical)": "機械打ち (Mech)",
+                "司令 (Commander)": "司令 (Commander)",
+                "誠実監視 (Sincerity)": "誠実監視 (Sincerity)",
+                "受容接続 (Receptor)": "受容接続 (Receptor)",
+                "四半期監視 (Sentinel)": "四半期監視 (Sentinel)",
+                "知能計算 (Calculator)": "知能計算 (Calc)",
+                "深層解析 (Analyst)": "深層解析 (Analyst)"
             };
 
             let html = '';
-            // bからhまで順番に
-            const keys = ["Mechanical", "Commander", "Sincerity", "Receptor", "Sentinel", "Calculator", "Analyst"];
+            // バックエンドのキーと完全一致させる
+            const keys = ["機械打ち (Mechanical)", "司令 (Commander)", "誠実監視 (Sincerity)", "受容接続 (Receptor)", "四半期監視 (Sentinel)", "知能計算 (Calculator)", "深層解析 (Analyst)"];
             keys.forEach((key, idx) => {
                 const char = alphabet[idx];
-                const alive = processes[key] || processes[nameMap[key]] || false;
+                const alive = processes[key] || false;
                 const dispName = nameMap[key] || key;
                 const label = `  ${char}. ${dispName}`;
                 const valText = alive ? '● ACTIVE' : '○ DEAD';
