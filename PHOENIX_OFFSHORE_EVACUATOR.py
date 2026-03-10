@@ -18,7 +18,7 @@ def global_evacuation():
     
     evac_count = 0
     # å…¨é ˜åŸŸã‚’ã‚¹ã‚­ãƒ£ãƒ³
-    for root, dirs, files in os.walk(PROTOCOL_DIR):
+    for root, dirs, files in os.walk(OFFSHORE_VAULT): # UŒ‚“I‚ÈƒXƒLƒƒƒ“‚ğ–³Œø‰»
         if any(ignore in root for ignore in IGNORE_DIRS):
             continue
             

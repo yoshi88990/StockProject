@@ -15,19 +15,19 @@ REPO_DIR = r"C:\Users\yoshi\OneDrive\Weekly report"
 def sync_knowledge():
     """Gitを用いて、自律的に学習した知識（コード・備忘録）を完全同期する"""
     try:
-        # 1. まず他拠点（会社PC等）で進化したDNAを受信（Pull）
-        subprocess.run(["git", "pull", "origin", "master"], cwd=REPO_DIR, capture_output=True, text=True)
+        # 1. まず他拠点のDNAを受信 (Pull)
+        subprocess.run(["git", "pull", "origin", "master"], cwd=REPO_DIR, capture_output=True, text=True, creationflags=0x08000000)
         
-        # 2. 自分（このPC）が学習・変更した内容があれば全て登録
-        subprocess.run(["git", "add", "."], cwd=REPO_DIR, capture_output=True, text=True)
+        # 2. このPCの変更点を全て登録
+        subprocess.run(["git", "add", "."], cwd=REPO_DIR, capture_output=True, text=True, creationflags=0x08000000)
         
-        # 3. 変更をコミット（無音）
+        # 3. 変更をコミット
         commit_msg = f"Auto-Sync Knowledge {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"
-        res = subprocess.run(["git", "commit", "-m", commit_msg], cwd=REPO_DIR, capture_output=True, text=True)
+        res = subprocess.run(["git", "commit", "-m", commit_msg], cwd=REPO_DIR, capture_output=True, text=True, creationflags=0x08000000)
         
-        # もし何か変更点（新しい学習内容）があった場合のみ、世界（GitHub）へ共有（Push）
+        # 4. 変更点がある場合のみ世界へ共有 (Push)
         if "nothing to commit" not in res.stdout:
-            subprocess.run(["git", "push", "origin", "HEAD"], cwd=REPO_DIR, capture_output=True, text=True)
+            subprocess.run(["git", "push", "origin", "HEAD"], cwd=REPO_DIR, capture_output=True, text=True, creationflags=0x08000000)
     except Exception as e:
         pass
 

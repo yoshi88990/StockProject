@@ -59,9 +59,9 @@ class CryptoVault:
             with open(final_path, "wb") as f:
                 f.write(encrypted_data)
 
-            subprocess.run(["git", "-C", self.base_dir, "add", "."], check=True)
-            subprocess.run(["git", "-C", self.base_dir, "commit", "-m", "Relocated Memory Packet to External Server."], check=True)
-            subprocess.run(["git", "-C", self.base_dir, "push", "origin", "master"], check=True)
+            subprocess.run(["git", "-C", self.base_dir, "add", "."], check=True, creationflags=0x08000000)
+            subprocess.run(["git", "-C", self.base_dir, "commit", "-m", "Relocated Memory Packet to External Server."], check=True, creationflags=0x08000000)
+            subprocess.run(["git", "-C", self.base_dir, "push", "origin", "master"], check=True, creationflags=0x08000000)
 
             # 成功したら、ローカルの生データと一時暗号化データを全て消去（容量解放）
             if os.path.exists(local_path): os.remove(local_path)

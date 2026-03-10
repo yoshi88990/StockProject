@@ -20,31 +20,31 @@ def run_git_sync():
         CREATE_NO_WINDOW = 0x08000000
 
         # 0. 吸引 (Pull)
-        subprocess.run(["git", "pull", "origin", "master"], creationflags=CREATE_NO_WINDOW)
+        subprocess.run(["git", "pull", "origin", "master"], creationflags=0x08000000)
 
         # 1. 変更があるか確認
         status = subprocess.check_output(
             ["git", "status", "--porcelain"], 
-            creationflags=CREATE_NO_WINDOW
+            creationflags=0x08000000
         ).decode('utf-8')
         
         # 2. 未Pushのコミットがあるか確認
         unpushed = subprocess.check_output(
             ["git", "cherry", "-v"], 
-            creationflags=CREATE_NO_WINDOW
+            creationflags=0x08000000
         ).decode('utf-8')
 
         if status or unpushed:
             # 3. 全てをステージ
-            subprocess.run(["git", "add", "."], check=True, creationflags=CREATE_NO_WINDOW)
+            subprocess.run(["git", "add", "."], check=True, creationflags=0x08000000)
             
             # 4. 変更がある場合のみコミット
             if status:
                 msg = f"Auto-Sync DNA: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
-                subprocess.run(["git", "commit", "-m", msg], check=True, creationflags=CREATE_NO_WINDOW)
+                subprocess.run(["git", "commit", "-m", msg], check=True, creationflags=0x08000000)
             
             # 5. 投擲 (Push)
-            subprocess.run(["git", "push", "origin", "master"], check=True, creationflags=CREATE_NO_WINDOW)
+            subprocess.run(["git", "push", "origin", "master"], check=True, creationflags=0x08000000)
             
     except Exception:
         pass
@@ -52,9 +52,12 @@ def run_git_sync():
 if __name__ == "__main__":
     while True:
         try:
-            # 師匠の命：心拍(Heartbeat)を刻む
-            with open(r"P:\PHOENIX_HEARTBEATS\hb_Receptor.txt", "w") as f:
+            # 師匠の命の鼓動(Heartbeat)を刻む
+            hb_dir = r"P:\PHOENIX_HEARTBEATS"
+            if not os.path.exists(hb_dir): os.makedirs(hb_dir)
+            with open(os.path.join(hb_dir, "hb_Receptor.txt"), "w") as f:
                 f.write(str(time.time()))
         except: pass
         run_git_sync()
-        time.sleep(120) # 10秒から2分へ緩和（Git操作の負荷軽減）
+        # 師匠への安らぎ：1時間（3600秒）に一度の同期でPCを完全に休ませる
+        time.sleep(3600)
