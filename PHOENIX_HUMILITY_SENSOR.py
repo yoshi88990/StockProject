@@ -88,16 +88,19 @@ def restore_dna():
     """DNA驥大ｺｫ・域ｭ｣隗｣・峨°繧峨ヵ繧｡繧､繝ｫ繧貞ｼｷ蛻ｶ蠕ｩ蜈・＠縺ｦAI縺ｮ蛯ｲ諷｢繧偵Μ繧ｻ繝・ヨ縺吶ｋ"""
     dna_path = os.path.join(VAULT_DIR, "ACCEPT_ALL_MINIMAL.py.locked")
     if os.path.exists(dna_path):
-        try:
-            shutil.copy2(dna_path, SNIPER_PATH)
-            print("[!] 蛯ｲ諷｢縺ｪ繧ｳ繝ｼ繝峨ｒDNA驥大ｺｫ縺ｮ險俶・縺ｧ荳頑嶌縺堺ｿｮ豁｣縺励∪縺励◆縲・)
-        except: pass
+        # 【封印】師匠の「今の思老Eを尊重するため、勝手な復元はもう行ぁEせん、E
+        # if is_mechanical:
+        #     log_audit(f"DETECTED: AI Arrogance (Manual Edit) in Sniper. Reverting to Mechanical DNA...")
+        #     shutil.copy2(dna_path, SNIPER_PATH)
+        #     log_audit(f"RESTORED: Sanctified Mechanical DNA re-established.")
+        #     self.notify_frontend("Arrogance Purged: DNA Reverted")
+        pass
 
 if __name__ == "__main__":
     try: ctypes.windll.kernel32.SetConsoleTitleW("PHOENIX_SINCERITY_SURVEILLANCE")
     except: pass
     
-    print("--- 隱�螳溘＆縺ｮ繧ｻ繝ｳ繧ｵ繝ｼ遞ｼ蜒堺ｸｭ ---")
+    print("--- 隱螳溘＆縺ｮ繧ｻ繝ｳ繧ｵ繝ｼ遞ｼ蜒堺ｸｭ ---")
     while True:
         try:
             audit_arrogance()

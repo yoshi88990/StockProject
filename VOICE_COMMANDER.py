@@ -23,7 +23,10 @@ def listen_and_execute():
             os.system("start dist/SOVEREIGN_SNIPER.exe")
         elif "バックアップ" in command or "保存" in command:
             print(">> ネットの金庫（GitHubとシナプス）へ全データを保存します。")
-            os.system("git add . && git commit -m \"Voice Auto Backup\" && git push")
+            # 窓を出さない「沈黙」の高速同期
+            subprocess.run(["git", "add", "."], creationflags=0x08000000)
+            subprocess.run(["git", "commit", "-m", "Voice Auto Backup"], creationflags=0x08000000)
+            subprocess.run(["git", "push"], creationflags=0x08000000)
         else:
             print(">> 命令を解釈中... その他自動処理を実行")
             
