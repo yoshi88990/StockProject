@@ -2,53 +2,58 @@
 setlocal enabledelayedexpansion
 chcp 65001 > nul
 
-echo ====================================================
-echo   [PHOENIX DRIVE UNIFIER] v1.0 - Protocol P:
-echo ====================================================
-echo.
-echo このスクリプトは、自宅PCにおいても「P:\」ドライブを
-echo 自動で作成し、会社PCと完全に同一の環境を構築します。
-echo.
+:: ==============================================================================
+:: [PHOENIX UNIFIED P: PROTOCOL] v2.0
+:: 師匠の命：拠点間（自宅/会社）のパス差異を完全に抹消する。
+:: ==============================================================================
 
-:: 1. 実体フォルダの確認と決定
-:: 師匠の命：自宅PCは容量不足のため、D:ドライブを優先的に利用する
-set target_dir=C:\StockProject
-if exist "D:\" (
-    set target_dir=D:\StockProject
-    echo [INFO] 外部ドライブ D: を検知しました。
-)
+echo [*] PHOENIX: Detecting Unified DNA Storage...
 
-if not exist "%target_dir%" (
-    echo [INFO] 実体フォルダ "%target_dir%" を作成中...
-    mkdir "%target_dir%"
+:: 1. 実体フォルダの自動検知 (Home vs Office)
+:: D:\ を優先し、なければ C:\ を探索する。
+set "BASE_NAME=StockProject"
+set "DATA_DIR=C:\%BASE_NAME%"
+
+if exist "D:\%BASE_NAME%" (
+    set "DATA_DIR=D:\%BASE_NAME%"
+    echo [INFO] Detected: Home PC Pattern (Drive D:)
 ) else (
-    echo [OK] 実体フォルダ "%target_dir%" は既に存在します。
+    echo [INFO] Detected: Office PC Pattern (Drive C:)
 )
 
-:: 2. 仮想ドライブ P: の作成 (subst)
+:: 2. 仮想ドライブ P: の再構築
 subst P: /d > nul 2>&1
-subst P: "%target_dir%"
+subst P: "%DATA_DIR%"
+
 if %errorlevel% equ 0 (
-    echo [SUCCESS] 仮想ドライブ P: を "%target_dir%" に紐付けました。
+    echo [SUCCESS] Unified Drive P: is ACTIVE -> %DATA_DIR%
 ) else (
-    echo [ERROR] 仮想ドライブ P: の作成に失敗しました。
+    echo [ERROR] Failed to map P: drive. Please check if P: is already in use.
+    pause
+    exit /b 1
 )
 
-:: 3. スタートアップへの登録（永続化）
-set vbs_name=AUTO_PHOENIX_SNIPER.vbs
-set startup_folder=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup
-if exist "%~dp0%vbs_name%" (
-    echo [INFO] スタートアップ・ランチャーをコピー中...
-    copy /Y "%~dp0%vbs_name%" "%startup_folder%\" > nul
-    echo [SUCCESS] 次回PC起動時も自動で P: ドライブが作成されます。
+:: 3. 脳の同期 (Git DNA Pull)
+echo [*] Syncing DNA with Global Cloud...
+cd /d P:\
+git pull origin master
+if %errorlevel% equ 0 (
+    echo [OK] DNA Synchronization Complete.
 ) else (
-    echo [WARNING] %vbs_name% が見つからないため、登録をスキップしました。
+    echo [WARNING] Global Sync skipped. Proceeding with local DNA.
+)
+
+:: 4. 仕上げ：RESUMEコマンドの起動
+if exist "P:\RESUME_MASTER_PC.bat" (
+    echo [*] Launching Master Resume Sequence...
+    start "" "P:\RESUME_MASTER_PC.bat"
+) else (
+    echo [ERROR] RESUME_MASTER_PC.bat not found on P:
 )
 
 echo.
 echo ----------------------------------------------------
-echo [完了] 自宅PCが PHOENIX 統一規格「P:」に準拠しました。
-echo 今後はエクスプローラーから P:\ ドライブにアクセスしてください。
+echo [FINISH] PHOENIX UNIFIED ENVIRONMENT ESTABLISHED.
 echo ----------------------------------------------------
-echo.
-pause
+timeout /t 5
+exit

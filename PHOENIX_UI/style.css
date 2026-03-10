@@ -128,8 +128,8 @@ header {
 }
 
 .log-container {
-    background: #111;
-    border: 1px solid #222;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
     padding: 8px;
     height: 120px;
     overflow-y: auto;
