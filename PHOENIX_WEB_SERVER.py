@@ -168,4 +168,4 @@ if os.path.exists(UI_DIR):
 if __name__ == "__main__":
     import uvicorn
     # 既存のダッシュボードをリプレイスするため、標準ポート 8000 で起動
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="warning")
