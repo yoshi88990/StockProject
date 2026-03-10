@@ -33,3 +33,9 @@ process_check.txt
 # Phoenix Pulse
 PHOENIX_HEARTBEATS/
 
+
+# Peace Protocol: Prevent Vault/Stash resurrection
+*VAULT/
+*STASH/
+PHOENIX_HEARTBEATS/
+spirit_watchdog.log
