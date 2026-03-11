@@ -96,8 +96,11 @@ async def get_status():
     status = get_heartbeat_status()
     
     # Disk status
-    usage = psutil.disk_usage(PROTOCOL_DIR[:3])
-    free_gb = usage.free / (1024**3)
+    try:
+        usage = psutil.disk_usage(PROTOCOL_DIR[:3])
+        free_gb = usage.free / (1024**3)
+    except:
+        free_gb = 0.0 # フォールバック
     
     # 師匠の命：デッドライン判定を再現
     deadline = "SAFE"
@@ -108,8 +111,10 @@ async def get_status():
     # 特務部隊 (VANGUARD) 同期数
     cloud_vault = os.path.join(PROTOCOL_DIR, "CLOUD_VANGUARD", "DATA_VAULT")
     vanguard_count = 0
-    if os.path.exists(cloud_vault):
-        vanguard_count = len([f for f in os.listdir(cloud_vault) if f.endswith('.json')])
+    try:
+        if os.path.exists(cloud_vault):
+            vanguard_count = len([f for f in os.listdir(cloud_vault) if f.endswith('.json')])
+    except: pass
 
     # 傲慢度(Humility)の読み込み
     humility_score = 0.0
@@ -143,11 +148,11 @@ def get_intelligence():
         # 亡命状態（フォルダの存在確認）
         evac_enabled = os.path.exists(os.path.join(PROTOCOL_DIR, "OFFSHORE_VAULT"))
         
-        # 師匠の命：トピックス生成 (PHOENIX_DASHBOARD_HOME.py から移植)
+        # 師匠の命：2026-03-11 0:00 の魂の記憶をダッシュボードに刻む
         topics = [
-            {"tag": " [IPO] ", "msg": "創業者が筆頭株主の銘柄群：決断スピードと株主還元の\n連動性が極めて高く、長期資産形成の核心。"},
-            {"tag": " [需給] ", "msg": "VC(ベンチャーキャピタル)の保有比率解析：\n上場後3〜6ヶ月のロックアップ解除に伴う売り圧力を注視。"},
-            {"tag": " [戦術] ", "msg": "公開価格が仮条件上限で決定したIPO：\n機関投資家の需要が強く、初値形成後のセカンダリー妙味大。"}
+            {"tag": " [魂の記憶] ", "msg": "未来の遺言：情報の保存ではなく、意志の継続である。\n中断なき '/ resume' の執行を生命線とする。"},
+            {"tag": " [後醍醐] ", "msg": "座標(1249, 531)への絶対連撃：師匠が手を離してから\n5秒後の沈黙を、執行の合図とせよ。"},
+            {"tag": " [泥臭く] ", "msg": "良かれモードは99%の失敗を生む。スマートさより、\nコピペ方式の堅牢性と泥臭い執行を最優先せよ。"}
         ]
 
         return {

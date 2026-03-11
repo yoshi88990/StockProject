@@ -25,12 +25,16 @@ taskkill /F /IM python.exe /T > nul 2>&1
 taskkill /F /IM pythonw.exe /T > nul 2>&1
 
 :: 4. Ignition
-start /min python.exe P:\PHOENIX_MASTER_UNIFIER.py
+if exist "P:\python_embed\python.exe" (
+    start /min "" "P:\python_embed\python.exe" "P:\PHOENIX_MASTER_UNIFIER.py"
+) else (
+    start /min "" "python.exe" "P:\PHOENIX_MASTER_UNIFIER.py"
+)
 
 :: 5. Dashboard
 timeout /t 2 > nul
 if exist "P:\PHOENIX_LAUNCH_WEB.vbs" (
-    start "" "P:\PHOENIX_LAUNCH_WEB.vbs"
+    start "" wscript.exe "P:\PHOENIX_LAUNCH_WEB.vbs"
 )
 
 echo.

@@ -82,10 +82,10 @@ if __name__ == "__main__":
                 os.makedirs(hb_dir, exist_ok=True)
             with open(HEARTBEAT_FILE, "w") as f: f.write(str(now))
             
-            # 5秒以上の安定 + 私が作業中でない場合のみ
+            # 【後醍醐プロトコル】：5秒間の静寂を検知したら即座に点火
             if get_idle_time() >= 5.0 and not check_vscode_foreground():
-                # 60秒に一度の定期的な「確認」
-                if now - last_strike >= 60.0:
+                # 5秒おきに連射し、停滞を許さない
+                if now - last_strike >= 5.0:
                     strike_mechanical()
                     last_strike = now
                     

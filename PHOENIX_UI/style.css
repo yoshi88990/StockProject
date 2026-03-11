@@ -1,15 +1,15 @@
 :root {
-    --bg: #000000;
-    --text-color: #ffffff;
-    --white: #ffffff;
-    --cyan: #00ffff;
-    --yellow: #ffff00;
-    --green: #00ff00;
-    --red: #ff0000;
-    --magenta: #ff00ff;
-    --gray: #666666;
-    --accent-color: #00ffca;
-    --glass-bg: rgba(16, 16, 16, 0.95);
+    --bg: #000000 !important;
+    --text-color: #ffffff !important;
+    --white: #ffffff !important;
+    --cyan: #00ffff !important;
+    --yellow: #ffff00 !important;
+    --green: #00ff00 !important;
+    --red: #ff0000 !important;
+    --magenta: #ff00ff !important;
+    --gray: #666666 !important;
+    --accent-color: #00ffca !important;
+    --glass-bg: rgba(0, 0, 0, 1.0) !important; /* 透けさせない：泥臭い黒 */
 }
 
 * {
@@ -19,10 +19,9 @@
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text-color);
-    /* 師匠の命：Windowsターミナルと全く同じ等幅整列を出すため、等幅フォントを厳命 */
-    font-family: 'Consolas', 'MS Gothic', 'Courier New', monospace;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-family: 'Consolas', 'MS Gothic', 'Courier New', monospace !important;
     font-size: 14px;
     line-height: 1.4;
     padding: 10px;
@@ -128,13 +127,14 @@ header {
 }
 
 .log-container {
-    background: #f0f0f0;
-    border: 1px solid #ddd;
+    background: #1a1a1a;
+    border: 1px solid #333;
     padding: 8px;
     height: 120px;
     overflow-y: auto;
     font-size: 12px;
     margin-top: 10px;
+    color: #00ff00; /* 鳳凰の緑 */
 }
 
 .log-line {
