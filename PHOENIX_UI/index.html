@@ -183,6 +183,7 @@
                 let html0 = renderStatusLine(" > Cドライブ空き容量", `${status.disk.free_gb} GB`, "val-green");
                 html0 += renderStatusLine(" > 動作環境ステータス", `● ${status.disk.status}`, status.disk.status === 'SAFE' ? 'val-green' : 'val-red');
                 html0 += renderStatusLine(" > 知能亡命", intel.evac_enabled ? '● 有効' : '○ 無効', intel.evac_enabled ? 'val-cyan' : 'val-red');
+                html0 += renderStatusLine(" > 亡命成功 / 現在知能 / 最終目標", `${intel.evac_count} / ${intel.total_collected} / 4,000 件`, "val-cyan");
                 sec0.innerHTML = html0;
 
                 // Section 1 (Handled by WebSocket)

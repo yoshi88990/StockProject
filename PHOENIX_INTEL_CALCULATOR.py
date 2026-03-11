@@ -1,12 +1,12 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import os
 import time
 import json
 import sys
 
-# --- PHOENIX EXTERNAL INTEL-SITUATION (螟夜Κ遏･閭ｽ險育ｮ玲ｩ・ ---
-# 蟶ｫ蛹縺ｮ蜻ｽ・壹ム繝・す繝･繝懊・繝峨°繧芽ｨ育ｮ励ｒ蛻・屬縲ょ､夜Κ縺ｧ縲御ｸ榊､峨阪・謨ｰ蛟､繧剃ｿ晄戟縺吶ｋ縲・
-# 縺薙・繝励Ο繧ｰ繝ｩ繝縺ｯ繝｡繝｢繝ｪ豸郁ｲｻ繧呈･ｵ髯舌∪縺ｧ謚代∴縲√ヵ繧｡繧､繝ｫ縺ｨ縺励※邨先棡繧貞・蜉帙☆繧九・
+# --- PHOENIX INTEL CALCULATOR v1.2 [外部知能計算機・資産統計] ---
+# 師匠の命：ダッシュボードから計算を分離。外部で「不変」の数値を保持する。
+# PCを重くしないよう、60秒に1回、静かに統計を更新する。
 
 PROTOCOL_DIR = r"P:/"
 CALC_CACHE = os.path.join(PROTOCOL_DIR, "INTELLIGENCE_TOTAL_CALC.json")
@@ -24,18 +24,22 @@ def run_calculation():
     evac_count = 0
     today_count = 0
     
-    # JST縺ｧ縺ｮ縲梧悽譌･縲阪・髢句ｧ区凾髢薙ｒ險育ｮ・(UTC+9)
+    # 師匠の命：本日(JST)の開始時間を計算
     now = time.time()
     local_time = now + (9 * 3600)
     today_start_jst = (local_time - (local_time % 86400)) - (9 * 3600)
 
+    # 1. 資産ディレクトリ全体のカウント
     for d in asset_dirs:
         if not os.path.exists(d): continue
-        for f in os.listdir(d):
-            full_p = os.path.join(d, f)
-            if f.endswith('.json') or f.endswith('.locked'):
+        for root, _, files in os.walk(d):
+            for f in files:
+                full_p = os.path.join(root, f)
+                # 知能ファイルとして計数
                 ipo_collected += 1
-                if f.endswith('.locked'):
+                
+                # 亡命先(OFFSHORE_VAULT)にあるものはすべて亡命成功数とする
+                if "OFFSHORE_VAULT" in root:
                     evac_count += 1
                 
                 try:
@@ -43,9 +47,8 @@ def run_calculation():
                         today_count += 1
                 except: pass
     
-    # --- 蟶ｫ蛹縺ｮ蜻ｽ・壻ｸ榊､峨・繝ｬ繧ｬ繧ｷ繝ｼ雉・肇 (567驫俶氛) 繧堤ｶ呎価 ---
-    total_assets = 567 + ipo_collected
-    if total_assets < 589: total_assets = 589
+    # 師匠の命：レガシー資産 (589銘柄の魂) をベースにする
+    total_assets = max(589, ipo_collected)
 
     data = {
         "total_collected": total_assets,
@@ -55,21 +58,20 @@ def run_calculation():
     }
     
     with open(CALC_CACHE, 'w', encoding='utf-8') as f:
-        json.dump(data, f)
+        json.dump(data, f, ensure_ascii=False, indent=2)
     return data
 
 def persistent_calc():
+    print("--- PHOENIX CALC: 資産統計・開始 ---")
     while True:
         try:
             run_calculation()
-            # 蟶ｫ蛹縺ｮ蜻ｽ・壼ｿ・牛・・eartbeat・峨ｒ蛻ｻ繧縲ゅム繝・す繝･繝懊・繝峨∈縺ｮ逕溷ｭ伜ｱ蜻翫・
-            try:
-                with open(HEARTBEAT_FILE, "w") as f:
-                    f.write(str(time.time()))
-            except: pass
-            time.sleep(60) # 10遘帝俣髫・
-        except Exception:
-            time.sleep(60)
+            # 師匠の命：心臓（Heartbeat）を刻む
+            with open(HEARTBEAT_FILE, "w") as f:
+                f.write(str(time.time()))
+        except Exception as e:
+            print(f"Calc error: {e}")
+        time.sleep(60)
 
 if __name__ == "__main__":
     if "--one-shot" in sys.argv:

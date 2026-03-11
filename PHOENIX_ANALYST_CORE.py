@@ -1,13 +1,13 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import time
 import datetime
 import json
 import os
 import random
 
-# --- PHOENIX ANALYST CORE v1.1 [遏･閭ｽ陞榊粋繝ｻ逶ｸ髢｢隗｣譫仙渕蟷ｹ: IPO雉・肇蠖｢謌先悄] ---
-# 蟶ｫ蛹縺ｮ蜻ｽ・夊ｳ・≡蠖｢謌舌ｒ譛蜆ｪ蜈医・PO驫俶氛縺ｮ縲梧悽雉ｪ縲阪ｒ豕･閾ｭ縺剰ｧ｣譫舌＠縲・
-# 謖・焚莉･荳翫・謌宣聞・医く繝｣繝斐ち繝ｫ繧ｲ繧､繝ｳ・峨ｒ迢吶≧縲瑚ｳ・肇蠖｢謌先姶逡･縲阪ｒ荳ｭ譬ｸ縺ｫ謐ｮ縺医ｋ縲・
+# --- PHOENIX ANALYST CORE v1.1 [知能統合・相関解析基幹: IPO資産形成期] ---
+# 師匠の命：資産形成を最優先。IPO銘柄の「本質」を泥臭く解析し、
+# 指数以上の成長（キャピタルゲイン）を狙う「資産形成戦略」を中核に据える。
 
 PHASE = "ASSET_BUILDER_IPO"
 BASE_DIR = r"P:/"
@@ -16,10 +16,10 @@ CORRELATION_LOG = os.path.join(BASE_DIR, "PHOENIX_CORRELATION_MAP.json")
 
 def fuse_intelligence(target_code):
     """
-    縲千衍閭ｽ陞榊粋繝励Ο繝医さ繝ｫ・唔PO迚ｹ蛹門梛縲・
-    豁ｴ蜿ｲ縺ｮ縺ｪ縺ИPO驫俶氛縺ｫ蟇ｾ縺励※縺ｯ縲∫岼隲冶ｦ区嶌縺ｮ縲悟ｿ励阪→螟ｧ譬ｪ荳ｻ縺ｮ縲碁怙邨ｦ・医Ο繝・け繧｢繝・・・峨阪ｒ陞榊粋縲・
+    【知能統合プロトコル：IPO特化版】
+    歴史のないIPO銘柄に対しては、目論見書の「志」と大株主の「需給（ロックアップ等）」を統合。
     """
-    is_ipo = target_code > 9000 # 邁｡譏灘愛螳夲ｼ・000逡ｪ蜿ｰ縺ｯ譁ｰ闊育ｳｻ縺悟､壹＞・・
+    is_ipo = target_code > 9000 # 簡易判定：9000番台は新興系が多い。
     
     if is_ipo:
         intelligence = {
@@ -41,27 +41,27 @@ def fuse_intelligence(target_code):
 
 def detect_sibling_stocks(target_code):
     """
-    縲蝕PO謌ｦ逡･・夐｡樔ｼｼ蝗譫懊・迚ｹ螳壹・
+    【IPO戦略：類似因果の特定】
     """
-    if target_code > 9000: # IPO驫俶氛縺ｮ萓・
+    if target_code > 9000: # IPO銘柄の例
         return [
-            {"code": "SUCCESS_MODEL_A", "name": "驕主悉縺ｮ謌仙粥IPO(繝・ャ繧ｯ)", "type": "蝗譫懆ｻ碁％縺ｮ鬘樔ｼｼ", "correlation": 0.92},
-            {"code": "SUCCESS_MODEL_B", "name": "繧ｻ繧ｯ繧ｿ繝ｼ蜈郁｡栗PO", "type": "謌宣聞繝代ち繝ｼ繝ｳ縺ｮ霑台ｼｼ", "correlation": 0.85}
+            {"code": "SUCCESS_MODEL_A", "name": "過去の成功IPO(テック)", "type": "因果軌道の類似", "correlation": 0.92},
+            {"code": "SUCCESS_MODEL_B", "name": "セクター先行IPO", "type": "成長パターンの近似", "correlation": 0.85}
         ]
     
     if target_code == 6701: # NEC
         return [
-            {"code": 6702, "name": "蟇悟｣ｫ騾・, "type": "逶ｴ謗･遶ｶ蜷・IT繧､繝ｳ繝輔Λ", "correlation": 0.98},
-            {"code": 6501, "name": "譌･遶玖｣ｽ菴懈園", "type": "驥埼崕/DX繧､繝ｳ繝輔Λ", "correlation": 0.95}
+            {"code": 6702, "name": "富士通", "type": "直接競合/ITインフラ", "correlation": 0.98},
+            {"code": 6501, "name": "日立製作所", "type": "重電/DXインフラ", "correlation": 0.95}
         ]
     return []
 
 def run_daily_correlation_audit():
     """
-    縲先怙驥崎ｦ・ｼ唔PO謌ｦ逡･逶｣譟ｻ縲・
+    【最重要：IPO戦略監査】
     """
-    # 蟶ｫ蛹縺ｮ蜻ｽ・壽怙驥崎ｦ√・IPO縲・
-    ipo_targets = [9166, 5595] # 萓具ｼ哦eniee, QPS遐皮ｩｶ謇遲峨・IPO
+    # 師匠の命：最重要のIPO銘柄。
+    ipo_targets = [9166, 5595] # 例：Geniee, QPS研究所等のIPO
     main_targets = ipo_targets + [6701] 
     
     analysis_results = {}
@@ -75,7 +75,7 @@ def run_daily_correlation_audit():
             "sovereign_strategy": "IPO_PHOENIX_RISE" if code > 9000 else "STABLE_DNA"
         }
         
-    # 隗｣譫千ｵ先棡繧呈ｰｸ邯壼喧・医ム繝・す繝･繝懊・繝峨′縺薙ｌ繧定ｪｭ縺ｿ蜿悶ｋ・・
+    # 解析結果を永続化（ダッシュボードがこれを読み取る）
     try:
         with open(CORRELATION_LOG, "w", encoding="utf-8") as f:
             json.dump(analysis_results, f, ensure_ascii=False, indent=2)
@@ -83,10 +83,10 @@ def run_daily_correlation_audit():
 
 if __name__ == "__main__":
     print("=================================================================")
-    print("縲娠HOENIX ANALYST CORE縲題ｵｷ蜍包ｼ夂衍閭ｽ陞榊粋繝ｻ逶ｸ髢｢隗｣譫舌す繧ｹ繝・Β")
-    print(" 1. 蝗帛ｭ｣蝣ｱ(10蟷ｴ蜿ｲ) ﾃ・豎ｺ邂・譛譁ｰ) 縺ｮ螳悟・陞榊粋隗｣譫・)
-    print(" 2. 繧ｿ繝ｼ繧ｲ繝・ヨ驫俶氛縺ｨ縲悟酔縺俶ｳ｢縲阪ｒ謠上￥蜈・ｼ滄釜譟・・閾ｪ蜍慕音螳・)
-    print(" 3. 譌･縲・・謗ｨ遘ｻ荵夜屬繧貞ｸｸ譎ら屮隕厄ｼ亥屏譫懷ｾ九・繧ｺ繝ｬ繧呈､懃衍・・)
+    print("【PHOENIX ANALYST CORE】起動：知能統合・相関解析システム")
+    print(" 1. 四季報(10年史) × 決算(最新) の完全統合解析")
+    print(" 2. ターゲット銘柄と「同じ波」を描く先行・競合の自動特定")
+    print(" 3. 日々の推移異常を常時監視（因果律のズレを検知）")
     print("=================================================================")
 
     last_audit_time = 0
@@ -97,8 +97,12 @@ if __name__ == "__main__":
                 run_daily_correlation_audit()
                 last_audit_time = current_time
             
-            # 蟶ｫ蛹縺ｮ蜻ｽ・壼ｿ・牛・・eartbeat・峨ｒ蛻ｻ繧
-            with open(r"P:\PHOENIX_HEARTBEATS\hb_Analyst.txt", "w") as f:
+            # 師匠の命：心拍（Heartbeat）を刻む
+            hb_path = r"P:\PHOENIX_HEARTBEATS\hb_Analyst.txt"
+            hb_dir = os.path.dirname(hb_path)
+            if not os.path.exists(hb_dir):
+                os.makedirs(hb_dir, exist_ok=True)
+            with open(hb_path, "w") as f:
                 f.write(str(current_time))
         except: pass
-        time.sleep(60)
+        time.sleep(60) # 師匠の命：重くならないよう、1分おきの拍動
