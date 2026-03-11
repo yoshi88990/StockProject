@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "P:\\python_embed\\python.exe",
+    "python.analysis.extraPaths": [
+        "P:/python_embed/Lib/site-packages"
+    ]
+}
