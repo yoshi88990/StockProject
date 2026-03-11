@@ -237,7 +237,7 @@
             } catch (err) { console.error(err); }
         }
 
-        setInterval(updateTerminal, 5000);
+        setInterval(updateTerminal, 60000); // 師匠の命：5秒は重負荷の原因。60秒で安定稼働。
         updateTerminal();
     </script>
 </body>

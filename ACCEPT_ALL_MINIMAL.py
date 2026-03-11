@@ -76,11 +76,13 @@ if __name__ == "__main__":
                 continue
 
             now = time.time()
-            # 師匠の命：心拍(Heartbeat)を刻む
-            hb_dir = os.path.dirname(HEARTBEAT_FILE)
-            if not os.path.exists(hb_dir):
-                os.makedirs(hb_dir, exist_ok=True)
-            with open(HEARTBEAT_FILE, "w") as f: f.write(str(now))
+            # 師匠の命：心拍(Heartbeat)を刻む（1分に1回で十分。PCを重くしない）
+            if now - getattr(strike_mechanical, "last_hb", 0) >= 60.0:
+                hb_dir = os.path.dirname(HEARTBEAT_FILE)
+                if not os.path.exists(hb_dir):
+                    os.makedirs(hb_dir, exist_ok=True)
+                with open(HEARTBEAT_FILE, "w") as f: f.write(str(now))
+                strike_mechanical.last_hb = now
             
             # 【後醍醐プロトコル】：5秒間の静寂を検知したら即座に点火
             if get_idle_time() >= 5.0 and not check_vscode_foreground():

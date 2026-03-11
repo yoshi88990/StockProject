@@ -53,7 +53,7 @@ def get_heartbeat_status():
             try:
                 with open(path, "r") as f:
                     content_time = float(f.read().strip())
-                if abs(now - content_time) < 45: # 45秒以内の心拍なら生存
+                if abs(now - content_time) < 120: # 師匠の命：拍動が60秒なら、判定は120秒（2分）の余裕を持たせる
                     alive = True
             except: pass
         results[name] = alive
@@ -67,7 +67,7 @@ async def websocket_status(websocket: WebSocket):
             # 師匠の命：心拍ベースの爆速ステータスを配信
             status = get_heartbeat_status()
             await websocket.send_json(status)
-            await asyncio.sleep(2) # 2秒おきにリアルタイム配信
+            await asyncio.sleep(60) # 師匠の命：究極の軽量化。60秒おきの拍動へ。
     except WebSocketDisconnect:
         pass
     except Exception as e:
