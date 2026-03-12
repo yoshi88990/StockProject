@@ -9,12 +9,15 @@ chcp 65001 > nul
 
 echo [*] PHOENIX: Detecting Unified DNA Storage...
 
-:: 1. 実体フォルダの自動検知 (Home vs Office)
-:: D:\ を優先し、なければ C:\ を探索する。
+:: 1. 実体フォルダの自動検知 (Home vs Office vs E-Drive)
+:: E:\ を最優先し、次に D:\、なければ C:\ を探索する。
 set "BASE_NAME=StockProject"
 set "DATA_DIR=C:\%BASE_NAME%"
 
-if exist "D:\%BASE_NAME%" (
+if exist "E:\%BASE_NAME%" (
+    set "DATA_DIR=E:\%BASE_NAME%"
+    echo [INFO] Detected: External/Large Drive Pattern (Drive E:)
+) else if exist "D:\%BASE_NAME%" (
     set "DATA_DIR=D:\%BASE_NAME%"
     echo [INFO] Detected: Home PC Pattern (Drive D:)
 ) else (
