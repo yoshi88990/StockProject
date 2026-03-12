@@ -10,7 +10,7 @@
       ],
       "dna_pattern": "NEW_GENESIS",
       "current_momentum": "SOVEREIGN_PRIORITY",
-      "last_fused": 1773272375.1138723
+      "last_fused": 1773276803.2832692
     },
     "siblings": [
       {
@@ -26,7 +26,7 @@
         "correlation": 0.85
       }
     ],
-    "update_time": "2026-03-12T08:39:35.114101",
+    "update_time": "2026-03-12T09:53:23.283269",
     "sovereign_strategy": "IPO_PHOENIX_RISE"
   },
   "5595": {
@@ -34,10 +34,10 @@
       "code": 5595,
       "dna_pattern": "EXPONENTIAL_GROWTH",
       "current_momentum": "HIGH_VOLATILITY",
-      "last_fused": 1773272375.114101
+      "last_fused": 1773276803.2832692
     },
     "siblings": [],
-    "update_time": "2026-03-12T08:39:35.114101",
+    "update_time": "2026-03-12T09:53:23.283269",
     "sovereign_strategy": "STABLE_DNA"
   },
   "6701": {
@@ -45,7 +45,7 @@
       "code": 6701,
       "dna_pattern": "EXPONENTIAL_GROWTH",
       "current_momentum": "HIGH_VOLATILITY",
-      "last_fused": 1773272375.114101
+      "last_fused": 1773276803.2832692
     },
     "siblings": [
       {
@@ -61,7 +61,7 @@
         "correlation": 0.95
       }
     ],
-    "update_time": "2026-03-12T08:39:35.114101",
+    "update_time": "2026-03-12T09:53:23.283269",
     "sovereign_strategy": "STABLE_DNA"
   }
 }
