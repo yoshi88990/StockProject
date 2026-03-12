@@ -39,3 +39,7 @@ PHOENIX_HEARTBEATS/
 *STASH/
 PHOENIX_HEARTBEATS/
 spirit_watchdog.log
+
+# Embedded Python
+python_embed/
+python_embed_old/

@@ -89,7 +89,7 @@ if __name__ == "__main__":
     print(" 3. 日々の推移異常を常時監視（因果律のズレを検知）")
     print("=================================================================")
 
-    last_audit_time = 0
+    last_audit_time = 0.0
     while True:
         try:
             current_time = time.time()
